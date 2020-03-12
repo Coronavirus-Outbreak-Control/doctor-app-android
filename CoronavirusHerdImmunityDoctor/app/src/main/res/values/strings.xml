@@ -1,3 +1,53 @@
 <resources>
     <string name="app_name">Coronavirus Herd Immunity Doctor</string>
+
+    <string name="app_title">Doctor Coronavirus Check</string>
+
+    <!-- Splash Screen -->
+    <string name="splashscreen_title">Doctor Coronavirus Check</string>
+    <string name="splashscreen_subtitle">Together we can save lives and stop people losing their job.</string>
+
+    <!-- Introduction Slider -->
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GO TO THE APP</string>
+
+    <string name="slide_0_title">Who are we?</string>
+    <string name="slide_0_desc">We are a team of developers who, just like you, are concerned about Coronavirus,
+        and want to do something to limit its spreading however we can</string>
+    <string name="slide_1_title">How it works</string>
+    <string name="slide_1_desc">This app is able to anonymously monitor your distance from other devices.
+        It is able to check all the devices which have been at less than 2 meters away from you</string>
+    <string name="slide_2_title">Why is it useful</string>
+    <string name="slide_2_desc">If we see that you currently are or have been close to a device whose owner has been diagnosed with Coronavirus in the past two weeks,
+        we will notify you straightaway, informing you on what steps to follow next, as suggested from the Government</string>
+    <string name="slide_3_title">How you can help us</string>
+    <string name="slide_3_desc">In order to detect the interactions between yours and other devices,
+        we will need your permission to use Bluetooth</string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+
+
+    <!-- Login Doctor Screen -->
+    <string name="login_doctor_title">Login Doctor App</string>
+    <string name="tv_mobile_phone">Mobile Phone</string>
+    <string name="tv_code">Write the 4 digits SMS code</string>
+    <string name="bt_send_number">Send</string>
+
+    <!-- Login Accepted Screen -->
+    <string name="tv_title_login_accepted">Activated</string>
+    <string name="tv_accepted">You have been accepted</string>
+
+    <!-- Doctor View Screen -->
+    <string name="tv_change_patient_status">To change a patient health status please scan QR code</string>
+    <string name="bt_scan_qrcode">Scan patient account QR code</string>
+    <string name="bt_invite_doc">Invite new doctors</string>
+
+    <!-- Change Patient Status Screen -->
+    <string name="bt_confirm_covid">Confirm Covid-19</string>
+    <string name="bt_recover_covid">Recovered</string>
+    <string name="bt_other_status_covid">Other</string>
+
 </resources>
