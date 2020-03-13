@@ -26,7 +26,7 @@ public class DoctorViewActivity extends Activity {
              */
             public void onClick(View view)
             {
-                Intent intent=new Intent(DoctorViewActivity.this, ChangeStatusActivity.class);
+                Intent intent=new Intent(DoctorViewActivity.this, ScannerActivity.class);
                 startActivity(intent);
             }
         });
