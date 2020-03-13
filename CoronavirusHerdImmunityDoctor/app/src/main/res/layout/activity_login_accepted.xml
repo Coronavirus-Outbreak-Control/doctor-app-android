@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +7,44 @@
 
     <TextView
         android:id="@+id/tv_title_login_accepted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="145dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="120dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
         android:text="@string/tv_title_login_accepted"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="116dp" />
+        android:textColor="#009688"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_accepted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="212dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
         android:text="@string/tv_accepted"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="213dp" />
+        android:textIsSelectable="true"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_title_login_accepted"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="@+id/tv_title_login_accepted"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login_accepted" />
 
     <ImageView
-        android:id="@+id/imv_checkbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/checkbox_on_background"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="320dp" />
+        android:id="@+id/img_checkbox"
+        android:layout_width="93dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="104dp"
+        android:background="@color/white"
+        android:contentDescription="@null"
+        android:duplicateParentState="true"
+        app:layout_constraintEnd_toEndOf="@+id/tv_accepted"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="@+id/tv_accepted"
+        app:layout_constraintTop_toBottomOf="@+id/tv_accepted"
+        app:srcCompat="@drawable/checkbox" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
