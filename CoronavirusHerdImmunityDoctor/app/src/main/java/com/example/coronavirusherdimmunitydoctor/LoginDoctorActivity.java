@@ -31,30 +31,64 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code2;                                      //EditText where inserting 2 digit of verification code
     private EditText et_code3;                                      //EditText where inserting 3 digit of verification code
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
-    /*
-    private EditText [] et_code_array = new EditText[DIGITS_CODE];  //Array of EditText which contains 4 EditText
-    private KeyListener [] kl_code_array = new KeyListener[DIGITS_CODE]; //Array of KeyListener
-    private Integer index_et_code_array = 0;                        //Index of EditText Array (et_code_array)
 
-    private TextWatcher TextWatcher_code = new TextWatcher() {
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+    /**
+     * This TextWatcher manages text changed on EditText:
+     * - when a digit is inserted then change to next EditText
+     * - when the 4th digit is inserted then change activity
+     */
+    public class GenericTextWatcher implements TextWatcher
+    {
+        private View view;
+        private GenericTextWatcher(View view)
+        {
+            this.view = view;
         }
 
         @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-           et_code1.setEnabled(false);
+        public void afterTextChanged(Editable editable) {
+            String text = editable.toString();
+            switch(view.getId())
+            {
+                case R.id.et_code1:
+                    if(text.length()==1)
+                        et_code2.requestFocus();
+                    break;
+                case R.id.et_code2:
+                    if(text.length()==1)
+                        et_code3.requestFocus();
+                    else if(text.length()==0)
+                        et_code1.requestFocus();
+                    break;
+                case R.id.et_code3:
+                    if(text.length()==1)
+                        et_code4.requestFocus();
+                    else if(text.length()==0)
+                        et_code2.requestFocus();
+                    break;
+                case R.id.et_code4:
+                    if (text.length()==1) { //change activity when the 4th digit is inserted
+                        Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
+                        startActivity(intent);
+                    }
+                    else if(text.length()==0)
+                        et_code3.requestFocus();
+                    break;
+            }
         }
 
         @Override
-        public void afterTextChanged(Editable s) {
-
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            // TODO Auto-generated method stub
         }
 
-    };
-    */
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            // TODO Auto-generated method stub
+        }
+    }
+
 
     /******************** Activity Functions *********************************************/
 
@@ -73,8 +107,6 @@ public class LoginDoctorActivity extends Activity {
         et_code2 = (EditText) findViewById(R.id.et_code2);
         et_code3 = (EditText) findViewById(R.id.et_code3);
         et_code4 = (EditText) findViewById(R.id.et_code4);
-        //et_code_array = new EditText[]{et_code1, et_code2, et_code3, et_code4};
-        //kl_code_array = new KeyListener[]{et_code1.getKeyListener(), et_code2.getKeyListener(), et_code3.getKeyListener(), et_code4.getKeyListener()};
 
         bt_send_num = findViewById(R.id.bt_send_num);
         bt_send_num.setOnClickListener(new View.OnClickListener() {
@@ -95,9 +127,6 @@ public class LoginDoctorActivity extends Activity {
                     tr_code.setVisibility(View.VISIBLE);
 
                     write_verification_code();
-
-                    Intent intent=new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
-                    startActivity(intent);
                 }
 
             }
@@ -107,14 +136,15 @@ public class LoginDoctorActivity extends Activity {
 
     }
 
+
     /**
      * Write 4 digits of verification code on 4 EditText, when a digit is inserted then change to next EditText.
      * When all digits are inserted, then check verification code and go to next Activity
      */
     private void write_verification_code(){
-        //et_code1.addTextChangedListener(TextWatcher_code);
-        //et_code2.addTextChangedListener(TextWatcher_code);
-        //et_code3.addTextChangedListener(TextWatcher_code);
-        //et_code4.addTextChangedListener(TextWatcher_code);
+        et_code1.addTextChangedListener(new GenericTextWatcher(et_code1));
+        et_code2.addTextChangedListener(new GenericTextWatcher(et_code2));
+        et_code3.addTextChangedListener(new GenericTextWatcher(et_code3));
+        et_code4.addTextChangedListener(new GenericTextWatcher(et_code4));
     }
 }

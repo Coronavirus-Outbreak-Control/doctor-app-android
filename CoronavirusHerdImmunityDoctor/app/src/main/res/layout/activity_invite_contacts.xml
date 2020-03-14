@@ -8,11 +8,11 @@
 
     <RelativeLayout
         android:id="@+id/relative_layout"
-        android:layout_width="420dp"
-        android:layout_height="569dp"
+        android:layout_width="match_parent"
+        android:layout_height="559dp"
         app:layout_constraintBottom_toTopOf="@+id/bt_invite"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_invite_contacts">
 
         <ListView

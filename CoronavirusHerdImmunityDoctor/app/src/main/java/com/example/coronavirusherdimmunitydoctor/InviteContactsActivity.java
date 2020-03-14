@@ -93,7 +93,7 @@ public class InviteContactsActivity extends Activity {
             @Override
             protected void onPreExecute() {
                 dialog = ProgressDialog.show(InviteContactsActivity.this,
-                        "Caricamento contatti..", "Attendere, prego", true, false);
+                        "Loading Contacts...", "Waiting, please", true, false);
             }
 
             @Override
