@@ -50,4 +50,8 @@
     <string name="bt_recover_covid">Recovered</string>
     <string name="bt_other_status_covid">Other</string>
 
+    <!-- Invite Contacts Activity -->
+    <string name="tv_invite_contacts">Select new doctor then click to invite</string>
+    <string name="bt_invite">Invite</string>
+
 </resources>

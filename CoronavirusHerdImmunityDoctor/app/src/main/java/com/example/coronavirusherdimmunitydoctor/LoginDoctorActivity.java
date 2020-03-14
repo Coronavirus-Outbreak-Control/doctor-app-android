@@ -86,13 +86,20 @@ public class LoginDoctorActivity extends Activity {
              */
             public void onClick(View view)
             {  //when click "send" button, display the view in order to insert random code
-                tv_write_code.setVisibility(View.VISIBLE);
-                tr_code.setVisibility(View.VISIBLE);
 
-                write_verification_code();
+                if (et_phone_number.getText().toString().isEmpty()){   //if phone number is not inserted
+                    Toast.makeText(getApplicationContext(), "Insert number", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    tv_write_code.setVisibility(View.VISIBLE);
+                    tr_code.setVisibility(View.VISIBLE);
 
-                Intent intent=new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
-                startActivity(intent);
+                    write_verification_code();
+
+                    Intent intent=new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 

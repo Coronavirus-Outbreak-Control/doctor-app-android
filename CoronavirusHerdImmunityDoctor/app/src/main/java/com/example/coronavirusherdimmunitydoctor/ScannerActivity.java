@@ -32,7 +32,6 @@ public class ScannerActivity extends AppCompatActivity {
     private SurfaceView surfaceView;
     private BarcodeDetector codeDetector;
     private CameraSource camera;
-    private static final int REQUEST_CAMERA_PERMISSION = 201;
     private String patient_code = "";  //code recognized
 
     @Override
@@ -62,14 +61,7 @@ public class ScannerActivity extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    //if camera permission are granted then start camera
-                    if (ActivityCompat.checkSelfPermission(ScannerActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        camera.start(surfaceView.getHolder());
-                    } else { //else request camera permission
-                        ActivityCompat.requestPermissions(ScannerActivity.this, new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                    }
-
+                    camera.start(surfaceView.getHolder());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
