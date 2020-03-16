@@ -5,8 +5,10 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -16,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 
@@ -46,11 +50,20 @@ public class InviteContactsActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 String contact =  lv_contacts.getItemAtPosition(position).toString();
-                String[] array = contact.split(":");
-                String name = array[0];
-                String number = array[1];
 
-                invited_contacts_list.add(contact);
+                lv_contacts.setBackgroundColor(Color.GREEN);
+                if (invited_contacts_list.contains(contact)){ // if contact is contained in invited contact list then it is removed by list
+
+                    invited_contacts_list.remove(contact);
+
+                } else{  // if contact has not been already inserted in invited contact list then it is added to list
+                    String[] array = contact.split(":");
+                    String name = array[0];
+                    String number = array[1];
+
+                    invited_contacts_list.add(contact);
+                }
+
             }
         });
 
@@ -64,16 +77,37 @@ public class InviteContactsActivity extends Activity {
             {
                 if (invited_contacts_list.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(), "Select at least a contact", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.toast_select_doc, Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    //send invited_contacts_list to Server
 
-                    Toast.makeText(getApplicationContext(), "New contacts are invited", Toast.LENGTH_SHORT).show();
+                    /**
+                     *  open an Alert dialog which asks if user has selected  right numbers
+                     *  if click on "yes" then send selected contacts to Server and change activity
+                     *  else if click on "no" then the user can change contacts
+                     */
+                    new AlertDialog.Builder(InviteContactsActivity.this)
+                            .setTitle(R.string.alertdial_invite_title)
+                            .setMessage(R.string.alertdial_invite_msg)
+                            .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctors
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //send invited_contacts_list to Server
 
-                    //go back to DoctorViewActivity
-                    Intent intent = new Intent(InviteContactsActivity.this, DoctorViewActivity.class);
-                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(), R.string.toast_new_doc_inv, Toast.LENGTH_SHORT).show();
+
+                                    //go back to DoctorViewActivity
+                                    Intent intent = new Intent(InviteContactsActivity.this, DoctorViewActivity.class);
+                                    startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+
+
                 }
             }
         });
@@ -93,7 +127,7 @@ public class InviteContactsActivity extends Activity {
             @Override
             protected void onPreExecute() {
                 dialog = ProgressDialog.show(InviteContactsActivity.this,
-                        "Loading Contacts...", "Waiting, please", true, false);
+                        getString(R.string.progrdial_loading_con), getString(R.string.progrdial_waiting), true, false);
             }
 
             @Override
@@ -129,7 +163,6 @@ public class InviteContactsActivity extends Activity {
                 String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = cur.getString(cur.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                 if (Integer.parseInt(cur.getString(cur.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {
-                    //System.out.println("name : " + name + ", ID : " + id);
 
                     // get the phone number
                     Cursor pCur = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,

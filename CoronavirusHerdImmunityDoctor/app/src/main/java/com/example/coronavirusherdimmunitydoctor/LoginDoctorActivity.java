@@ -120,12 +120,12 @@ public class LoginDoctorActivity extends Activity {
             {  //when click "send" button, display the view in order to insert random code
 
                 if (et_phone_number.getText().toString().isEmpty()){   //if phone number is not inserted
-                    Toast.makeText(getApplicationContext(), "Insert number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.toast_insert_num, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     tv_write_code.setVisibility(View.VISIBLE);
                     tr_code.setVisibility(View.VISIBLE);
-
+                    et_code1.requestFocus();
                     write_verification_code();
                 }
 

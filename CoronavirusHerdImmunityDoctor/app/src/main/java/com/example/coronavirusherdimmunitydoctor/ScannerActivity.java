@@ -46,7 +46,7 @@ public class ScannerActivity extends AppCompatActivity {
      */
     private void startScanner() {
 
-        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), R.string.toast_scanner_start, Toast.LENGTH_SHORT).show();
         codeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
                 .build();
@@ -83,11 +83,11 @@ public class ScannerActivity extends AppCompatActivity {
             public void release() {
                 if (patient_code.isEmpty())
                 {
-                    Toast.makeText(getApplicationContext(), "Code scanner has been stopped", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.toast_scanner_stop, Toast.LENGTH_SHORT).show();
                 }
                 else{
                     patient_code = "";
-                    Toast.makeText(getApplicationContext(), "Code recognized", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.toast_scanner_recognized, Toast.LENGTH_SHORT).show();
                 }
             }
 
