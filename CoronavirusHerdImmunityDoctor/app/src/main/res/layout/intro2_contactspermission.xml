@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- DA CAMBIARE IMMAGINE -->
+    <ImageView
+        style="@style/background_image"
+        android:id="@+id/logo_id"
+        android:src="@drawable/ic_illustration_location" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <!-- Step 2 of 2 -->
+        <TextView
+            style="@style/steps_text"
+            android:id="@+id/step_2_of_2"
+            android:text="@string/step_2_of_2" />
+
+        <!-- Location -->
+        <TextView
+            style="@style/intro_title"
+            android:id="@+id/contact"
+            android:text="@string/contact" />
+
+
+        <!-- To monitor more accurately your interactions we will
+        ask you permission to use Location. It's anonymous. -->
+        <TextView
+            style="@style/intro_subtitle"
+            android:id="@+id/we_need_contact"
+            android:text="@string/we_need_contact" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true" >
+
+
+        <!-- BUTTON -->
+        <Button style="@style/button_primary"
+            android:shadowColor="@color/white"
+            android:id="@+id/button_next"
+            android:text="@string/give_contact"/>
+
+    </RelativeLayout>
+</RelativeLayout>

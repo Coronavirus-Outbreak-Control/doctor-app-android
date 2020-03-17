@@ -27,13 +27,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WelcomeActivity" />
-        <activity android:name=".ChangeStatusActivity" />
-        <activity android:name=".DoctorViewActivity" />
-        <activity android:name=".LoginAcceptedActivity" />
+        <activity android:name=".introduction.WelcomeActivity"/>
+        <activity android:name=".introduction.CameraPermissionActivity"/>
+        <activity android:name=".introduction.ContactsPermissionActivity"/>
         <activity android:name=".LoginDoctorActivity" />
+        <activity android:name=".LoginAcceptedActivity" />
+        <activity android:name=".DoctorViewActivity" />
         <activity android:name=".ScannerActivity" />
+        <activity android:name=".ChangeStatusActivity" />
         <activity android:name=".InviteContactsActivity"/>
+        <activity android:name=".HowItWorksActivity"/>
     </application>
 
 </manifest>

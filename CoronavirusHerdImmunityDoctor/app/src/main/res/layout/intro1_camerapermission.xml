@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <!-- DA CAMBIARE IMMAGINE -->
+    <ImageView
+        style="@style/background_image"
+        android:id="@+id/logo_id"
+        android:src="@drawable/ic_illustration_bluetooth" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical" >
+
+        <!-- Step 1 of 2 -->
+        <TextView
+            style="@style/steps_text"
+            android:id="@+id/step_1_of_2"
+            android:text="@string/step_1_of_2" />
+
+        <!-- Bluetooth -->
+        <TextView
+            style="@style/intro_title"
+            android:id="@+id/camera"
+            android:text="@string/camera" />
+
+        <!-- We need your permission to use Bluetooth to monitor
+        your distance from other devices. It's anonymous. -->
+        <TextView
+            style="@style/intro_subtitle"
+            android:id="@+id/we_need_camera"
+            android:text="@string/we_need_camera" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true" >
+
+
+        <!-- BUTTON -->
+        <Button style="@style/button_primary"
+            android:shadowColor="@color/white"
+            android:id="@+id/button_next"
+            android:text="@string/give_cam" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

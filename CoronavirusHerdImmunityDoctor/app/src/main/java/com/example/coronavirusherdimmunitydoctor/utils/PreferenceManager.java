@@ -1,4 +1,4 @@
-package com.example.coronavirusherdimmunitydoctor;
+package com.example.coronavirusherdimmunitydoctor.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,7 +14,7 @@ public class PreferenceManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "intro_slider-welcome";
+    private static final String PREF_NAME = "WelcomeActivity";
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
@@ -29,6 +29,10 @@ public class PreferenceManager {
         editor.commit();
     }
 
+    /**
+     * check if it is the first time launch
+     * @return "true" if it the first time launch, else "false"
+     */
     public boolean isFirstTimeLaunch() {
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
