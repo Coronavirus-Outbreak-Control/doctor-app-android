@@ -11,9 +11,7 @@ import android.widget.Toast;
 
 public class ChangeStatusActivity extends Activity {
 
-    private Button bt_confirm_covid;
-    private Button bt_recover_covid;
-    private Button bt_other;
+    private Button bt_confirm_covid, bt_suspect_covid, bt_recover_covid, bt_other;
     private ImageButton bt_back;
 
     @Override
@@ -30,6 +28,20 @@ public class ChangeStatusActivity extends Activity {
             @Override
             /**
              * Click on "Confirm Covid 19" button, change patient's status to 'positive'
+             */
+            public void onClick(View view)
+            {
+                Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        bt_suspect_covid = findViewById(R.id.bt_suspect_covid);
+        bt_suspect_covid.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            /**
+             * Click on "Recover" button, change patient's status to 'negative'
              */
             public void onClick(View view)
             {
