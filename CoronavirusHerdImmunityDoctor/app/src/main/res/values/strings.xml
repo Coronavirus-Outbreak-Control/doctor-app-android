@@ -2,12 +2,14 @@
     <string name="app_name">Coronavirus Herd Immunity Doctor</string>
     <string name="app_title">Doctor Coronavirus Doctor</string>
 
-    <!-- Splash Screen Activity -->
+    <!-- ******* Splash Screen Activity ******* -->
     <string name="together_we"> Together we can save lives and help people keep their jobs. </string>
     <string name="let_s_get_s"> LET\'S GET STARTED </string>
     <string name="how_it_works"> How it works? </string>
+    <!-- ******************************* -->
 
-    <!-- Introduction Slider -->
+
+    <!-- ******* Introduction Slider ******* -->
     <string name="step_1_of_2"> Step 1 of 2 </string>
     <string name="step_2_of_2"> Step 2 of 2 </string>
     <string name="skip_step"> SKIP THIS STEP </string>
@@ -21,30 +23,39 @@
     <string name="we_need_contact">  We need your permission to read Contacts
         in order to invite new Doctors.</string>
     <string name="give_contact"> GIVE CONTACTS PERMISSION </string>
+    <!-- ******************************* -->
 
 
-    <!-- Login Doctor Activity -->
+    <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
     <string name="tv_code">Write the 4 digits SMS code</string>
     <string name="bt_send_number">Send</string>
     <string name="toast_insert_num">Insert number</string>
+    <!-- ******************************* -->
 
-    <!-- Login Accepted Activity-->
+
+    <!-- ******* Login Accepted Activity *******-->
     <string name="tv_title_login_accepted">Activated</string>
     <string name="tv_accepted">You have been accepted</string>
+    <!-- ******************************* -->
 
-    <!-- Doctor View Activity -->
+
+    <!-- ******* Doctor View Activity ******* -->
     <string name="tv_change_patient_status">To change a patient health status please scan QR code</string>
     <string name="bt_scan_qrcode">Scan patient account QR code</string>
     <string name="bt_invite_doc">Invite new doctors</string>
+    <!-- ******************************* -->
 
-    <!-- Scanner Screen Activity -->
+
+    <!-- ******* Scanner Screen Activity ******* -->
     <string name="toast_scanner_start">Barcode scanner started</string>
     <string name="toast_scanner_stop">Code scanner has been stopped</string>
     <string name="toast_scanner_recognized">Code recognized</string>
+    <!-- ******************************* -->
 
-    <!-- Invite Contacts Activity -->
+
+    <!-- ******* Invite Contacts Activity ******* -->
     <string name="tv_invite_contacts">Select new doctor then click to invite</string>
     <string name="bt_invite">Invite</string>
     <string name="toast_select_doc">Select at least a contact</string>
@@ -55,11 +66,29 @@
     <string name="alertdial_invite_msg">Are you sure to invite them?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
+    <!-- ******************************* -->
 
-    <!-- Change Patient Status Activity -->
+
+    <!-- ***** Change Patient Status Activity ****-->
     <string name="bt_confirm_covid">Confirm Covid-19</string>
     <string name="bt_suspect_covid">Suspect Covid-19</string>
     <string name="bt_recover_covid">Recovered</string>
     <string name="bt_other_status_covid">Other</string>
+    <!-- ******************************* -->
+
+
+    <!-- ****** How it works Screen *****-->
+    <string name="how_it_works_p0">  We will use your mobile phone camera and contacts
+        in order to scanner patient code and invite new doctors. </string>
+
+    <string name="how_it_works_q1"> How can I help the people? </string>
+    <string name="how_it_works_p1"> You can change health patient status in order to notify
+        other patients that have met the sick. </string>
+
+    <string name="how_it_works_q2">  How can I promote this application? </string>
+    <string name="how_it_works_p2"> You can invite new trusted doctors by sending us
+        their phone number. </string>
+    <!-- ******************************* -->
+
 
 </resources>
