@@ -14,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.example.coronavirusherdimmunitydoctor.utils.PermissionRequest;
+
 import java.util.ArrayList;
 
 
@@ -64,6 +66,9 @@ public class DoctorViewActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        PermissionRequest permissions = new PermissionRequest(DoctorViewActivity.this);
+        permissions.checkPermissions(); //check if camera and read_contacts are enabled else go to activity in order to enable them
 
     }
 }

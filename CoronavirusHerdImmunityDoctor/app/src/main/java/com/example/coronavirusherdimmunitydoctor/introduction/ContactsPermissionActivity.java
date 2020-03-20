@@ -20,6 +20,7 @@ import com.example.coronavirusherdimmunitydoctor.R;
 public class ContactsPermissionActivity extends AppCompatActivity {
 
     private final int REQUEST_ID_PERMISSION_CONTACT = 2;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,9 @@ public class ContactsPermissionActivity extends AppCompatActivity {
         //set content view AFTER ABOVE sequence (to avoid crash)
         setContentView(R.layout.intro2_contactspermission);
 
-        Button button_next;
+        Button button_next, button_skip;
+
+        bundle = getIntent().getExtras(); //Retrieves data from the intent
 
 
         button_next = findViewById(R.id.button_next);
@@ -44,6 +47,37 @@ public class ContactsPermissionActivity extends AppCompatActivity {
             }
         });
 
+        button_skip = findViewById(R.id.button_skip);
+        button_skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                go_nextActivity();
+
+            }
+        });
+
+    }
+
+
+    /**
+     * if this activity has been re-called in order to enable permission then go to LoginDoctorActivity
+     * else if this activity has been called for the first time then go LoginDoctorActivity
+     */
+    private void go_nextActivity(){
+
+        if ( bundle != null &&
+                bundle.getBoolean("permission_request")){ // if this activity has been recalled then go to LoginDoctorActivity
+
+            startActivity(new Intent(this, LoginDoctorActivity.class));
+            finish();
+
+        }else{ //if this activity has been called for the first time then go to ContactPermissionActivity
+
+            startActivity(new Intent(this, LoginDoctorActivity.class));
+            finish();
+        }
+
     }
 
     /**
@@ -51,10 +85,14 @@ public class ContactsPermissionActivity extends AppCompatActivity {
      */
     private void requestContactsPermission() {
 
-        //if read_contacct permission is not granted then require permission
+        //if read_contact permission is not granted then require permission
         if (ActivityCompat.checkSelfPermission(ContactsPermissionActivity.this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
 
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, REQUEST_ID_PERMISSION_CONTACT);
+
+        }else{ //if read_contact permission is granted
+
+            go_nextActivity();
         }
     }
 
@@ -75,12 +113,8 @@ public class ContactsPermissionActivity extends AppCompatActivity {
                 if (grantResults.length > 0 &&
                         grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
-                    startActivity(new Intent(ContactsPermissionActivity.this, LoginDoctorActivity.class)); //go to LoginDoctorActivity
-                    finish();
+                    go_nextActivity();
 
-                } else {    // permission denied, then requires permissions again
-
-                    requestContactsPermission(); //requires permissions again
                 }
             }
         }

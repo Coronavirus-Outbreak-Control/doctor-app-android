@@ -26,6 +26,16 @@
     <!-- ******************************* -->
 
 
+    <!-- ******* Utils **************** -->
+
+    <!-- Permission Request -->
+    <string name="cam_disabled"> "Camera" Disabled</string>
+    <string name="cam_please_en"> Please, enable "Camera" </string>
+    <string name="cont_disabled"> "Read Contacts" Disabled </string>
+    <string name="cont_please_en"> Please, enable "Read Contacts" </string>
+
+    <!-- ******************************* -->
+
     <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
