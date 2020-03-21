@@ -25,6 +25,15 @@ android {
 
 }
 
+configurations.all {
+    resolutionStrategy {
+        force 'org.hamcrest:hamcrest-junit:2.0.0.0'
+    }
+}
+configurations {
+    compile.exclude group: "junit", module: "junit"}
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -35,5 +44,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'com.google.android.gms:play-services-vision:11.8.0' //Add the Google Mobile Vision API in build.gradle file
+    implementation 'com.google.android.gms:play-services-vision:11.8.0' //Add the Google Mobile Vision API in build.gradle file to scan QR code
+
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'                 //Add okhttp to use REST api
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'       //Add json-simple to use JSON file
+
 }

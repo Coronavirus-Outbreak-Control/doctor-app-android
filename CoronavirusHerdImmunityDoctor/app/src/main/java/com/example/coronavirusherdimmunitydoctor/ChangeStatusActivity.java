@@ -33,6 +33,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -47,6 +48,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -61,6 +63,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -75,6 +78,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -90,6 +94,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Intent intent=new Intent(ChangeStatusActivity.this, DoctorViewActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

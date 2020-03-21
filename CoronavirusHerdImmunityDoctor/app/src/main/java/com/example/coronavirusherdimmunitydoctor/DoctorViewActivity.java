@@ -48,6 +48,7 @@ public class DoctorViewActivity extends Activity {
             {
                 Intent intent=new Intent(DoctorViewActivity.this, ScannerActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -64,6 +65,7 @@ public class DoctorViewActivity extends Activity {
             {
                 Intent intent=new Intent(DoctorViewActivity.this, InviteContactsActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

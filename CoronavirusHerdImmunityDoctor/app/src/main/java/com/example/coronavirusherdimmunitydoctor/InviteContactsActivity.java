@@ -51,7 +51,7 @@ public class InviteContactsActivity extends Activity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 String contact =  lv_contacts.getItemAtPosition(position).toString();
 
-                lv_contacts.setBackgroundColor(Color.GREEN);
+                //lv_contacts.setBackgroundColor(Color.GREEN);
                 if (invited_contacts_list.contains(contact)){ // if contact is contained in invited contact list then it is removed by list
 
                     invited_contacts_list.remove(contact);

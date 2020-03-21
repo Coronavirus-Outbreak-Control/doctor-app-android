@@ -73,6 +73,7 @@ public class LoginDoctorActivity extends Activity {
                     if (text.length()==1) { //change activity when the 4th digit is inserted
                         Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                     else if(text.length()==0)
                         et_code3.requestFocus();

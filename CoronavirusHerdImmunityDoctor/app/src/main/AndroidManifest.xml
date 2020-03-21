@@ -8,7 +8,6 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -20,23 +19,53 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity">
+        <activity
+            android:name=".SplashScreenActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".introduction.WelcomeActivity"/>
-        <activity android:name=".introduction.CameraPermissionActivity"/>
-        <activity android:name=".introduction.ContactsPermissionActivity"/>
-        <activity android:name=".LoginDoctorActivity" />
-        <activity android:name=".LoginAcceptedActivity" />
-        <activity android:name=".DoctorViewActivity" />
-        <activity android:name=".ScannerActivity" />
-        <activity android:name=".ChangeStatusActivity" />
-        <activity android:name=".InviteContactsActivity"/>
-        <activity android:name=".HowItWorksActivity"/>
+        <activity
+            android:name=".introduction.WelcomeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".introduction.CameraPermissionActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".introduction.ContactsPermissionActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".LoginDoctorActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".LoginAcceptedActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".DoctorViewActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ScannerActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ChangeStatusActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".InviteContactsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".HowItWorksActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

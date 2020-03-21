@@ -105,7 +105,7 @@ public class ScannerActivity extends AppCompatActivity {
                     Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
                     intent.putExtra("patient code",patient_code);
                     startActivity(intent);
-
+                    finish();
                 }
             }
         });
