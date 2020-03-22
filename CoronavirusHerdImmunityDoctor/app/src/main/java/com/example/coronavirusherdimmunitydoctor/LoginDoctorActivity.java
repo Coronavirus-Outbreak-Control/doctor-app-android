@@ -3,6 +3,7 @@ package com.example.coronavirusherdimmunitydoctor;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
 
     private String token_jwt;                                       //token jwt received by requestActivation
+    private String phone_num;
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -85,7 +87,18 @@ public class LoginDoctorActivity extends Activity {
                                                    et_code3.getText().toString() +
                                                    et_code4.getText().toString();
 
-                        task_acceptInvite(verification_code, token_jwt);  //call acceptInvite
+                        task_acceptInvite(verification_code, token_jwt, phone_num);  //call acceptInvite
+
+                        Handler handler=new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
+                                startActivity(intent);
+                                finish();
+                            }
+                        },10000);
+
                     }
                     else if(text.length()==0)
                         et_code3.requestFocus();
@@ -138,7 +151,6 @@ public class LoginDoctorActivity extends Activity {
         }
 
         et_phone_number = (EditText) findViewById(R.id.et_phone_number);
-        final String phone_num = et_phone_number.getText().toString();  //get phone number
 
         tv_write_code = (TextView) findViewById(R.id.tv_write_code);
 
@@ -163,6 +175,7 @@ public class LoginDoctorActivity extends Activity {
                     Toast.makeText(getApplicationContext(), R.string.toast_insert_num, Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    phone_num = et_phone_number.getText().toString();  //get phone number
                     token_jwt = new String();
                     task_requestActivation(phone_num); //call requestActivation
 
@@ -191,7 +204,7 @@ public class LoginDoctorActivity extends Activity {
      * @param verification_code
      * @param token_jwt
      */
-    private void task_acceptInvite(final String verification_code, final String token_jwt){
+    private void task_acceptInvite(final String verification_code, final String token_jwt, final String phone_number){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
@@ -203,17 +216,39 @@ public class LoginDoctorActivity extends Activity {
             public String then(Task<JSONObject> task) throws Exception {
 
                 JSONObject object = task.getResult();;             //get response of acceptInvite
-                if (object != null) {
-                    PreferenceManager pm = new PreferenceManager(getApplicationContext());
-                    pm.setDoctorId(object.getLong("id"));                //save user(doctor) id in SharedPreferences
-                    pm.setAuthorizationToken(object.getString("token")); //save authorization token in SharedPreferences
 
-                    Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
-                    startActivity(intent);
-                    finish();
+                if (object != null) {
+                    if ( object.getInt("code") == 401) {//verification code is expired
+
+                        new Handler().post( new Runnable(){
+                            public void run(){
+                                Toast.makeText(LoginDoctorActivity.this, "Verification code expired, insert number again", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }else{
+
+                        PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                        pm.setDoctorId(object.getLong("id"));                //save user(doctor) id in SharedPreferences
+                        pm.setAuthorizationToken(object.getString("token")); //save authorization token in SharedPreferences
+                        pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
+
+                        Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
+                        startActivity(intent);
+                        finish();
+                    }
+
 
                 } else{
-                    //
+                    new Handler().post( new Runnable(){
+                        public void run(){
+                            Toast.makeText(LoginDoctorActivity.this, "DEBUG CALL ACCEPT INVITE", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                    pm.setDoctorId(Long.parseLong("11292"));                //save user(doctor) id in SharedPreferences
+                    pm.setAuthorizationToken("011292"); //save authorization token in SharedPreferences
+                    pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
                 }
                 return null;
             }
@@ -242,14 +277,30 @@ public class LoginDoctorActivity extends Activity {
                             token_jwt = object.getString("token");
                             break;
                         case 403: //Forbidden
-                            Toast.makeText(LoginDoctorActivity.this, "Number forbidden", Toast.LENGTH_SHORT);
+                            new Handler().post( new Runnable(){
+                                public void run(){
+                                    Toast.makeText(LoginDoctorActivity.this, "Number forbidden", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             break;
                         case 404: //Not Found
-                            Toast.makeText(LoginDoctorActivity.this, "Number not found", Toast.LENGTH_SHORT);
+                            new Handler().post( new Runnable(){
+                                public void run(){
+                                    Toast.makeText(LoginDoctorActivity.this, "Number not found", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             break;
                         default:
                             break;
                     }
+                }else{
+                    new Handler().post( new Runnable(){
+                        public void run(){
+                            Toast.makeText(LoginDoctorActivity.this, "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    token_jwt = "180393";
+
                 }
                 return null;
             }

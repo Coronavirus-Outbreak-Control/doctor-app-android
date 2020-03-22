@@ -62,20 +62,21 @@
     <string name="toast_scanner_start">Barcode scanner started</string>
     <string name="toast_scanner_stop">Code scanner has been stopped</string>
     <string name="toast_scanner_recognized">Code recognized</string>
+    <string name="toast_wrong_scan">Scanned QR code is wrong</string>
     <!-- ******************************* -->
 
 
     <!-- ******* Invite Contacts Activity ******* -->
-    <string name="tv_invite_contacts">Select new doctor then click to invite</string>
+    <string name="tv_invite_contacts">Select new doctor</string>
     <string name="bt_invite">Invite</string>
     <string name="toast_select_doc">Select at least a contact</string>
-    <string name="toast_new_doc_inv">New contacts are invited</string>
     <string name="progrdial_loading_con">Loading Contacts...</string>
     <string name="progrdial_waiting">Waiting, please</string>
     <string name="alertdial_invite_title">Invite new Doctors</string>
     <string name="alertdial_invite_msg">Are you sure to invite them?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
+    <string name="toast_num_doc_invited">New Doctor invited</string>
     <!-- ******************************* -->
 
 
@@ -84,6 +85,7 @@
     <string name="bt_suspect_covid">Suspect Covid-19</string>
     <string name="bt_recover_covid">Recovered</string>
     <string name="bt_other_status_covid">Other</string>
+    <string name="toast_status_changed">Status Changed</string>
     <!-- ******************************* -->
 
 

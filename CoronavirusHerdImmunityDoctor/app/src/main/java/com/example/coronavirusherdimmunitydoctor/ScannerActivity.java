@@ -2,6 +2,7 @@ package com.example.coronavirusherdimmunitydoctor;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,7 +32,7 @@ public class ScannerActivity extends AppCompatActivity {
     private SurfaceView surfaceView;
     private BarcodeDetector codeDetector;
     private CameraSource camera;
-    private String patient_code = "";  //code recognized
+    private String patient_id = "";  //code recognized
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +87,12 @@ public class ScannerActivity extends AppCompatActivity {
         codeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-                if (patient_code.isEmpty())
+                if (patient_id.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(), R.string.toast_scanner_stop, Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    patient_code = "";
+                    patient_id = "";
                     Toast.makeText(getApplicationContext(), R.string.toast_scanner_recognized, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -100,12 +101,23 @@ public class ScannerActivity extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> code = detections.getDetectedItems();
                 if (code.size() != 0) {
-                    patient_code = code.valueAt(0).displayValue;  //get qrcode recognized
+                    patient_id = code.valueAt(0).displayValue;  //get qrcode recognized
 
-                    Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
-                    intent.putExtra("patient code",patient_code);
-                    startActivity(intent);
-                    finish();
+                    try {
+                        patient_id = "covid-outbreak-control:199992"; //DEBUG
+                        Long pat_id = Long.parseLong(patient_id.replaceAll("\\D+","")); //convert QR code in Long number by removing chars
+                        Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
+                        intent.putExtra("patient id", pat_id);
+                        startActivity(intent);
+                        finish();
+                    } catch (NumberFormatException e) { //when patient id is not convertable in a Long
+                        new Handler().post(new Runnable(){
+                            public void run(){
+                                Toast.makeText(ScannerActivity.this, R.string.toast_wrong_scan, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
                 }
             }
         });

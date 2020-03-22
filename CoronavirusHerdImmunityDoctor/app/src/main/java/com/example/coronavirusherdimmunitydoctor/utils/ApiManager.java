@@ -31,7 +31,7 @@ public class ApiManager {
      *
      * Doctor A sends phone number of doctor B to Server
      *
-     * @param phone_number: doctor phone number
+     * @param phone_number: doctor phone number to invite
      * @param token: authorization token
      * @return JSONObject is the Response to the request:
      *              - 200: ok
@@ -44,7 +44,7 @@ public class ApiManager {
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
-        String h_auth_token = token;                               //Headers: ‘Authorization: Bearer <Token>’
+        String h_auth_token = "Bearer " + token;                   //Headers: ‘Authorization: Bearer <Token>’
 
 
         /****** Body ********/
@@ -180,25 +180,26 @@ public class ApiManager {
      *
      * QRcode scanned (User Id) is used to update health patient status where:
      *          - “user-id”: long -> id of the patient, take it from the user QR code or by ID if the device already knows the ID
-     *          - “new-status”: int -> new status of the user {0: normal, 1: infected, 2: quarantine, 3: healed, 4: exposed}
+     *          - “new-status”: int -> new status of the user {0: normal, 1: infected, 2:suspect, 3: healed, 4: quarantine_light, 5: quarantine_warning, 6:quarantine_alert}
      *
+     * @param user_id: doctor id
      * @param new_status: health patient status {0: normal, 1: infected, 2: quarantine, 3: healed, 4: exposed}
      * @param token: authorization token
      * @return JSONObject is the response to the request:
      *              - 200: ok
-     *             - null: if there is an exception
+     *              - null: if there is an exception
      */
-    public static JSONObject updateUserStatus(String user_id, String new_status, String token){
+    public static JSONObject updateUserStatus(Long user_id, Integer new_status, String token){
 
         /****** Endpoint *****/
         String endpoint = baseEndoint +
                           "/mark/" +
-                          user_id + "/" +
-                          new_status;   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/mark/<long:user-id>/<int:new-status>
+                          user_id.toString() + "/" +
+                          new_status.toString();   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/mark/<long:user-id>/<int:new-status>
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
-        String h_auth_token = token;                               //Headers: ‘Authorization: Bearer <Token>’
+        String h_auth_token = "Bearer " + token;                               //Headers: ‘Authorization: Bearer <Token>’
 
 
         OkHttpClient client = new OkHttpClient();

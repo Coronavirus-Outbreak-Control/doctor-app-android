@@ -11,24 +11,34 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
+import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
+
+import bolts.Continuation;
+import bolts.Task;
 
 public class InviteContactsActivity extends Activity {
 
     private ArrayList<String> contacts_list;  //the list of all contacts
-    private ArrayList<String> invited_contacts_list;  //the list of invited/selected contacts
 
-    private Button bt_invite;
+    private ImageButton bt_back;
     private ListView lv_contacts;
     private ArrayAdapter<String> list_adapter;
 
@@ -37,10 +47,10 @@ public class InviteContactsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_contacts);
         lv_contacts = (ListView) findViewById(R.id.list_contacts);
-        bt_invite = (Button) findViewById(R.id.bt_invite);
+        bt_back = (ImageButton) findViewById(R.id.bt_back);
 
         contacts_list = new ArrayList<String>();
-        invited_contacts_list = new ArrayList<String>();
+        //invited_contacts_list = new ArrayList<String>();
 
         inviteContacts();
 
@@ -49,66 +59,48 @@ public class InviteContactsActivity extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                String contact =  lv_contacts.getItemAtPosition(position).toString();
+                final String contact =  lv_contacts.getItemAtPosition(position).toString();  //phone number
 
-                //lv_contacts.setBackgroundColor(Color.GREEN);
-                if (invited_contacts_list.contains(contact)){ // if contact is contained in invited contact list then it is removed by list
+                /**
+                 *  open an Alert dialog which asks if user has selected  right number
+                 *  if click on "yes" then send selected contacts to Server
+                 *  else if click on "no" then the user can change contacts
+                 */
+                new AlertDialog.Builder(InviteContactsActivity.this)
+                        .setTitle(R.string.alertdial_invite_title)
+                        .setMessage(R.string.alertdial_invite_msg)
+                        .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctor
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    invited_contacts_list.remove(contact);
+                                //send contact to Server
+                                PreferenceManager pm = new PreferenceManager(InviteContactsActivity.this);
+                                task_inviteDoctor(contact, pm.getAuthorizationToken());                     //call inviteDoctor Api
 
-                } else{  // if contact has not been already inserted in invited contact list then it is added to list
-                    String[] array = contact.split(":");
-                    String name = array[0];
-                    String number = array[1];
+                            }
+                        })
+                        .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
+                            public void onClick(DialogInterface dialog, int which) {
 
-                    invited_contacts_list.add(contact);
-                }
+                            }
+                        })
+                        .show();
 
             }
         });
 
-        bt_invite.setOnClickListener(new View.OnClickListener() {
+        bt_back = findViewById(R.id.bt_back);
+        bt_back.setImageResource(R.drawable.left);
+        bt_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             /**
-             * Click on "Invite" button, send the list of selected contacts to Server, then go back to main activity
-             **/
+             * Click on "Other" button
+             */
             public void onClick(View view)
             {
-                if (invited_contacts_list.isEmpty())
-                {
-                    Toast.makeText(getApplicationContext(), R.string.toast_select_doc, Toast.LENGTH_SHORT).show();
-                }
-                else {
-
-                    /**
-                     *  open an Alert dialog which asks if user has selected  right numbers
-                     *  if click on "yes" then send selected contacts to Server and change activity
-                     *  else if click on "no" then the user can change contacts
-                     */
-                    new AlertDialog.Builder(InviteContactsActivity.this)
-                            .setTitle(R.string.alertdial_invite_title)
-                            .setMessage(R.string.alertdial_invite_msg)
-                            .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctors
-                                public void onClick(DialogInterface dialog, int which) {
-                                    //send invited_contacts_list to Server
-
-                                    Toast.makeText(getApplicationContext(), R.string.toast_new_doc_inv, Toast.LENGTH_SHORT).show();
-
-                                    //go back to DoctorViewActivity
-                                    Intent intent = new Intent(InviteContactsActivity.this, DoctorViewActivity.class);
-                                    startActivity(intent);
-                                }
-                            })
-                            .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            })
-                            .show();
-
-
-                }
+                Intent intent=new Intent(InviteContactsActivity.this, DoctorViewActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -180,4 +172,48 @@ public class InviteContactsActivity extends Activity {
         }
         return arraylist;
     }
+
+
+
+
+    /******************* Task Function **************************/
+
+    /**
+     * Run task in order to call inviteDoctor API and manage the response
+     *
+     * @param phone_number: phone number of Doctor to invite
+     * @param token: authorization token
+     */
+    private void task_inviteDoctor(final String phone_number, final String token){
+
+        Task.callInBackground(new Callable<JSONObject>() {
+            @Override
+            public JSONObject call() throws Exception {
+                return ApiManager.inviteDoctor(phone_number, token);  //call inviteDoctor
+            }
+        }).onSuccess(new Continuation<JSONObject, Object>() {
+            @Override
+            public String then(Task<JSONObject> task) throws Exception {
+
+                JSONObject object = task.getResult();;             //get response of inviteDoctor
+                if (object != null) {
+                    if (object.getInt("code") == 202){      // if response is 'ok'
+                        new Handler().post(new Runnable(){
+                            public void run(){
+                                Toast.makeText(InviteContactsActivity.this, R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                } else{
+                    new Handler().post( new Runnable(){
+                        public void run(){
+                            Toast.makeText(InviteContactsActivity.this, "DEBUG CALL INVITE DOCTOR", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                return null;
+            }
+        });
+    }
+
 }
