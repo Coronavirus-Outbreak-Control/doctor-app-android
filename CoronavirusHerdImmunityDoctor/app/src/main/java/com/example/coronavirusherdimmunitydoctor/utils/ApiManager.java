@@ -31,6 +31,8 @@ public class ApiManager {
      *
      * Doctor A sends phone number of doctor B to Server
      *
+     * @param phone_number: doctor phone number
+     * @param token: authorization token
      * @return JSONObject is the Response to the request:
      *              - 200: ok
      *              - null: if there is an exception
@@ -81,6 +83,7 @@ public class ApiManager {
      * Doctor B downloads the app and, at first boot, inserts his/her phone number in order to send it to Server.
      * Server checks if the number exists and is trusted.
      *
+     * @param phone_number: Doctor phone number
      * @return JSONObject is the response to the request:
      *              - HTTP 202 Accepted {“token”:”<string:jwt>”}
      *              - HTTP 403 Forbidden
@@ -131,6 +134,8 @@ public class ApiManager {
      * Doctor B receives 'verification code' by SMS, inserts it and it is sent to Server.
      * Server checks 'verification code' and accepts the invite by giving back User Id and Authorization Token
      *
+     * @param verification_code: code received by SMS
+     * @param token_jwt: token received by requestActivation
      * @return JSONObject is the response to the request {id: long, token: string } where:
      *             - id of the device of the NEW doctor B
      *             - The token should be sent for every next call to the API as Headers: ‘Authorization: Bearer <Token>’
@@ -177,6 +182,8 @@ public class ApiManager {
      *          - “user-id”: long -> id of the patient, take it from the user QR code or by ID if the device already knows the ID
      *          - “new-status”: int -> new status of the user {0: normal, 1: infected, 2: quarantine, 3: healed, 4: exposed}
      *
+     * @param new_status: health patient status {0: normal, 1: infected, 2: quarantine, 3: healed, 4: exposed}
+     * @param token: authorization token
      * @return JSONObject is the response to the request:
      *              - 200: ok
      *             - null: if there is an exception

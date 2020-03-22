@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.method.KeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +15,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
+import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
+
+import org.json.JSONObject;
+
+import java.util.concurrent.Callable;
+import bolts.Continuation;
+import bolts.Task;
 
 public class LoginDoctorActivity extends Activity {
 
@@ -34,6 +41,7 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code3;                                      //EditText where inserting 3 digit of verification code
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
 
+    private String token_jwt;                                       //token jwt received by requestActivation
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -71,9 +79,13 @@ public class LoginDoctorActivity extends Activity {
                     break;
                 case R.id.et_code4:
                     if (text.length()==1) { //change activity when the 4th digit is inserted
-                        Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);
-                        startActivity(intent);
-                        finish();
+
+                        String verification_code = et_code1.getText().toString() +
+                                                   et_code2.getText().toString() +
+                                                   et_code3.getText().toString() +
+                                                   et_code4.getText().toString();
+
+                        task_acceptInvite(verification_code, token_jwt);  //call acceptInvite
                     }
                     else if(text.length()==0)
                         et_code3.requestFocus();
@@ -92,6 +104,17 @@ public class LoginDoctorActivity extends Activity {
         }
     }
 
+    /**
+     * Write 4 digits of verification code on 4 EditText, when a digit is inserted then change to next EditText.
+     * When all digits are inserted, then check verification code and go to next Activity
+     */
+    private void write_verification_code(){
+        et_code1.addTextChangedListener(new GenericTextWatcher(et_code1));
+        et_code2.addTextChangedListener(new GenericTextWatcher(et_code2));
+        et_code3.addTextChangedListener(new GenericTextWatcher(et_code3));
+        et_code4.addTextChangedListener(new GenericTextWatcher(et_code4));
+    }
+
 
     /******************** Activity Functions *********************************************/
 
@@ -106,8 +129,16 @@ public class LoginDoctorActivity extends Activity {
 
         setContentView(R.layout.activity_login_doctor);
 
+        PreferenceManager pm = new PreferenceManager(this);
+        if ( !pm.isFirstLogin()){  // if it is not the first login of this doctor go directly to DoctorViewActivity
+
+            Intent intent = new Intent(LoginDoctorActivity.this, DoctorViewActivity.class); //change activity
+            startActivity(intent);
+            finish();
+        }
+
         et_phone_number = (EditText) findViewById(R.id.et_phone_number);
-        String phone_num = et_phone_number.getText().toString();  //get phone number
+        final String phone_num = et_phone_number.getText().toString();  //get phone number
 
         tv_write_code = (TextView) findViewById(R.id.tv_write_code);
 
@@ -132,6 +163,9 @@ public class LoginDoctorActivity extends Activity {
                     Toast.makeText(getApplicationContext(), R.string.toast_insert_num, Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    token_jwt = new String();
+                    task_requestActivation(phone_num); //call requestActivation
+
                     tv_write_code.setVisibility(View.VISIBLE);
                     tr_code.setVisibility(View.VISIBLE);
                     et_code1.requestFocus();
@@ -146,14 +180,82 @@ public class LoginDoctorActivity extends Activity {
     }
 
 
+
+
+    /******************** Task Functions *********************************************/
+
+
     /**
-     * Write 4 digits of verification code on 4 EditText, when a digit is inserted then change to next EditText.
-     * When all digits are inserted, then check verification code and go to next Activity
+     * Run task in order to call acceptInvite API and manage the response
+     *
+     * @param verification_code
+     * @param token_jwt
      */
-    private void write_verification_code(){
-        et_code1.addTextChangedListener(new GenericTextWatcher(et_code1));
-        et_code2.addTextChangedListener(new GenericTextWatcher(et_code2));
-        et_code3.addTextChangedListener(new GenericTextWatcher(et_code3));
-        et_code4.addTextChangedListener(new GenericTextWatcher(et_code4));
+    private void task_acceptInvite(final String verification_code, final String token_jwt){
+
+        Task.callInBackground(new Callable<JSONObject>() {
+            @Override
+            public JSONObject call() throws Exception {
+                return ApiManager.acceptInvite(verification_code, token_jwt);  //call acceptInvite
+            }
+        }).onSuccess(new Continuation<JSONObject, Object>() {
+            @Override
+            public String then(Task<JSONObject> task) throws Exception {
+
+                JSONObject object = task.getResult();;             //get response of acceptInvite
+                if (object != null) {
+                    PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                    pm.setDoctorId(object.getLong("id"));                //save user(doctor) id in SharedPreferences
+                    pm.setAuthorizationToken(object.getString("token")); //save authorization token in SharedPreferences
+
+                    Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
+                    startActivity(intent);
+                    finish();
+
+                } else{
+                    //
+                }
+                return null;
+            }
+        });
     }
+
+    /**
+     * Run task in order to call requestActivation API and manage the response
+     * @param phone_number
+     */
+    private void task_requestActivation(final String phone_number){
+
+        Task.callInBackground(new Callable<JSONObject>() {
+            @Override
+            public JSONObject call() throws Exception {
+                return ApiManager.requestActivation(phone_number);  //call requestActivation
+            }
+        }).onSuccess(new Continuation<JSONObject, Object>() {
+            @Override
+            public String then(Task<JSONObject> task) throws Exception {
+
+                JSONObject object = task.getResult();;             //get response of requestActivation
+                if (object != null) {
+                    switch (object.getInt("code")) {         //check response status(code)
+                        case 202: //Accepted
+                            token_jwt = object.getString("token");
+                            break;
+                        case 403: //Forbidden
+                            Toast.makeText(LoginDoctorActivity.this, "Number forbidden", Toast.LENGTH_SHORT);
+                            break;
+                        case 404: //Not Found
+                            Toast.makeText(LoginDoctorActivity.this, "Number not found", Toast.LENGTH_SHORT);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                return null;
+            }
+        });
+    }
+
+
+
 }
