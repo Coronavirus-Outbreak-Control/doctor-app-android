@@ -145,22 +145,15 @@ public class ChangeStatusActivity extends Activity {
                 JSONObject object = task.getResult();;             //get response of updateUserStatus
                 if (object != null) {
                     if (object.getInt("code") == 202){      // if response is 'ok'
-                        new Handler().post(new Runnable(){
-                            public void run(){
-                                Toast.makeText(ChangeStatusActivity.this, R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
                     }
 
                 } else{
-                    new Handler().post( new Runnable(){
-                        public void run(){
-                            Toast.makeText(ChangeStatusActivity.this, "DEBUG CALL UPDATE USER STATUS", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //PER DEBUG
+                    Toast.makeText(ChangeStatusActivity.this, "DEBUG CALL UPDATE USER STATUS", Toast.LENGTH_SHORT).show();
                 }
                 return null;
             }
-        });
+        },  Task.UI_THREAD_EXECUTOR);
     }
 }

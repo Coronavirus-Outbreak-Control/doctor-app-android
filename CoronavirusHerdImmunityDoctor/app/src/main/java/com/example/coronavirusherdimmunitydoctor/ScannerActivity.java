@@ -87,6 +87,7 @@ public class ScannerActivity extends AppCompatActivity {
         codeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
+                //when scanner is released then it is stopped if patient_id is empty else QR code is recognized
                 if (patient_id.isEmpty())
                 {
                     Toast.makeText(getApplicationContext(), R.string.toast_scanner_stop, Toast.LENGTH_SHORT).show();
@@ -104,18 +105,14 @@ public class ScannerActivity extends AppCompatActivity {
                     patient_id = code.valueAt(0).displayValue;  //get qrcode recognized
 
                     try {
-                        patient_id = "covid-outbreak-control:199992"; //DEBUG
+                        patient_id = "covid-outbreak-control:199992";   //PER DEBUG
                         Long pat_id = Long.parseLong(patient_id.replaceAll("\\D+","")); //convert QR code in Long number by removing chars
                         Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
                         intent.putExtra("patient id", pat_id);
                         startActivity(intent);
                         finish();
                     } catch (NumberFormatException e) { //when patient id is not convertable in a Long
-                        new Handler().post(new Runnable(){
-                            public void run(){
-                                Toast.makeText(ScannerActivity.this, R.string.toast_wrong_scan, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Toast.makeText(getApplicationContext(), R.string.toast_wrong_scan, Toast.LENGTH_SHORT).show();
                     }
 
                 }

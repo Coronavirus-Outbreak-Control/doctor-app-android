@@ -52,7 +52,7 @@ public class InviteContactsActivity extends Activity {
         contacts_list = new ArrayList<String>();
         //invited_contacts_list = new ArrayList<String>();
 
-        inviteContacts();
+        loadingContacts();
 
         //click on contacts of ListView so as to select and invite them
         lv_contacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -74,7 +74,7 @@ public class InviteContactsActivity extends Activity {
 
                                 //send contact to Server
                                 PreferenceManager pm = new PreferenceManager(InviteContactsActivity.this);
-                                task_inviteDoctor(contact, pm.getAuthorizationToken());                     //call inviteDoctor Api
+                                task_inviteDoctor(contact.split(":")[1], pm.getAuthorizationToken());                     //call inviteDoctor Api
 
                             }
                         })
@@ -112,7 +112,7 @@ public class InviteContactsActivity extends Activity {
      * Create a contacts list (ListView) in order to be selected
      */
     @SuppressLint("StaticFieldLeak")
-    private void inviteContacts(){
+    private void loadingContacts(){
         new AsyncTask<Void, Void, Void>() {
             private ProgressDialog dialog;
 
@@ -163,7 +163,7 @@ public class InviteContactsActivity extends Activity {
                     if (pCur.moveToFirst()) {
                         String phone = pCur.getString(
                                 pCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        String contact = name + ":" + phone;
+                        String contact = name + ":" + phone.replaceAll("\\s+","").replaceAll("-","");   //replaced white spaces and "-" from number
                         arraylist.add(contact);
                     }
                     pCur.close();
@@ -198,22 +198,15 @@ public class InviteContactsActivity extends Activity {
                 JSONObject object = task.getResult();;             //get response of inviteDoctor
                 if (object != null) {
                     if (object.getInt("code") == 202){      // if response is 'ok'
-                        new Handler().post(new Runnable(){
-                            public void run(){
-                                Toast.makeText(InviteContactsActivity.this, R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
                     }
                 } else{
-                    new Handler().post( new Runnable(){
-                        public void run(){
-                            Toast.makeText(InviteContactsActivity.this, "DEBUG CALL INVITE DOCTOR", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //PER DEBUG
+                    Toast.makeText(getApplicationContext(), "DEBUG CALL INVITE DOCTOR", Toast.LENGTH_SHORT).show();
                 }
                 return null;
             }
-        });
+        },  Task.UI_THREAD_EXECUTOR);
     }
 
 }

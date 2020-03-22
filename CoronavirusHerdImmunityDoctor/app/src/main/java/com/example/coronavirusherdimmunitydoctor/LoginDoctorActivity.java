@@ -89,6 +89,7 @@ public class LoginDoctorActivity extends Activity {
 
                         task_acceptInvite(verification_code, token_jwt, phone_num);  //call acceptInvite
 
+                        //PER DEBUG
                         Handler handler=new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -220,11 +221,7 @@ public class LoginDoctorActivity extends Activity {
                 if (object != null) {
                     if ( object.getInt("code") == 401) {//verification code is expired
 
-                        new Handler().post( new Runnable(){
-                            public void run(){
-                                Toast.makeText(LoginDoctorActivity.this, "Verification code expired, insert number again", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        Toast.makeText(getApplicationContext(), "Verification code expired, insert number again", Toast.LENGTH_SHORT).show();
 
                     }else{
 
@@ -240,19 +237,16 @@ public class LoginDoctorActivity extends Activity {
 
 
                 } else{
-                    new Handler().post( new Runnable(){
-                        public void run(){
-                            Toast.makeText(LoginDoctorActivity.this, "DEBUG CALL ACCEPT INVITE", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //PER DEBUG
+                    Toast.makeText(getApplicationContext(), "DEBUG CALL ACCEPT INVITE", Toast.LENGTH_SHORT).show();
                     PreferenceManager pm = new PreferenceManager(getApplicationContext());
                     pm.setDoctorId(Long.parseLong("11292"));                //save user(doctor) id in SharedPreferences
-                    pm.setAuthorizationToken("011292"); //save authorization token in SharedPreferences
+                    pm.setAuthorizationToken("011292");                        //save authorization token in SharedPreferences
                     pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
                 }
                 return null;
             }
-        });
+        },  Task.UI_THREAD_EXECUTOR);
     }
 
     /**
@@ -277,34 +271,23 @@ public class LoginDoctorActivity extends Activity {
                             token_jwt = object.getString("token");
                             break;
                         case 403: //Forbidden
-                            new Handler().post( new Runnable(){
-                                public void run(){
-                                    Toast.makeText(LoginDoctorActivity.this, "Number forbidden", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            Toast.makeText(getApplicationContext(), "Number forbidden", Toast.LENGTH_SHORT).show();
                             break;
                         case 404: //Not Found
-                            new Handler().post( new Runnable(){
-                                public void run(){
-                                    Toast.makeText(LoginDoctorActivity.this, "Number not found", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            Toast.makeText(getApplicationContext(), "Number not found", Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
                     }
                 }else{
-                    new Handler().post( new Runnable(){
-                        public void run(){
-                            Toast.makeText(LoginDoctorActivity.this, "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    //PER DEBUG
+                    Toast.makeText(getApplicationContext(), "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
                     token_jwt = "180393";
 
                 }
                 return null;
             }
-        });
+        },  Task.UI_THREAD_EXECUTOR);
     }
 
 
