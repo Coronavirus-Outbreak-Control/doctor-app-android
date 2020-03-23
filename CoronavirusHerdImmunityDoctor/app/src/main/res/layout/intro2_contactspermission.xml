@@ -6,10 +6,12 @@
     android:background="@color/white" >
 
     <!-- DA CAMBIARE IMMAGINE -->
+    <!--
     <ImageView
         style="@style/background_image"
         android:id="@+id/logo_id"
         android:src="@drawable/ic_illustration_location" />
+    -->
 
     <LinearLayout
         android:layout_width="match_parent"

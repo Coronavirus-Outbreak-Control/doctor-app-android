@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class LoginDoctorActivity extends Activity {
     private Button bt_send_num;                                     //When is clicked, sends phone number to Server
 
     private EditText et_phone_number;                               //Edit Text where phone number is inserted
+    private Spinner spinner_prefix;                                 //Spinner where there is a list of number prefix
 
     private TextView tv_write_code;                                 //TextView
     private TableRow tr_code;                                       //View where the code is inserted
@@ -42,8 +45,12 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code3;                                      //EditText where inserting 3 digit of verification code
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
 
+    private String phone_num;                                       //phone number (without prefix)
+    private String prefix_num;                                      //number prefix
+    private String prefix_phone_num;                                //phone number with number prefix
+
     private String token_jwt;                                       //token jwt received by requestActivation
-    private String phone_num;
+
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -87,7 +94,7 @@ public class LoginDoctorActivity extends Activity {
                                                    et_code3.getText().toString() +
                                                    et_code4.getText().toString();
 
-                        task_acceptInvite(verification_code, token_jwt, phone_num);  //call acceptInvite
+                        task_acceptInvite(verification_code, token_jwt, prefix_phone_num);  //call acceptInvite
 
                         //PER DEBUG
                         Handler handler=new Handler();
@@ -161,6 +168,24 @@ public class LoginDoctorActivity extends Activity {
         et_code3 = (EditText) findViewById(R.id.et_code3);
         et_code4 = (EditText) findViewById(R.id.et_code4);
 
+        spinner_prefix = (Spinner) findViewById(R.id.spinner_prefix);
+        spinner_prefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View v,
+                                       int arg2, long arg3) {
+
+                //get number prefix from spinner
+                prefix_num = getResources().getStringArray(R.array.country_prefix)[spinner.getSelectedItemPosition()].split("-")[0];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                prefix_num = "+39";                 //set italian prefix "+39" as default
+            }
+
+        });
+
         bt_send_num = findViewById(R.id.bt_send_num);
         bt_send_num.setOnClickListener(new View.OnClickListener() {
 
@@ -178,7 +203,8 @@ public class LoginDoctorActivity extends Activity {
                 else{
                     phone_num = et_phone_number.getText().toString();  //get phone number
                     token_jwt = new String();
-                    task_requestActivation(phone_num); //call requestActivation
+                    prefix_phone_num = prefix_num+phone_num;
+                    task_requestActivation(prefix_phone_num); //call requestActivation
 
                     tv_write_code.setVisibility(View.VISIBLE);
                     tr_code.setVisibility(View.VISIBLE);
@@ -188,9 +214,6 @@ public class LoginDoctorActivity extends Activity {
 
             }
         });
-
-
-
     }
 
 
