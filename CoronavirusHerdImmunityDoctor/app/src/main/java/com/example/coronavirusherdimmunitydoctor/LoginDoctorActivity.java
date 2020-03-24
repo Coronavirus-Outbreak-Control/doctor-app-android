@@ -49,8 +49,6 @@ public class LoginDoctorActivity extends Activity {
     private String prefix_num;                                      //number prefix
     private String prefix_phone_num;                                //phone number with number prefix
 
-    private String token_jwt;                                       //token jwt received by requestActivation
-
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -94,7 +92,7 @@ public class LoginDoctorActivity extends Activity {
                                                    et_code3.getText().toString() +
                                                    et_code4.getText().toString();
 
-                        task_acceptInvite(verification_code, token_jwt, prefix_phone_num);  //call acceptInvite
+                        task_acceptInvite(verification_code, prefix_phone_num);  //call acceptInvite
 
                         //PER DEBUG
                         Handler handler=new Handler();
@@ -202,7 +200,6 @@ public class LoginDoctorActivity extends Activity {
                 }
                 else{
                     phone_num = et_phone_number.getText().toString();  //get phone number
-                    token_jwt = new String();
                     prefix_phone_num = prefix_num+phone_num;
                     task_requestActivation(prefix_phone_num); //call requestActivation
 
@@ -226,14 +223,14 @@ public class LoginDoctorActivity extends Activity {
      * Run task in order to call acceptInvite API and manage the response
      *
      * @param verification_code
-     * @param token_jwt
+     * @param doc_phone_num: phone number of the doctor that tries to login
      */
-    private void task_acceptInvite(final String verification_code, final String token_jwt, final String phone_number){
+    private void task_acceptInvite(final String verification_code, final String doc_phone_num){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                return ApiManager.acceptInvite(verification_code, token_jwt);  //call acceptInvite
+                return ApiManager.acceptInvite(verification_code);  //call acceptInvite
             }
         }).onSuccess(new Continuation<JSONObject, Object>() {
             @Override
@@ -244,14 +241,14 @@ public class LoginDoctorActivity extends Activity {
                 if (object != null) {
                     if ( object.getInt("code") == 401) {//verification code is expired
 
-                        Toast.makeText(getApplicationContext(), "Verification code expired, insert number again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Verification code expired", Toast.LENGTH_SHORT).show();
 
                     }else{
 
                         PreferenceManager pm = new PreferenceManager(getApplicationContext());
-                        pm.setDoctorId(object.getLong("id"));                //save user(doctor) id in SharedPreferences
-                        pm.setAuthorizationToken(object.getString("token")); //save authorization token in SharedPreferences
-                        pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
+                        pm.setDoctorId(object.getLong("id"));                     //save user(doctor) id in SharedPreferences
+                        pm.setAuthorizationToken(object.getString("auth_token")); //save authorization token in SharedPreferences
+                        pm.setPhoneNumber(doc_phone_num);                                //save phone number of doctor in SharedPreferences
 
                         Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
                         startActivity(intent);
@@ -265,7 +262,7 @@ public class LoginDoctorActivity extends Activity {
                     PreferenceManager pm = new PreferenceManager(getApplicationContext());
                     pm.setDoctorId(Long.parseLong("11292"));                //save user(doctor) id in SharedPreferences
                     pm.setAuthorizationToken("011292");                        //save authorization token in SharedPreferences
-                    pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
+                    pm.setPhoneNumber(doc_phone_num);                          //save phone number of doctor in SharedPreferences
                 }
                 return null;
             }
@@ -291,13 +288,13 @@ public class LoginDoctorActivity extends Activity {
                 if (object != null) {
                     switch (object.getInt("code")) {         //check response status(code)
                         case 202: //Accepted
-                            token_jwt = object.getString("token");
+                            Toast.makeText(getApplicationContext(), "Phone Number accepted", Toast.LENGTH_SHORT).show();
                             break;
-                        case 403: //Forbidden
-                            Toast.makeText(getApplicationContext(), "Number forbidden", Toast.LENGTH_SHORT).show();
+                        case 502: //Error Phone Number -> Not trusted
+                            Toast.makeText(getApplicationContext(), "Phone Number not accepted", Toast.LENGTH_SHORT).show();
                             break;
                         case 404: //Not Found
-                            Toast.makeText(getApplicationContext(), "Number not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Phone Number not found", Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
@@ -305,8 +302,6 @@ public class LoginDoctorActivity extends Activity {
                 }else{
                     //PER DEBUG
                     Toast.makeText(getApplicationContext(), "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
-                    token_jwt = "180393";
-
                 }
                 return null;
             }

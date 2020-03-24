@@ -57,8 +57,7 @@ public class ChangeStatusActivity extends Activity {
 
                 Integer new_status = states[1];                        //"infected"
 
-                PreferenceManager pm = new PreferenceManager(ChangeStatusActivity.this);
-                task_updateUserStatus(patient_id, new_status, pm.getAuthorizationToken());
+                task_updateUserStatus(patient_id, new_status);
 
             }
         });
@@ -76,8 +75,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Integer new_status = states[2];                        //"suspect"
 
-                PreferenceManager pm = new PreferenceManager(ChangeStatusActivity.this);
-                task_updateUserStatus(patient_id, new_status, pm.getAuthorizationToken());
+                task_updateUserStatus(patient_id, new_status);
             }
         });
 
@@ -95,8 +93,7 @@ public class ChangeStatusActivity extends Activity {
             {
                 Integer new_status = states[3];                        //"recover"
 
-                PreferenceManager pm = new PreferenceManager(ChangeStatusActivity.this);
-                task_updateUserStatus(patient_id, new_status, pm.getAuthorizationToken());
+                task_updateUserStatus(patient_id, new_status);
             }
         });
 
@@ -129,14 +126,18 @@ public class ChangeStatusActivity extends Activity {
      *
      * @param user_id: patient id
      * @param new_status: health patient status
-     * @param token: authorization token
      */
-    private void task_updateUserStatus(final Long user_id, final Integer new_status, final String token){
+    private void task_updateUserStatus(final Long user_id, final Integer new_status){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                return ApiManager.updateUserStatus(user_id, new_status, token);  //call updateUserStatus
+                PreferenceManager pm = new PreferenceManager(getApplicationContext());
+
+                JSONObject object = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //per ora aggiornato sempre il jwt token
+                pm.setJwtToken(object.getString("token"));                             //per ora aggiornato sempre il jwt token
+
+                return ApiManager.updateUserStatus(user_id, new_status, pm.getJwtToken());  //call updateUserStatus
             }
         }).onSuccess(new Continuation<JSONObject, Object>() {
             @Override
@@ -146,6 +147,8 @@ public class ChangeStatusActivity extends Activity {
                 if (object != null) {
                     if (object.getInt("code") == 202){      // if response is 'ok'
                         Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
+                    }else{
+                        //jwt token is expired -> call refreshJwtToken(pm.getAuthorizationToken()) -> recall task_inviteDoctor
                     }
 
                 } else{

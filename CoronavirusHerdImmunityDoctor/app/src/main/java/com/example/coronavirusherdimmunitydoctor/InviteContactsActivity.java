@@ -73,9 +73,7 @@ public class InviteContactsActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 //send contact to Server
-                                PreferenceManager pm = new PreferenceManager(InviteContactsActivity.this);
-                                task_inviteDoctor(contact.split(":")[1], pm.getAuthorizationToken());                     //call inviteDoctor Api
-
+                                task_inviteDoctor(contact.split(":")[1]);                     //call inviteDoctor Api
                             }
                         })
                         .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
@@ -182,14 +180,18 @@ public class InviteContactsActivity extends Activity {
      * Run task in order to call inviteDoctor API and manage the response
      *
      * @param phone_number: phone number of Doctor to invite
-     * @param token: authorization token
      */
-    private void task_inviteDoctor(final String phone_number, final String token){
+    private void task_inviteDoctor(final String phone_number){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                return ApiManager.inviteDoctor(phone_number, token);  //call inviteDoctor
+                PreferenceManager pm = new PreferenceManager(getApplicationContext());
+
+                JSONObject object = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //per ora aggiornato sempre il jwt token
+                pm.setJwtToken(object.getString("token"));                             //per ora aggiornato sempre il jwt token
+
+                return ApiManager.inviteDoctor(phone_number, pm.getJwtToken());  //call inviteDoctor
             }
         }).onSuccess(new Continuation<JSONObject, Object>() {
             @Override
@@ -197,8 +199,10 @@ public class InviteContactsActivity extends Activity {
 
                 JSONObject object = task.getResult();;             //get response of inviteDoctor
                 if (object != null) {
-                    if (object.getInt("code") == 202){      // if response is 'ok'
+                    if (object.getInt("code") == 200){      // if response is 'ok'
                         Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
+                    } else{
+                        //jwt token is expired -> call refreshJwtToken(pm.getAuthorizationToken()) -> recall task_inviteDoctor
                     }
                 } else{
                     //PER DEBUG
