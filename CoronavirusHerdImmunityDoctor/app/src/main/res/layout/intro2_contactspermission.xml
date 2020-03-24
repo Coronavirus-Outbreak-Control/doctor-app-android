@@ -6,12 +6,10 @@
     android:background="@color/white" >
 
     <!-- DA CAMBIARE IMMAGINE -->
-    <!--
-    <ImageView
+<!--    <ImageView
         style="@style/background_image"
         android:id="@+id/logo_id"
-        android:src="@drawable/ic_illustration_location" />
-    -->
+        android:src="@drawable/ic_illustration_location" />-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,12 +39,6 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true" >
-
-
         <!-- BUTTON -->
         <Button style="@style/button_primary"
             android:shadowColor="@color/white"
@@ -58,6 +50,4 @@
             android:id="@+id/button_skip"
             android:text="@string/skip_step" />
 
-
-    </RelativeLayout>
 </RelativeLayout>
