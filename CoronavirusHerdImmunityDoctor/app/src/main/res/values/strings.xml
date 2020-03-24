@@ -1,43 +1,56 @@
 <resources>
-    <string name="app_name">Coronavirus Herd Immunity Doctor</string>
-    <string name="app_title">Doctor Coronavirus Doctor</string>
+    <string name="app_name">CoviDoc</string>
+    <string name="app_title">Doctor Covid Community Alert</string>
 
     <!-- ******* Splash Screen Activity ******* -->
-    <string name="together_we"> Together we can save lives and help people keep their jobs. </string>
-    <string name="let_s_get_s"> LET\'S GET STARTED </string>
-    <string name="how_it_works"> How it works? </string>
+    <string name="splash_title_first">Covi</string>
+    <string name="splash_title_next">Doc&#129658;</string>
+    <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
 
 
-    <!-- ******* Introduction Slider ******* -->
-    <string name="step_1_of_2"> Step 1 of 2 </string>
-    <string name="step_2_of_2"> Step 2 of 2 </string>
-    <string name="skip_step"> SKIP THIS STEP </string>
+    <!-- ***** Introduction Slider ****** -->
+    <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
+    <string name="welcome_next">\nCovidCommunity</string>
+    <string name="welcome_last">\nAlert &#128075;</string>
+    <string name="together_we">Together we can save lives and help people keep their jobs. </string>
+    <string name="let_s_get_s">LET\'S GET STARTED </string>
+    <string name="how_it_works">How it works? &#129300;</string>
 
-    <string name="camera"> Camera</string>
-    <string name="we_need_camera"> We need your permission to use Camera
+    <string name="step_1_of_2">Step 1 of 2 </string>
+    <string name="step_2_of_2">Step 2 of 2 </string>
+    <string name="skip_step">SKIP THIS STEP </string>
+
+    <string name="camera">Camera</string>
+    <string name="we_need_camera">We need your permission to use Camera
         to scanner QR Code patient in order to change health patient status.</string>
-    <string name="give_cam"> GIVE CAMERA PERMISSION </string>
+    <string name="give_cam">GIVE CAMERA PERMISSION </string>
 
-    <string name="contact"> Contacts</string>
-    <string name="we_need_contact">  We need your permission to read Contacts
+    <string name="contact">Contacts</string>
+    <string name="we_need_contact"> We need your permission to read Contacts
         in order to invite new Doctors.</string>
-    <string name="give_contact"> GIVE CONTACTS PERMISSION </string>
+    <string name="give_contact">GIVE ACCESS TO CONTACTS</string>
+
+
+    <string name="all_set">All Set!</string>
+    <string name="what_to_do"> On this app you will now be able to scan a patient\'s QR code
+        in order to change a patient health status, and invite other doctors on the app.</string>
+    <string name="go">GO TO APPLICATION</string>
     <!-- ******************************* -->
 
 
     <!-- ******* Utils **************** -->
 
     <!-- Permission Request -->
-    <string name="cam_disabled"> "Camera" Disabled</string>
-    <string name="cam_please_en"> Please, enable "Camera" </string>
-    <string name="cont_disabled"> "Read Contacts" Disabled </string>
-    <string name="cont_please_en"> Please, enable "Read Contacts" </string>
+    <string name="cam_disabled">"Camera" Disabled</string>
+    <string name="cam_please_en">Please, enable "Camera" </string>
+    <string name="cont_disabled">"Read Contacts" Disabled </string>
+    <string name="cont_please_en">Please, enable "Read Contacts" </string>
 
     <!-- ******************************* -->
 
     <!-- ******* Login Doctor Activity ******* -->
-    <string name="login_doctor_title">Login Doctor App</string>
+    <string name="login_doctor_title">Login</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
     <string name="tv_code">Write the 4 digits SMS code</string>
     <string name="bt_send_number">Send</string>
@@ -52,8 +65,10 @@
 
 
     <!-- ******* Doctor View Activity ******* -->
-    <string name="tv_change_patient_status">To change a patient health status please scan QR code</string>
-    <string name="bt_scan_qrcode">Scan patient account QR code</string>
+    <string name="main_title">Welcome to CoviDoc&#129658;</string>
+    <string name="tv_change_patient_status">Click here to\nscan QR code</string>
+    <string name="bt_scan_qrcode">Scan the patient account QR code to change their health status,
+        or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite new doctors</string>
     <!-- ******************************* -->
 
@@ -70,7 +85,7 @@
     <string name="tv_invite_contacts">Select new doctor</string>
     <string name="bt_invite">Invite</string>
     <string name="toast_select_doc">Select at least a contact</string>
-    <string name="progrdial_loading_con">Loading Contacts...</string>
+    <string name="progrdial_loading_con">Loading Contacts&#8230;</string>
     <string name="progrdial_waiting">Waiting, please</string>
     <string name="alertdial_invite_title">Invite new Doctors</string>
     <string name="alertdial_invite_msg">Are you sure to invite them?</string>
@@ -81,24 +96,25 @@
 
 
     <!-- ***** Change Patient Status Activity ****-->
-    <string name="bt_confirm_covid">Confirm Covid-19</string>
-    <string name="bt_suspect_covid">Suspect Covid-19</string>
-    <string name="bt_recover_covid">Recovered</string>
+    <string name="diagnosis_title">Diagnosis&#129658;</string>
+    <string name="bt_confirm_covid">&#129440;\ \ \ \ COVID-19 Positive</string>
+    <string name="bt_suspect_covid">&#10068;\ \ \ \ Suspected COVID-19</string>
+    <string name="bt_recover_covid">&#129293;\ \ \ \ Healed/Negative</string>
     <string name="bt_other_status_covid">Other</string>
     <string name="toast_status_changed">Status Changed</string>
     <!-- ******************************* -->
 
 
     <!-- ****** How it works Screen *****-->
-    <string name="how_it_works_p0">  We will use your mobile phone camera and contacts
+    <string name="how_it_works_p0"> We will use your mobile phone camera and contacts
         in order to scanner patient code and invite new doctors. </string>
 
-    <string name="how_it_works_q1"> How can I help the people? </string>
-    <string name="how_it_works_p1"> You can change health patient status in order to notify
+    <string name="how_it_works_q1">How can I help the people? </string>
+    <string name="how_it_works_p1">You can change health patient status in order to notify
         other patients that have met the sick. </string>
 
-    <string name="how_it_works_q2">  How can I promote this application? </string>
-    <string name="how_it_works_p2"> You can invite new trusted doctors by sending us
+    <string name="how_it_works_q2"> How can I promote this application? </string>
+    <string name="how_it_works_p2">You can invite new trusted doctors by sending us
         their phone number. </string>
     <!-- ******************************* -->
 

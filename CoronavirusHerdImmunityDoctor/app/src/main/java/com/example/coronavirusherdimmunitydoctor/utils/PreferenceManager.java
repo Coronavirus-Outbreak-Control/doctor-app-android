@@ -18,7 +18,8 @@ public class PreferenceManager {
 
     private static final String IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch";
 
-    private static final String AUTH_TOKEN = "authorization_token"; // authorization code used to send 'authorized' rest API
+    private static final String AUTH_TOKEN = "authorization_token"; // authorization token used to get jwt token
+    private static final String JWT_TOKEN = "jwt_token";            // jwt token used to send 'authorized' rest API
     private static final String PHONE_NUMBER = "phone_number";      // phone number of Doctor
     private static final String DOCTOR_ID = "doctor_id";            // doctor id received after activation
 
@@ -42,6 +43,11 @@ public class PreferenceManager {
         editor.commit();
     }
 
+    public void setJwtToken(String jwt_token){
+        editor.putString(JWT_TOKEN, jwt_token);
+        editor.commit();
+    }
+
     public void setPhoneNumber(String phoneNumber){
         editor.putString(PHONE_NUMBER, phoneNumber);
         editor.commit();
@@ -60,11 +66,15 @@ public class PreferenceManager {
         return pref.getString(AUTH_TOKEN, null);
     }
 
+    public String getJwtToken(){
+        return pref.getString(JWT_TOKEN, null);
+    }
+
     public String getPhoneNumber(){
         return pref.getString(PHONE_NUMBER, null);
     }
 
-    public Long getDoctorId(){
+    public Long getDoctorId() {
         return pref.getLong(DOCTOR_ID, -1);
     }
     /********************************************/
@@ -77,6 +87,7 @@ public class PreferenceManager {
      * @return "true" if it the first time launch, else "false"
      */
     public boolean isFirstTimeLaunch() {
+
         return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
     }
 

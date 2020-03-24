@@ -7,47 +7,42 @@
     android:layout_height="match_parent">
 
     <TextView
+        style="@style/intro_title"
         android:id="@+id/tv_changestatus"
-        android:layout_width="230dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:text="@string/tv_change_patient_status"
-        android:textSize="17sp"
+        android:layout_marginTop="70dp"
+        android:text="@string/main_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <Button
+        style="@style/button_primary"
         android:id="@+id/bt_scan_qrcode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/bt_scan_qrcode"
+        android:layout_width="290dp"
+        android:layout_height="340dp"
+        android:layout_marginTop="@dimen/side_margin"
+        android:background="@drawable/ic_asset_1"
+        android:text="@string/tv_change_patient_status"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="bold"
+        android:paddingTop="25dp"
+        android:gravity="center|top"
+        android:textSize="20sp"
+        android:textColor="@color/colorTextDark"
         app:layout_constraintEnd_toEndOf="@+id/tv_changestatus"
         app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="@+id/tv_changestatus"
         app:layout_constraintTop_toBottomOf="@+id/tv_changestatus" />
 
-    <View
-        android:layout_width="329dp"
-        android:layout_height="8dp"
-        android:layout_gravity="center"
-        android:background="#8BC34A"
-        app:layout_constraintBottom_toTopOf="@+id/bt_invite_doc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_scan_qrcode" />
 
     <Button
+        style="@style/button_primary"
         android:id="@+id/bt_invite_doc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="312dp"
         android:text="@string/bt_invite_doc"
+        android:layout_marginTop="70dp"
         app:layout_constraintEnd_toEndOf="@+id/bt_scan_qrcode"
-        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="@+id/bt_scan_qrcode"
         app:layout_constraintTop_toBottomOf="@+id/bt_scan_qrcode" />
 

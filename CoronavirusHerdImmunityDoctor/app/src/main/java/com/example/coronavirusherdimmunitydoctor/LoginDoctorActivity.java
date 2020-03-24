@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class LoginDoctorActivity extends Activity {
     private Button bt_send_num;                                     //When is clicked, sends phone number to Server
 
     private EditText et_phone_number;                               //Edit Text where phone number is inserted
+    private Spinner spinner_prefix;                                 //Spinner where there is a list of number prefix
 
     private TextView tv_write_code;                                 //TextView
     private TableRow tr_code;                                       //View where the code is inserted
@@ -42,8 +45,10 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code3;                                      //EditText where inserting 3 digit of verification code
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
 
-    private String token_jwt;                                       //token jwt received by requestActivation
-    private String phone_num;
+    private String phone_num;                                       //phone number (without prefix)
+    private String prefix_num;                                      //number prefix
+    private String prefix_phone_num;                                //phone number with number prefix
+
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -87,7 +92,7 @@ public class LoginDoctorActivity extends Activity {
                                                    et_code3.getText().toString() +
                                                    et_code4.getText().toString();
 
-                        task_acceptInvite(verification_code, token_jwt, phone_num);  //call acceptInvite
+                        task_acceptInvite(verification_code, prefix_phone_num);  //call acceptInvite
 
                         //PER DEBUG
                         Handler handler=new Handler();
@@ -98,7 +103,7 @@ public class LoginDoctorActivity extends Activity {
                                 startActivity(intent);
                                 finish();
                             }
-                        },10000);
+                        },5000);
 
                     }
                     else if(text.length()==0)
@@ -161,6 +166,24 @@ public class LoginDoctorActivity extends Activity {
         et_code3 = (EditText) findViewById(R.id.et_code3);
         et_code4 = (EditText) findViewById(R.id.et_code4);
 
+        spinner_prefix = (Spinner) findViewById(R.id.spinner_prefix);
+        spinner_prefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> spinner, View v,
+                                       int arg2, long arg3) {
+
+                //get number prefix from spinner
+                prefix_num = getResources().getStringArray(R.array.country_prefix)[spinner.getSelectedItemPosition()].split("-")[0];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                prefix_num = "+39";                 //set italian prefix "+39" as default
+            }
+
+        });
+
         bt_send_num = findViewById(R.id.bt_send_num);
         bt_send_num.setOnClickListener(new View.OnClickListener() {
 
@@ -177,8 +200,8 @@ public class LoginDoctorActivity extends Activity {
                 }
                 else{
                     phone_num = et_phone_number.getText().toString();  //get phone number
-                    token_jwt = new String();
-                    task_requestActivation(phone_num); //call requestActivation
+                    prefix_phone_num = prefix_num+phone_num;
+                    task_requestActivation(prefix_phone_num); //call requestActivation
 
                     tv_write_code.setVisibility(View.VISIBLE);
                     tr_code.setVisibility(View.VISIBLE);
@@ -188,9 +211,6 @@ public class LoginDoctorActivity extends Activity {
 
             }
         });
-
-
-
     }
 
 
@@ -203,14 +223,14 @@ public class LoginDoctorActivity extends Activity {
      * Run task in order to call acceptInvite API and manage the response
      *
      * @param verification_code
-     * @param token_jwt
+     * @param doc_phone_num: phone number of the doctor that tries to login
      */
-    private void task_acceptInvite(final String verification_code, final String token_jwt, final String phone_number){
+    private void task_acceptInvite(final String verification_code, final String doc_phone_num){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                return ApiManager.acceptInvite(verification_code, token_jwt);  //call acceptInvite
+                return ApiManager.acceptInvite(verification_code);  //call acceptInvite
             }
         }).onSuccess(new Continuation<JSONObject, Object>() {
             @Override
@@ -221,14 +241,14 @@ public class LoginDoctorActivity extends Activity {
                 if (object != null) {
                     if ( object.getInt("code") == 401) {//verification code is expired
 
-                        Toast.makeText(getApplicationContext(), "Verification code expired, insert number again", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Verification code expired", Toast.LENGTH_SHORT).show();
 
                     }else{
 
                         PreferenceManager pm = new PreferenceManager(getApplicationContext());
-                        pm.setDoctorId(object.getLong("id"));                //save user(doctor) id in SharedPreferences
-                        pm.setAuthorizationToken(object.getString("token")); //save authorization token in SharedPreferences
-                        pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
+                        pm.setDoctorId(object.getLong("id"));                     //save user(doctor) id in SharedPreferences
+                        pm.setAuthorizationToken(object.getString("auth_token")); //save authorization token in SharedPreferences
+                        pm.setPhoneNumber(doc_phone_num);                                //save phone number of doctor in SharedPreferences
 
                         Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
                         startActivity(intent);
@@ -242,7 +262,7 @@ public class LoginDoctorActivity extends Activity {
                     PreferenceManager pm = new PreferenceManager(getApplicationContext());
                     pm.setDoctorId(Long.parseLong("11292"));                //save user(doctor) id in SharedPreferences
                     pm.setAuthorizationToken("011292");                        //save authorization token in SharedPreferences
-                    pm.setPhoneNumber(phone_number);                           //save phone number of doctor in SharedPreferences
+                    pm.setPhoneNumber(doc_phone_num);                          //save phone number of doctor in SharedPreferences
                 }
                 return null;
             }
@@ -268,13 +288,13 @@ public class LoginDoctorActivity extends Activity {
                 if (object != null) {
                     switch (object.getInt("code")) {         //check response status(code)
                         case 202: //Accepted
-                            token_jwt = object.getString("token");
+                            Toast.makeText(getApplicationContext(), "Phone Number accepted", Toast.LENGTH_SHORT).show();
                             break;
-                        case 403: //Forbidden
-                            Toast.makeText(getApplicationContext(), "Number forbidden", Toast.LENGTH_SHORT).show();
+                        case 502: //Error Phone Number -> Not trusted
+                            Toast.makeText(getApplicationContext(), "Phone Number not accepted", Toast.LENGTH_SHORT).show();
                             break;
                         case 404: //Not Found
-                            Toast.makeText(getApplicationContext(), "Number not found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Phone Number not found", Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             break;
@@ -282,8 +302,6 @@ public class LoginDoctorActivity extends Activity {
                 }else{
                     //PER DEBUG
                     Toast.makeText(getApplicationContext(), "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
-                    token_jwt = "180393";
-
                 }
                 return null;
             }

@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,7 +38,7 @@ public class InviteContactsActivity extends Activity {
 
     private ArrayList<String> contacts_list;  //the list of all contacts
 
-    private ImageButton bt_back;
+    private Button bt_back;
     private ListView lv_contacts;
     private ArrayAdapter<String> list_adapter;
 
@@ -47,7 +47,7 @@ public class InviteContactsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_contacts);
         lv_contacts = (ListView) findViewById(R.id.list_contacts);
-        bt_back = (ImageButton) findViewById(R.id.bt_back);
+        bt_back = (Button) findViewById(R.id.bt_back);
 
         contacts_list = new ArrayList<String>();
         //invited_contacts_list = new ArrayList<String>();
@@ -73,9 +73,7 @@ public class InviteContactsActivity extends Activity {
                             public void onClick(DialogInterface dialog, int which) {
 
                                 //send contact to Server
-                                PreferenceManager pm = new PreferenceManager(InviteContactsActivity.this);
-                                task_inviteDoctor(contact.split(":")[1], pm.getAuthorizationToken());                     //call inviteDoctor Api
-
+                                task_inviteDoctor(contact.split(":")[1]);                     //call inviteDoctor Api
                             }
                         })
                         .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
@@ -89,7 +87,6 @@ public class InviteContactsActivity extends Activity {
         });
 
         bt_back = findViewById(R.id.bt_back);
-        bt_back.setImageResource(R.drawable.left);
         bt_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -182,14 +179,18 @@ public class InviteContactsActivity extends Activity {
      * Run task in order to call inviteDoctor API and manage the response
      *
      * @param phone_number: phone number of Doctor to invite
-     * @param token: authorization token
      */
-    private void task_inviteDoctor(final String phone_number, final String token){
+    private void task_inviteDoctor(final String phone_number){
 
         Task.callInBackground(new Callable<JSONObject>() {
             @Override
             public JSONObject call() throws Exception {
-                return ApiManager.inviteDoctor(phone_number, token);  //call inviteDoctor
+                PreferenceManager pm = new PreferenceManager(getApplicationContext());
+
+                JSONObject object = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //per ora aggiornato sempre il jwt token
+                pm.setJwtToken(object.getString("token"));                             //per ora aggiornato sempre il jwt token
+
+                return ApiManager.inviteDoctor(phone_number, pm.getJwtToken());  //call inviteDoctor
             }
         }).onSuccess(new Continuation<JSONObject, Object>() {
             @Override
@@ -197,8 +198,10 @@ public class InviteContactsActivity extends Activity {
 
                 JSONObject object = task.getResult();;             //get response of inviteDoctor
                 if (object != null) {
-                    if (object.getInt("code") == 202){      // if response is 'ok'
+                    if (object.getInt("code") == 200){      // if response is 'ok'
                         Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
+                    } else{
+                        //jwt token is expired -> call refreshJwtToken(pm.getAuthorizationToken()) -> recall task_inviteDoctor
                     }
                 } else{
                     //PER DEBUG
