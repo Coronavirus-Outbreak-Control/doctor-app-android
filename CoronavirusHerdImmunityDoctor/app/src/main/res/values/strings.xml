@@ -15,31 +15,31 @@
     <string name="welcome_last">\nAlert &#128075;</string>
     <string name="together_we">Together we can save lives and help people keep their jobs. </string>
     <string name="let_s_get_s">LET\'S GET STARTED </string>
-    <string name="how_it_works"> How it works? &#129300;</string>
+    <string name="how_it_works">How it works? &#129300;</string>
 
-    <string name="step_1_of_2"> Step 1 of 2 </string>
-    <string name="step_2_of_2"> Step 2 of 2 </string>
-    <string name="skip_step"> SKIP THIS STEP </string>
+    <string name="step_1_of_2">Step 1 of 2 </string>
+    <string name="step_2_of_2">Step 2 of 2 </string>
+    <string name="skip_step">SKIP THIS STEP </string>
 
-    <string name="camera"> Camera</string>
-    <string name="we_need_camera"> We need your permission to use Camera
+    <string name="camera">Camera</string>
+    <string name="we_need_camera">We need your permission to use Camera
         to scanner QR Code patient in order to change health patient status.</string>
-    <string name="give_cam"> GIVE CAMERA PERMISSION </string>
+    <string name="give_cam">GIVE CAMERA PERMISSION </string>
 
-    <string name="contact"> Contacts</string>
-    <string name="we_need_contact">  We need your permission to read Contacts
+    <string name="contact">Contacts</string>
+    <string name="we_need_contact"> We need your permission to read Contacts
         in order to invite new Doctors.</string>
-    <string name="give_contact"> GIVE CONTACTS PERMISSION </string>
+    <string name="give_contact">GIVE ACCESS TO CONTACTS</string>
     <!-- ******************************* -->
 
 
     <!-- ******* Utils **************** -->
 
     <!-- Permission Request -->
-    <string name="cam_disabled"> "Camera" Disabled</string>
-    <string name="cam_please_en"> Please, enable "Camera" </string>
-    <string name="cont_disabled"> "Read Contacts" Disabled </string>
-    <string name="cont_please_en"> Please, enable "Read Contacts" </string>
+    <string name="cam_disabled">"Camera" Disabled</string>
+    <string name="cam_please_en">Please, enable "Camera" </string>
+    <string name="cont_disabled">"Read Contacts" Disabled </string>
+    <string name="cont_please_en">Please, enable "Read Contacts" </string>
 
     <!-- ******************************* -->
 
@@ -98,15 +98,15 @@
 
 
     <!-- ****** How it works Screen *****-->
-    <string name="how_it_works_p0">  We will use your mobile phone camera and contacts
+    <string name="how_it_works_p0"> We will use your mobile phone camera and contacts
         in order to scanner patient code and invite new doctors. </string>
 
-    <string name="how_it_works_q1"> How can I help the people? </string>
-    <string name="how_it_works_p1"> You can change health patient status in order to notify
+    <string name="how_it_works_q1">How can I help the people? </string>
+    <string name="how_it_works_p1">You can change health patient status in order to notify
         other patients that have met the sick. </string>
 
-    <string name="how_it_works_q2">  How can I promote this application? </string>
-    <string name="how_it_works_p2"> You can invite new trusted doctors by sending us
+    <string name="how_it_works_q2"> How can I promote this application? </string>
+    <string name="how_it_works_p2">You can invite new trusted doctors by sending us
         their phone number. </string>
     <!-- ******************************* -->
 
