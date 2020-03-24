@@ -17,7 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,7 +38,7 @@ public class InviteContactsActivity extends Activity {
 
     private ArrayList<String> contacts_list;  //the list of all contacts
 
-    private ImageButton bt_back;
+    private Button bt_back;
     private ListView lv_contacts;
     private ArrayAdapter<String> list_adapter;
 
@@ -47,7 +47,7 @@ public class InviteContactsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite_contacts);
         lv_contacts = (ListView) findViewById(R.id.list_contacts);
-        bt_back = (ImageButton) findViewById(R.id.bt_back);
+        bt_back = (Button) findViewById(R.id.bt_back);
 
         contacts_list = new ArrayList<String>();
         //invited_contacts_list = new ArrayList<String>();

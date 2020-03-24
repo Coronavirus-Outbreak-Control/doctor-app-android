@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
@@ -23,7 +23,7 @@ import bolts.Task;
 public class ChangeStatusActivity extends Activity {
 
     private Button bt_confirm_covid, bt_suspect_covid, bt_recover_covid, bt_other;
-    private ImageButton bt_back;
+    private Button bt_back;
 
     final Integer[] states = {0, 1, 2, 3, 4, 5, 6};     // {0: normal,
                                                         //  1: infected,
