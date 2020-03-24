@@ -3,9 +3,9 @@
     <string name="app_title">Doctor Covid Community Alert</string>
 
     <!-- ******* Splash Screen Activity ******* -->
-    <string name="together_we"> Together we can save lives and help people keep their jobs. </string>
-    <string name="let_s_get_s"> LET\'S GET STARTED </string>
-    <string name="how_it_works"> How it works? </string>
+    <string name="splash_title_first">Covi</string>
+    <string name="splash_title_next">Doc&#129658;</string>
+    <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
 
 
@@ -25,6 +25,9 @@
     <string name="give_contact"> GIVE CONTACTS PERMISSION </string>
     <!-- ******************************* -->
 
+    <string name="together_we"> Together we can save lives and help people keep their jobs. </string>
+    <string name="let_s_get_s"> LET\'S GET STARTED </string>
+    <string name="how_it_works"> How it works? </string>
 
     <!-- ******* Utils **************** -->
 
@@ -70,7 +73,7 @@
     <string name="tv_invite_contacts">Select new doctor</string>
     <string name="bt_invite">Invite</string>
     <string name="toast_select_doc">Select at least a contact</string>
-    <string name="progrdial_loading_con">Loading Contacts...</string>
+    <string name="progrdial_loading_con">Loading Contacts&#8230;</string>
     <string name="progrdial_waiting">Waiting, please</string>
     <string name="alertdial_invite_title">Invite new Doctors</string>
     <string name="alertdial_invite_msg">Are you sure to invite them?</string>

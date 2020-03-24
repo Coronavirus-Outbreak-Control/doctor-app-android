@@ -100,7 +100,6 @@ public class ChangeStatusActivity extends Activity {
         /****************** Back Button *******************/
 
         bt_back = findViewById(R.id.bt_back);
-        bt_back.setImageResource(R.drawable.left);
         bt_back.setOnClickListener(new View.OnClickListener() {
 
             @Override

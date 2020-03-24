@@ -1,49 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/white">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <!-- illustration_bluetooth -->
-        <!-- <ImageView
-            style="@style/background_image"
-            android:layout_marginTop="400dp"
-            android:src="@drawable/ic_illustration_bluetooth" />
-        -->
-    </RelativeLayout>
+
+    <!-- illustration_bluetooth -->
+    <ImageView
+        style="@style/background_image"
+        android:layout_marginTop="350dp"
+        android:src="@drawable/ic_illustration_bluetooth" />
+
+    <TextView
+        style="@style/splashscreen_title"
+        android:id="@+id/splashscreen_title" />
+
+    <TextView
+        android:id="@+id/splashscreen_subtitle"
+        style="@style/splashscreen_subtitle"
+        android:text="@string/splash_subtitle"/>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!-- Welcome to anonymous Coronavirus check 👋 -->
-        <ImageView
-            android:id="@+id/logo_id"
-            android:layout_width="262dp"
-            android:layout_height="221dp"
-            android:layout_marginLeft="@dimen/margin_left"
-            android:layout_marginTop="100dp"
-            android:orientation="vertical"/>
-
-        <!-- Together we can save lives and help people keep their jobs -->
-        <TextView
-            style="@style/intro_subtitle"
-            android:id="@+id/together_we"
-            android:layout_width="262dp"
-            android:text="@string/together_we"
-            android:textAppearance="@style/splashscreen_subtitle" />
-
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

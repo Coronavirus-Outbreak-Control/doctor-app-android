@@ -87,7 +87,6 @@ public class InviteContactsActivity extends Activity {
         });
 
         bt_back = findViewById(R.id.bt_back);
-        bt_back.setImageResource(R.drawable.left);
         bt_back.setOnClickListener(new View.OnClickListener() {
 
             @Override

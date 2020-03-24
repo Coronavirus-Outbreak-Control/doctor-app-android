@@ -8,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
+
 
 public class LoginAcceptedActivity extends Activity {
 
@@ -23,8 +25,9 @@ public class LoginAcceptedActivity extends Activity {
 
         setContentView(R.layout.activity_login_accepted);
 
-        ImageView img_checkbox = (ImageView) findViewById(R.id.img_checkbox);
-        img_checkbox.setImageResource(R.drawable.checkbox);
+        PreferenceManager prefManager = new PreferenceManager(this);
+        prefManager.setFirstTimeLaunch(false);
+        //ImageView img_checkbox = (ImageView) findViewById(R.id.img_checkbox);
 
         han_logacc=new Handler();
         han_logacc.postDelayed(new Runnable() {
