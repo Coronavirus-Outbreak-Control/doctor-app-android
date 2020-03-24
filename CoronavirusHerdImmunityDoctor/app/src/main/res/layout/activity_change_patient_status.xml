@@ -2,9 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="left"
     android:background="@color/white">
 
 
@@ -16,38 +14,43 @@
 
 
     <Button
+        style="@style/button_primary"
         android:id="@+id/bt_confirm_covid"
+        android:text="@string/bt_confirm_covid"
+        android:background="@drawable/ic_rectangle_red"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/ic_rectangle_red"
-        android:layout_gravity="center"
         android:layout_marginTop="80dp"
-        android:text="@string/bt_confirm_covid"
-        android:textColor="@color/white"
-        android:textSize="18sp"/>
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="7dp"
+        android:textSize="15sp"
+        android:textColor="@color/white" />
 
 
     <Button
         android:id="@+id/bt_suspect_covid"
+        style="@style/button_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/ic_rectangle_orange"
-        android:text="@string/bt_suspect_covid"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:paddingBottom="7dp"
+        android:textSize="15sp"
+        android:text="@string/bt_suspect_covid" />
 
     <Button
+        style="@style/button_primary"
         android:id="@+id/bt_recover_covid"
         android:text="@string/bt_recover_covid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/ic_rectangle_green"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:paddingBottom="7dp"
+        android:textSize="15sp"
+        android:layout_gravity="center_vertical" />
 
     <!-- BACK BUTTON -->
     <Button
