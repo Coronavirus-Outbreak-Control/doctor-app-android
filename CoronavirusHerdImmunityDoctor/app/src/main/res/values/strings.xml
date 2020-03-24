@@ -88,9 +88,10 @@
 
 
     <!-- ***** Change Patient Status Activity ****-->
-    <string name="bt_confirm_covid">Confirm Covid-19</string>
-    <string name="bt_suspect_covid">Suspect Covid-19</string>
-    <string name="bt_recover_covid">Recovered</string>
+    <string name="diagnosis_title">Diagnosis&#129658;</string>
+    <string name="bt_confirm_covid">&#129440;\ \ COVID-19 Positive</string>
+    <string name="bt_suspect_covid">Suspected COVID-19</string>
+    <string name="bt_recover_covid">Healed/Negative</string>
     <string name="bt_other_status_covid">Other</string>
     <string name="toast_status_changed">Status Changed</string>
     <!-- ******************************* -->

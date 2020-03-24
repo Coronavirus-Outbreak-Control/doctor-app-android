@@ -1,60 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="left"
+    android:background="@color/white">
+
+
+    <!-- Title -->
+    <TextView
+        style="@style/intro_title"
+        android:layout_marginTop="60dp"
+        android:text="@string/diagnosis_title" />
+
 
     <Button
         android:id="@+id/bt_confirm_covid"
-        android:layout_width="180dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/ic_rectangle_red"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
         android:text="@string/bt_confirm_covid"
-        android:textColor="#F44336"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/white"
+        android:textSize="18sp"/>
+
 
     <Button
         android:id="@+id/bt_suspect_covid"
-        android:layout_width="180dp"
-        android:layout_height="130dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_rectangle_orange"
         android:text="@string/bt_suspect_covid"
-        android:textColor="#FF9800"
-        app:layout_constraintEnd_toEndOf="@+id/bt_confirm_covid"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bt_confirm_covid"
-        app:layout_constraintTop_toBottomOf="@+id/bt_confirm_covid" />
-
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/bt_recover_covid"
-        android:layout_width="180dp"
-        android:layout_height="130dp"
         android:text="@string/bt_recover_covid"
-        android:textColor="#4CAF50"
-        android:textColorLink="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/bt_suspect_covid"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/bt_suspect_covid"
-        app:layout_constraintTop_toBottomOf="@+id/bt_suspect_covid" />
-
-    <ImageButton
-        android:id="@+id/bt_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_back_button" />
+        android:layout_marginTop="80dp"
+        android:background="@drawable/ic_rectangle_green"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- BACK BUTTON -->
+    <Button
+        android:id="@+id/bt_back"
+        android:background="@drawable/ic_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/side_margin"
+        android:layout_marginBottom="0dp"
+        android:gravity="bottom"/>
+
+</LinearLayout>
