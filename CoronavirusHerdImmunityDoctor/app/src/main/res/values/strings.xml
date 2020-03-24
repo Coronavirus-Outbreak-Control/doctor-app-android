@@ -50,7 +50,7 @@
     <!-- ******************************* -->
 
     <!-- ******* Login Doctor Activity ******* -->
-    <string name="login_doctor_title">Login Doctor App</string>
+    <string name="login_doctor_title">Login</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
     <string name="tv_code">Write the 4 digits SMS code</string>
     <string name="bt_send_number">Send</string>
@@ -65,8 +65,10 @@
 
 
     <!-- ******* Doctor View Activity ******* -->
-    <string name="tv_change_patient_status">To change a patient health status please scan QR code</string>
-    <string name="bt_scan_qrcode">Scan patient account QR code</string>
+    <string name="main_title">Welcome to CoviDoc&#129658;</string>
+    <string name="tv_change_patient_status">Click here to\nscan QR code</string>
+    <string name="bt_scan_qrcode">Scan the patient account QR code to change their health status,
+        or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite new doctors</string>
     <!-- ******************************* -->
 
