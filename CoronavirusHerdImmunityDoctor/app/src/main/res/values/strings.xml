@@ -30,6 +30,12 @@
     <string name="we_need_contact"> We need your permission to read Contacts
         in order to invite new Doctors.</string>
     <string name="give_contact">GIVE ACCESS TO CONTACTS</string>
+
+
+    <string name="all_set">All Set!</string>
+    <string name="what_to_do"> On this app you will now be able to scan a patient\'s QR code
+        in order to change a patient health status, and invite other doctors on the app.</string>
+    <string name="go">GO TO APPLICATION</string>
     <!-- ******************************* -->
 
 

@@ -103,7 +103,7 @@ public class LoginDoctorActivity extends Activity {
                                 startActivity(intent);
                                 finish();
                             }
-                        },10000);
+                        },5000);
 
                     }
                     else if(text.length()==0)
