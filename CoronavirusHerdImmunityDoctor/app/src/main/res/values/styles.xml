@@ -63,7 +63,7 @@
         <item name="android:gravity">center_horizontal</item>
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">60sp</item>
+        <item name="android:textSize">55sp</item>
         <item name="android:textColor">@color/colorTextDark</item>
     </style>
 
@@ -126,9 +126,11 @@
     <style name="background_image">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_marginTop">370dp</item>
+        <item name="android:layout_marginTop">200dp</item>
+        <item name="android:layout_marginBottom">-200dp</item>
+        <item name="android:layout_marginLeft">@dimen/side_margin</item>
+        <item name="android:layout_marginRight">@dimen/side_margin</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_alignParentBottom">true</item>
     </style>
 
     <style name="status_title">
