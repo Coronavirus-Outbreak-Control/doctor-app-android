@@ -50,9 +50,10 @@
     <string name="tv_accepted">Accesso confermato</string>
     <!-- ******************************* -->
     <!-- ******* Doctor View Activity ******* -->
+    <string name="main_title">Welcome to CoviDoc&#129658;</string>
     <string name="tv_change_patient_status">Scansiona il Codice QR per registrare
         lo stato di salute del paziente.</string>
-    <string name="bt_scan_qrcode">Scansiona il Codice QR del paziente</string>
+    <string name="bt_scan_qrcode">Clicca qui per scansionare\nil Codice QR</string>
     <string name="bt_invite_doc">Invita altri dottori</string>
     <!-- ******************************* -->
     <!-- ******* Scanner Screen Activity ******* -->

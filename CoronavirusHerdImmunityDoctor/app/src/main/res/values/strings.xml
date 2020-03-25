@@ -53,9 +53,10 @@
     <!-- ******************************* -->
 
     <!-- ******* Doctor View Activity ******* -->
-    <string name="tv_change_patient_status">Scan the patient\’s QR code
-    	to log their health status.</string>
-    <string name="bt_scan_qrcode">Scan the patient\'s QR code</string>
+    <string name="main_title">Welcome to CoviDoc&#129658;</string>
+    <string name="bt_scan_qrcode">Click here to\nscan QR code</string>
+    <string name="tv_change_patient_status">Scan the patient account QR code to change their health status,
+        or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite other doctors</string>
     <!-- ******************************* -->
 
