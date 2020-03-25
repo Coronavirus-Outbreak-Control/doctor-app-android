@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">CoviDoc</string>
+    <string name="app_title">Doctor Covid Community Alert</string>
+    <!-- ******* Splash Screen Activity ******* -->
+    <string name="splash_title_first">Covi</string>
+    <string name="splash_title_next">Doc&#129658;</string>
+    <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
+    <!-- ******************************* -->
+    <!-- ***** Introduction Slider ****** -->
+    <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
+    <string name="welcome_next">\nCovidCommunity</string>
+    <string name="welcome_last">\nAlert &#128075;</string>
+    <string name="together_we">Insieme possiamo salvare vite!</string>
+    <string name="let_s_get_s">INIZIAMO</string>
+    <string name="how_it_works">Come funziona &#129300;</string>
+    <string name="step_1_of_2">Passaggio 1 di 2 </string>
+    <string name="step_2_of_2">Passaggio 2 di 2 </string>
+    <string name="skip_step">SALTA QUESTO PASSAGGIO </string>
+    <string name="camera">Fotocamera</string>
+    <string name="we_need_camera">Ci serve poter accedere alla fotocamera
+        per permetterti di scansionare il Codice QR del paziente e
+        registrare il loro stato di salute.</string>
+    <string name="give_cam">PERMETTI ACCESSO ALLA FOTOCAMERA </string>
+    <string name="contact">Contatti</string>
+    <string name="we_need_contact">Ci serve poter accedere ai contatti
+        per permetterti di invitare altri dottori.</string>
+    <string name="give_contact">PERMETTI ACCESSO AI CONTATTI</string>
+    <string name="all_set">Fatto!</string>
+    <string name="what_to_do">Ora potrai scansionare il Codice QR dei
+        pazienti, registrare il loro stato di salute e invitare altri
+        dottori ad usare app.</string>
+    <string name="go">VAI ALL\’APPLICAZIONE</string>
+    <!-- ******************************* -->
+    <!-- ******* Utils **************** -->
+    <!-- Permission Request -->
+    <string name="cam_disabled">"Fotocamera" Disattivata</string>
+    <string name="cam_please_en">Attiva "Fotocamera" </string>
+    <string name="cont_disabled">Accesso ai "Contatti" Disattivato</string>
+    <string name="cont_please_en">Attiva accesso ai "Contatti"</string>
+    <!-- ******************************* -->
+    <!-- ******* Login Doctor Activity ******* -->
+    <string name="login_doctor_title">Login Doctor App</string>
+    <string name="tv_mobile_phone">Numero di cellulare</string>
+    <string name="tv_code">Inserisci il codice di 4 cifre ricevuto per SMS</string>
+    <string name="bt_send_number">Invia</string>
+    <string name="toast_insert_num">Inserisci numero</string>
+    <!-- ******************************* -->
+    <!-- ******* Login Accepted Activity *******-->
+    <string name="tv_title_login_accepted">Attivato</string>
+    <string name="tv_accepted">Accesso confermato</string>
+    <!-- ******************************* -->
+    <!-- ******* Doctor View Activity ******* -->
+    <string name="tv_change_patient_status">Scansiona il Codice QR per registrare
+        lo stato di salute del paziente.</string>
+    <string name="bt_scan_qrcode">Scansiona il Codice QR del paziente</string>
+    <string name="bt_invite_doc">Invita altri dottori</string>
+    <!-- ******************************* -->
+    <!-- ******* Scanner Screen Activity ******* -->
+    <string name="toast_scanner_start">Scansione iniziata</string>
+    <string name="toast_scanner_stop">Scansione interrotta</string>
+    <string name="toast_scanner_recognized">Codice riconosciuto</string>
+    <string name="toast_wrong_scan">Codice scansionato incorretto</string>
+    <!-- ******************************* -->
+    <!-- ******* Invite Contacts Activity ******* -->
+    <string name="tv_invite_contacts">Seleziona un altro dottore</string>
+    <string name="bt_invite">Invita</string>
+    <string name="toast_select_doc">Seleziona almeno un contatto</string>
+    <string name="progrdial_loading_con">Caricamento contatti&#8230;</string>
+    <string name="progrdial_waiting">Attendi</string>
+    <string name="alertdial_invite_title">Invita altri dottori</string>
+    <string name="alertdial_invite_msg">Confermi l\’invito?</string>
+    <string name="alertdial_yes">Si</string>
+    <string name="alertdial_no">No</string>
+    <string name="toast_num_doc_invited">Dottore invitato</string>
+    <!-- ******************************* -->
+    <!-- ***** Change Patient Status Activity ****-->
+    <string name="diagnosis_title">Diagnosi&#129658;</string>
+    <string name="bt_confirm_covid">&#129440;\ \ \ \ Positivo al COVID-19</string>
+    <string name="bt_suspect_covid">&#10068;\ \ \ \ Sospetto di COVID-19</string>
+    <string name="bt_recover_covid">&#129293;\ \ \ \ Guarito</string>
+    <string name="bt_other_status_covid">Altro</string>
+    <string name="toast_status_changed">Stato di salute registrato</string>
+    <!-- ******************************* -->
+    <!-- ****** How it works Screen *****-->
+    <string name="how_it_works_p0">Useremo la fotocamera del tuo cellulare
+        e i contatti, per permetterti di scansionare i codici QR dei pazienti
+        e invitare altri dottori.</string>
+    <string name="how_it_works_q1">Come posso aiutare?</string>
+    <string name="how_it_works_p1">Puoi registrare lo stato di salute del
+        paziente in modo da notificare altre persone che hanno interagito
+        con il paziente.</string>
+    <string name="how_it_works_q2">Come posso promuovere questa app?</string>
+    <string name="how_it_works_p2">Puoi invitare altri dottori fidati inviandoci
+        il loro numero di telefono.</string>
+    <!-- ******************************* -->
+</resources>
