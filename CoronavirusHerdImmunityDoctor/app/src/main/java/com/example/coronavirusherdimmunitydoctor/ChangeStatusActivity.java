@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;
+import okhttp3.Response;
 
 
 public class ChangeStatusActivity extends Activity {
@@ -128,32 +130,56 @@ public class ChangeStatusActivity extends Activity {
      */
     private void task_updateUserStatus(final Long user_id, final Integer new_status){
 
-        Task.callInBackground(new Callable<JSONObject>() {
+        Task.callInBackground(new Callable<Response>() {
             @Override
-            public JSONObject call() throws Exception {
+            public Response call() throws Exception {
+
                 PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                Boolean updated =  false;
 
-                JSONObject object = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //per ora aggiornato sempre il jwt token
-                pm.setJwtToken(object.getString("token"));                             //per ora aggiornato sempre il jwt token
+                while ( updated == false){
 
-                return ApiManager.updateUserStatus(user_id, new_status, pm.getJwtToken());  //call updateUserStatus
-            }
-        }).onSuccess(new Continuation<JSONObject, Object>() {
-            @Override
-            public String then(Task<JSONObject> task) throws Exception {
+                    Response response_updateUS = ApiManager.updateUserStatus(user_id, new_status, pm.getJwtToken());  //call updateUserStatus
 
-                JSONObject object = task.getResult();;             //get response of updateUserStatus
-                if (object != null) {
-                    if (object.getInt("code") == 202){      // if response is 'ok'
-                        Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
-                    }else{
-                        //jwt token is expired -> call refreshJwtToken(pm.getAuthorizationToken()) -> recall task_inviteDoctor
+                    if (response_updateUS != null) {
+                        switch (response_updateUS.code()) {//check response status(code)
+                            case 200:     // if response is 'ok' -> status has been changed
+                                Log.d("task_updateUserStatus","status has been changed");
+                                updated = true;
+                                break;
+                            case 403:     // if jwt token is not sent -> call refreshJwtToken and recall task_updateUserStatus
+                            case 401:     // if jwt token is expired -> call refreshJwtToken and recall task_updateUserStatus
+                                Log.d("task_updateUserStatus","Jwt Token expired");
+
+                                Response response_refreshJwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //call refreshJwtToken
+                                if (response_refreshJwtToken != null &&
+                                        response_refreshJwtToken.code() == 200){ //check response status(code)
+
+                                    try{
+                                        String strResponse_body = response_refreshJwtToken.body().string();  //get body of Response
+                                        JSONObject response_body = new JSONObject(strResponse_body);
+                                        pm.setJwtToken(response_body.getString("token"));              //save new Jwt Token in shared preferences
+
+                                    }catch (Exception e){
+                                        Log.d("task_updateUserStatus", "Error to read jwt token received");
+                                    }
+                                }
+                                break;
+                            default:
+                                updated = true;
+                                Log.d("task_updateUserStatus", "Code not recognized:"+response_updateUS.code());
+                                break;
+                        }
+                    } else{
+                        Log.d("task_updateUserStatus","No response by updateUserStatus");
                     }
-
-                } else{
-                    //PER DEBUG
-                    Toast.makeText(ChangeStatusActivity.this, "DEBUG CALL UPDATE USER STATUS", Toast.LENGTH_SHORT).show();
                 }
+
+                return null;
+            }
+        }).onSuccess(new Continuation<Response, Object>() {
+            @Override
+            public String then(Task<Response> task) throws Exception {
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);

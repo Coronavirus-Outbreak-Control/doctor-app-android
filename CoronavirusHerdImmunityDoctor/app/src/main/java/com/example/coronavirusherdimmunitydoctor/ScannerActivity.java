@@ -105,7 +105,6 @@ public class ScannerActivity extends AppCompatActivity {
                     patient_id = code.valueAt(0).displayValue;  //get qrcode recognized
 
                     try {
-                        patient_id = "covid-outbreak-control:199992";   //PER DEBUG
                         Long pat_id = Long.parseLong(patient_id.replaceAll("\\D+","")); //convert QR code in Long number by removing chars
                         Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
                         intent.putExtra("patient id", pat_id);
