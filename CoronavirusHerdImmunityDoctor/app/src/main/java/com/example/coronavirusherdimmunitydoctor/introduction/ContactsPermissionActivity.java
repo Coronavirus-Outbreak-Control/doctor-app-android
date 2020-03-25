@@ -116,6 +116,7 @@ public class ContactsPermissionActivity extends AppCompatActivity {
                     go_nextActivity();
 
                 }
+                break;
             }
         }
     }

@@ -86,8 +86,8 @@
 
     <TableRow
         android:id="@+id/tr_code"
-        android:layout_width="243dp"
-        android:layout_height="61dp"
+        android:layout_width="303dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_write_code"
         app:layout_constraintStart_toStartOf="@+id/tv_write_code"
@@ -96,39 +96,57 @@
 
         <EditText
             android:id="@+id/et_code1"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code2"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code3"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code4"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/et_code5"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/et_code6"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="1" />
 
     </TableRow>
 

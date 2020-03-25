@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +34,7 @@ import java.util.concurrent.Callable;
 
 import bolts.Continuation;
 import bolts.Task;
+import okhttp3.Response;
 
 public class InviteContactsActivity extends Activity {
 
@@ -182,31 +184,59 @@ public class InviteContactsActivity extends Activity {
      */
     private void task_inviteDoctor(final String phone_number){
 
-        Task.callInBackground(new Callable<JSONObject>() {
+        Task.callInBackground(new Callable<Response>() {
             @Override
-            public JSONObject call() throws Exception {
+            public Response call() throws Exception {
+
                 PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                Boolean updated =  false;
 
-                JSONObject object = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //per ora aggiornato sempre il jwt token
-                pm.setJwtToken(object.getString("token"));                             //per ora aggiornato sempre il jwt token
+                while ( updated == false){
 
-                return ApiManager.inviteDoctor(phone_number, pm.getJwtToken());  //call inviteDoctor
-            }
-        }).onSuccess(new Continuation<JSONObject, Object>() {
-            @Override
-            public String then(Task<JSONObject> task) throws Exception {
+                    Response response_inviteDoctor = ApiManager.inviteDoctor(phone_number, pm.getJwtToken());  //call inviteDoctor
 
-                JSONObject object = task.getResult();;             //get response of inviteDoctor
-                if (object != null) {
-                    if (object.getInt("code") == 200){      // if response is 'ok'
-                        Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
+                    if (response_inviteDoctor != null) {
+                        switch (response_inviteDoctor.code()) { //check response status(code)
+                            case 200:     // if response is 'ok' -> new contact(doctor) has been sent
+                                Log.d("task_inviteDoctor","new contact has been sent");
+                                updated = true;
+                                break;
+
+                            case 403:    // if jwt token is not sent -> call refreshJwtToken and recall task_inviteDoctor
+                            case 401:    // if jwt token is expired -> call refreshJwtToken and recall task_inviteDoctor
+                                Log.d("task_inviteDoctor","Jwt Token expired");
+
+                                Response response_refreshJwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());  //call refreshJwtToken
+
+                                if ( response_refreshJwtToken != null &&
+                                        response_refreshJwtToken.code() == 200){ //check response status(code)
+
+                                    try{
+                                        String strResponse_body = response_refreshJwtToken.body().string(); //get body of Response
+                                        JSONObject response_body = new JSONObject(strResponse_body);
+                                        pm.setJwtToken(response_body.getString("token"));             //save new Jwt Token in shared preferences
+
+                                    }catch (Exception e){
+                                        Log.d("task_inviteDoctor", "Error to read jwt token received");
+                                    }
+
+                                }
+                                break;
+                            default:
+                                updated = true;
+                                Log.d("task_inviteDoctor","Code not recognized:"+response_inviteDoctor.code());
+                                break;
+                        }
                     } else{
-                        //jwt token is expired -> call refreshJwtToken(pm.getAuthorizationToken()) -> recall task_inviteDoctor
+                        Log.d("task_inviteDoctor","No response by task_inviteDoctor");
                     }
-                } else{
-                    //PER DEBUG
-                    Toast.makeText(getApplicationContext(), "DEBUG CALL INVITE DOCTOR", Toast.LENGTH_SHORT).show();
                 }
+
+                return null;
+            }
+        }).onSuccess(new Continuation<Response, Object>() {
+            @Override
+            public String then(Task<Response> task) throws Exception {
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);

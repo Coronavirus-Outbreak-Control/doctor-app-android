@@ -23,7 +23,7 @@ import okhttp3.Response;
 
 public class ApiManager {
 
-    private static final String baseEndoint = "https://doctors.api.coronaviruscheck.org/v1";
+    private static final String baseEndoint = "https://doctors.coronaviruscheck.org/v1";
     private static final MediaType JSONContentType = MediaType.parse("application/json; charset=utf-8");
 
 
@@ -36,9 +36,8 @@ public class ApiManager {
      * @param authorization_token: authorization token is used to get jwt token
      * @return JSONObject is the Response to the request:
      *              - HTTP 200: ok {“token”:”<string:jwt>”}, where 'jwt token' is used to authenticated function
-     *              - null: if there is an exception
      */
-    public static JSONObject refreshJwtToken(String authorization_token){
+    public static Response refreshJwtToken(String authorization_token){
         /****** Endpoint *****/
         String endpoint = baseEndoint + "/authenticate";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/authenticate
 
@@ -46,54 +45,8 @@ public class ApiManager {
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
         String h_auth_token = " Bearer " + authorization_token;    //Headers: ‘Authorization: Bearer <ReAuthToken>’
 
-        OkHttpClient client = new OkHttpClient();
-
-        /* create request to send */
-        Request request = new Request.Builder()
-                .url(endpoint)
-                .addHeader("Authorization", h_auth_token)
-                .build();
-
-        /****** Response *******/
-        JSONObject obj = null;
-        try {
-            //Invokes the request immediately, and blocks until the response can be processed or is in error
-            Response response = client.newCall(request).execute();            // response
-            String strResponse = response.body().string();
-            obj = new JSONObject(strResponse);
-
-        }catch(Exception e){
-            Log.d("API Rest", "EXCEPTION on refreshJwtToken");
-        }
-        return obj;
-    }
-
-
-    /**
-     * Method: POST (Authorized Function)
-     *
-     * Doctor A sends phone number of doctor B to Server
-     *
-     * @param phone_number: doctor phone number to invite
-     * @param jwt_token: jwt token to authorize the function
-     * @return JSONObject is the Response to the request:
-     *              - 200: ok
-     *              - null: if there is an exception
-     */
-    public static JSONObject inviteDoctor(String phone_number, String jwt_token){
-
-        /****** Endpoint *****/
-        String endpoint = baseEndoint + "/activation/invite";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/invite
-
-        /****** Header *******/
-        //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
-        String h_auth_token = " Bearer " + jwt_token;              //Headers: ‘Authorization: Bearer <JWT>’
-
-
         /****** Body ********/
-        Map body = new HashMap();
-        body.put("phone_number", phone_number);                    // “phone-number”: string -> phone number of the Doctor B
-
+        Map body = new HashMap();  //body is empty
 
         OkHttpClient client = new OkHttpClient();
 
@@ -106,17 +59,61 @@ public class ApiManager {
                 .build();
 
         /****** Response *******/
-        JSONObject obj = null;
+        Response response = null;
         try {
             //Invokes the request immediately, and blocks until the response can be processed or is in error
-            Response response = client.newCall(request).execute();            // response
-            String strResponse = response.body().string();
-            obj = new JSONObject(strResponse);
+            response = client.newCall(request).execute();            // response
+
+        }catch(Exception e){
+            Log.d("API Rest", "EXCEPTION on refreshJwtToken");
+        }
+        return response;
+    }
+
+
+    /**
+     * Method: POST (Authorized Function)
+     *
+     * Doctor A sends phone number of doctor B to Server
+     *
+     * @param phone_number: doctor phone number to invite
+     * @param jwt_token: jwt token to authorize the function
+     * @return JSONObject is the Response to the request:
+     *              - 200: ok
+     */
+    public static Response inviteDoctor(String phone_number, String jwt_token){
+
+        /****** Endpoint *****/
+        String endpoint = baseEndoint + "/activation/invite";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/invite
+
+        /****** Header *******/
+        //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
+        String h_auth_token = " Bearer " + jwt_token;              //Headers: ‘Authorization: Bearer <JWT>’
+
+        /****** Body ********/
+        Map body = new HashMap();
+        body.put("phone_number", phone_number);                    // “phone-number”: string -> phone number of the Doctor B
+
+        OkHttpClient client = new OkHttpClient();
+
+        /* create request to send */
+        RequestBody rq = RequestBody.create(JSONContentType, JSONValue.toJSONString(body));
+        Request request = new Request.Builder()
+                .url(endpoint)
+                .addHeader("Authorization", h_auth_token)
+                .post(rq)
+                .build();
+
+        /****** Response *******/
+        Response response = null;
+        try {
+            //Invokes the request immediately, and blocks until the response can be processed or is in error
+            response = client.newCall(request).execute();            // response
 
         }catch(Exception e){
             Log.d("API Rest", "EXCEPTION on inviteDoctor");
         }
-        return obj;
+        return response;
     }
 
 
@@ -131,9 +128,8 @@ public class ApiManager {
      *              - HTTP 202 Accepted
      *              - HTTP 502 Error Phone Number -> Number not trusted
      *              - HTTP 404 Not Found
-     *              - null: if there is an exception
      */
-    public static JSONObject requestActivation(String phone_number){
+    public static Response requestActivation(String phone_number){
 
         /****** Endpoint *****/
         String endpoint = baseEndoint + "/activation/request";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/request
@@ -141,11 +137,9 @@ public class ApiManager {
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
 
-
         /****** Body ********/
         Map body = new HashMap();
         body.put("phone_number", phone_number);                    // “phone_number” -> string  (the phone number of Doctor B)
-
 
         OkHttpClient client = new OkHttpClient();
 
@@ -157,17 +151,15 @@ public class ApiManager {
                 .build();
 
         /****** Response *******/
-        JSONObject obj = null;
+        Response response = null;
         try {
             //Invokes the request immediately, and blocks until the response can be processed or is in error
-            Response response = client.newCall(request).execute();            // response
-            String strResponse = response.body().string();
-            obj = new JSONObject(strResponse);
+             response = client.newCall(request).execute();            // response
 
         }catch(Exception e){
             Log.d("API Rest", "EXCEPTION on requestActivation");
         }
-        return obj;
+        return response;
     }
 
 
@@ -179,11 +171,11 @@ public class ApiManager {
      *
      * @param verification_code: code received by SMS
      * @return JSONObject is the response to the request {id: long, token: string } where:
-     *             - id of the device of the NEW doctor B
-     *             - The ReAuthToken is used to get JWT Token with refreshJwtToken function
-     *             - null: if there is an exception
+     *         - 200: ok + body: {id: long, token: string }:
+     *                  - id of the device of the NEW doctor B
+     *                  - The ReAuthToken is used to get JWT Token with refreshJwtToken function
      */
-    public static JSONObject acceptInvite(String verification_code){
+    public static Response acceptInvite(String verification_code){
 
         /****** Endpoint *****/
         String endpoint =   baseEndoint+
@@ -193,7 +185,6 @@ public class ApiManager {
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
 
-
         OkHttpClient client = new OkHttpClient();
 
         /* create request to send */
@@ -202,17 +193,15 @@ public class ApiManager {
                 .build();
 
         /****** Response *******/
-        JSONObject obj = null;
+        Response response = null;
         try {
             //Invokes the request immediately, and blocks until the response can be processed or is in error
-            Response response = client.newCall(request).execute();            // response
-            String strResponse = response.body().string();
-            obj = new JSONObject(strResponse);
+            response = client.newCall(request).execute();            // response
 
         }catch(Exception e){
             Log.d("API Rest", "EXCEPTION on acceptInvite");
         }
-        return obj;
+        return response;
     }
 
 
@@ -220,17 +209,16 @@ public class ApiManager {
      * Method: POST (Authorized Function)
      *
      * QRcode scanned (User Id) is used to update health patient status where:
-     *          - “user-id”: long -> id of the patient, take it from the user QR code or by ID if the device already knows the ID
-     *          - “new-status”: int -> new status of the user {0: normal, 1: infected, 2:suspect, 3: healed, 4: quarantine_light, 5: quarantine_warning, 6:quarantine_alert}
+     *    - “user-id”: long -> id of the patient, take it from the user QR code or by ID if the device already knows the ID
+     *    - “new-status”: int -> new status of the user {0: normal, 1: infected, 2:suspect, 3: healed, 4: quarantine_light, 5: quarantine_warning, 6:quarantine_alert}
      *
      * @param user_id: doctor id
      * @param new_status: health patient status {0: normal, 1: infected, 2: quarantine, 3: healed, 4: exposed}
      * @param jwt_token: jwt token to authorize the function
      * @return JSONObject is the response to the request:
      *              - 200: ok
-     *              - null: if there is an exception
      */
-    public static JSONObject updateUserStatus(Long user_id, Integer new_status, String jwt_token){
+    public static Response updateUserStatus(Long user_id, Integer new_status, String jwt_token){
 
         /****** Endpoint *****/
         String endpoint = baseEndoint +
@@ -242,29 +230,29 @@ public class ApiManager {
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
         String h_auth_token = " Bearer " + jwt_token;              //Headers: ‘Authorization: Bearer <JWT>’
 
+        /****** Body ********/
+        Map body = new HashMap();  //body is empty
 
         OkHttpClient client = new OkHttpClient();
 
         /* create request to send */
+        RequestBody rq = RequestBody.create(JSONContentType, JSONValue.toJSONString(body));
         Request request = new Request.Builder()
                 .url(endpoint)
                 .addHeader("Authorization", h_auth_token)
+                .post(rq)
                 .build();
 
         /****** Response *******/
-        JSONObject obj = null;
+        Response response = null;
         try {
             //Invokes the request immediately, and blocks until the response can be processed or is in error
-            Response response = client.newCall(request).execute();            // response
-            String strResponse = response.body().string();
-            obj = new JSONObject(strResponse);
+            response = client.newCall(request).execute();            // response
 
         }catch(Exception e){
             Log.d("API Rest", "EXCEPTION on updateUserStatus");
         }
-        return obj;
+        return response;
     }
-
-
 
 }

@@ -26,6 +26,7 @@ import org.json.JSONObject;
 import java.util.concurrent.Callable;
 import bolts.Continuation;
 import bolts.Task;
+import okhttp3.Response;
 
 public class LoginDoctorActivity extends Activity {
 
@@ -44,6 +45,8 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_code2;                                      //EditText where inserting 2 digit of verification code
     private EditText et_code3;                                      //EditText where inserting 3 digit of verification code
     private EditText et_code4;                                      //EditText where inserting 4 digit of verification code
+    private EditText et_code5;                                      //EditText where inserting 5 digit of verification code
+    private EditText et_code6;                                      //EditText where inserting 6 digit of verification code
 
     private String phone_num;                                       //phone number (without prefix)
     private String prefix_num;                                      //number prefix
@@ -85,29 +88,34 @@ public class LoginDoctorActivity extends Activity {
                         et_code2.requestFocus();
                     break;
                 case R.id.et_code4:
-                    if (text.length()==1) { //change activity when the 4th digit is inserted
+                    if(text.length()==1)
+                        et_code5.requestFocus();
+                    else if(text.length()==0)
+                        et_code3.requestFocus();
+                    break;
+                case R.id.et_code5:
+                    if(text.length()==1)
+                        et_code6.requestFocus();
+                    else if(text.length()==0)
+                        et_code4.requestFocus();
+                    break;
+                case R.id.et_code6:
+                    if (text.length()==1) { //change activity when the 6th digit is inserted
 
                         String verification_code = et_code1.getText().toString() +
                                                    et_code2.getText().toString() +
                                                    et_code3.getText().toString() +
-                                                   et_code4.getText().toString();
+                                                   et_code4.getText().toString() +
+                                                   et_code5.getText().toString() +
+                                                   et_code6.getText().toString();
 
+                        PreferenceManager pm = new PreferenceManager(getApplicationContext());
                         task_acceptInvite(verification_code, prefix_phone_num);  //call acceptInvite
 
-                        //PER DEBUG
-                        Handler handler=new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
-                                startActivity(intent);
-                                finish();
-                            }
-                        },5000);
-
+                        //task_refreshJwtToken();
                     }
                     else if(text.length()==0)
-                        et_code3.requestFocus();
+                        et_code5.requestFocus();
                     break;
             }
         }
@@ -132,6 +140,8 @@ public class LoginDoctorActivity extends Activity {
         et_code2.addTextChangedListener(new GenericTextWatcher(et_code2));
         et_code3.addTextChangedListener(new GenericTextWatcher(et_code3));
         et_code4.addTextChangedListener(new GenericTextWatcher(et_code4));
+        et_code5.addTextChangedListener(new GenericTextWatcher(et_code5));
+        et_code6.addTextChangedListener(new GenericTextWatcher(et_code6));
     }
 
 
@@ -165,6 +175,8 @@ public class LoginDoctorActivity extends Activity {
         et_code2 = (EditText) findViewById(R.id.et_code2);
         et_code3 = (EditText) findViewById(R.id.et_code3);
         et_code4 = (EditText) findViewById(R.id.et_code4);
+        et_code5 = (EditText) findViewById(R.id.et_code5);
+        et_code6 = (EditText) findViewById(R.id.et_code6);
 
         spinner_prefix = (Spinner) findViewById(R.id.spinner_prefix);
         spinner_prefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -179,7 +191,6 @@ public class LoginDoctorActivity extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
-                prefix_num = "+39";                 //set italian prefix "+39" as default
             }
 
         });
@@ -218,6 +229,48 @@ public class LoginDoctorActivity extends Activity {
 
     /******************** Task Functions *********************************************/
 
+    /**
+     * Run task in order to call requestActivation API and manage the response
+     * @param phone_number
+     */
+    private void task_requestActivation(final String phone_number){
+
+        Task.callInBackground(new Callable<Response>() {
+            @Override
+            public Response call() throws Exception {
+
+                Response response = ApiManager.requestActivation(phone_number);  //call requestActivation
+
+                if (response != null) {
+                    switch (response.code()) {         //check response status(code)
+                        case 202: //if response is 'ok' -> Number Accepted
+                            Log.d("task_requestActivation", "Phone Number accepted, please insert verification code");
+                            break;
+                        case 502: //Error Phone Number -> Not trusted
+                            Log.d("task_requestActivation", "Phone Number not accepted, please insert a number again");
+                            break;
+                        case 404: //Not Found
+                            Log.d("task_requestActivation", "Phone Number not found, please insert a number again");
+                            break;
+                        default:
+                            Log.d("task_requestActivation", "Code not recognized:"+response.code());
+                            break;
+                    }
+                }else{
+                    Log.d("task_requestActivation", "No response by requestActivation");
+
+                }
+
+                return null;
+            }
+        }).onSuccess(new Continuation<Response, Object>() {
+            @Override
+            public String then(Task<Response> task) throws Exception {
+                return null;
+            }
+        },  Task.UI_THREAD_EXECUTOR);
+    }
+
 
     /**
      * Run task in order to call acceptInvite API and manage the response
@@ -227,87 +280,91 @@ public class LoginDoctorActivity extends Activity {
      */
     private void task_acceptInvite(final String verification_code, final String doc_phone_num){
 
-        Task.callInBackground(new Callable<JSONObject>() {
+        Task.callInBackground(new Callable<Response>() {
             @Override
-            public JSONObject call() throws Exception {
-                return ApiManager.acceptInvite(verification_code);  //call acceptInvite
-            }
-        }).onSuccess(new Continuation<JSONObject, Object>() {
-            @Override
-            public String then(Task<JSONObject> task) throws Exception {
+            public Response call() throws Exception {
 
-                JSONObject object = task.getResult();;             //get response of acceptInvite
+                Response response_acceptInvite = ApiManager.acceptInvite(verification_code);  //call acceptInvite
+                Response response_refreshjwtToken = null;
+                PreferenceManager pm = new PreferenceManager(getApplicationContext());
 
-                if (object != null) {
-                    if ( object.getInt("code") == 401) {//verification code is expired
+                if (response_acceptInvite != null) {
+                    switch (response_acceptInvite.code()){  //check response status(code)
+                        case 200:      //Verification code is accepted
+                            try {
+                                Log.d("task_acceptInvite", "Verification code is accepted");
 
-                        Toast.makeText(getApplicationContext(), "Verification code expired", Toast.LENGTH_SHORT).show();
+                                String strResponse_body = response_acceptInvite.body().string();      //get body of Response
+                                JSONObject response_body = new JSONObject(strResponse_body);
 
-                    }else{
+                                String auth_token = response_body.getString("token");           //get Authorization Token from response of acceptInvite
+                                Long doc_id = response_body.getLong("id");                      //get Doctor Id from response of acceptInvite
+                                pm.setDoctorId(doc_id);                                               //save user(doctor) id in SharedPreferences
+                                pm.setAuthorizationToken(auth_token);                                 //save authorization token in SharedPreferences
+                                pm.setPhoneNumber(doc_phone_num);                                     //save phone number of doctor in SharedPreferences
 
-                        PreferenceManager pm = new PreferenceManager(getApplicationContext());
-                        pm.setDoctorId(object.getLong("id"));                     //save user(doctor) id in SharedPreferences
-                        pm.setAuthorizationToken(object.getString("auth_token")); //save authorization token in SharedPreferences
-                        pm.setPhoneNumber(doc_phone_num);                                //save phone number of doctor in SharedPreferences
+                                response_refreshjwtToken = ApiManager.refreshJwtToken(auth_token);    //call refreshJwtToken in order to return a Jwt Token from authorization token
 
-                        Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class); //change activity
-                        startActivity(intent);
-                        finish();
-                    }
+                            }catch (Exception e){
+                                Log.d("task_acceptInvite", "Error to read response body");
+                            }
 
-
-                } else{
-                    //PER DEBUG
-                    Toast.makeText(getApplicationContext(), "DEBUG CALL ACCEPT INVITE", Toast.LENGTH_SHORT).show();
-                    PreferenceManager pm = new PreferenceManager(getApplicationContext());
-                    pm.setDoctorId(Long.parseLong("11292"));                //save user(doctor) id in SharedPreferences
-                    pm.setAuthorizationToken("011292");                        //save authorization token in SharedPreferences
-                    pm.setPhoneNumber(doc_phone_num);                          //save phone number of doctor in SharedPreferences
-                }
-                return null;
-            }
-        },  Task.UI_THREAD_EXECUTOR);
-    }
-
-    /**
-     * Run task in order to call requestActivation API and manage the response
-     * @param phone_number
-     */
-    private void task_requestActivation(final String phone_number){
-
-        Task.callInBackground(new Callable<JSONObject>() {
-            @Override
-            public JSONObject call() throws Exception {
-                return ApiManager.requestActivation(phone_number);  //call requestActivation
-            }
-        }).onSuccess(new Continuation<JSONObject, Object>() {
-            @Override
-            public String then(Task<JSONObject> task) throws Exception {
-
-                JSONObject object = task.getResult();;             //get response of requestActivation
-                if (object != null) {
-                    switch (object.getInt("code")) {         //check response status(code)
-                        case 202: //Accepted
-                            Toast.makeText(getApplicationContext(), "Phone Number accepted", Toast.LENGTH_SHORT).show();
                             break;
-                        case 502: //Error Phone Number -> Not trusted
-                            Toast.makeText(getApplicationContext(), "Phone Number not accepted", Toast.LENGTH_SHORT).show();
+                        case 401:      //verification code is expired
+                            Log.d("task_acceptInvite", "Verification code expired");
                             break;
-                        case 404: //Not Found
-                            Toast.makeText(getApplicationContext(), "Phone Number not found", Toast.LENGTH_SHORT).show();
+                        case 404:     //Authorization token has already been requested
+                            Log.d("task_acceptInvite", "Authorization token has already been requested");
                             break;
                         default:
+                            Log.d("task_acceptInvite", "Code not recognized:"+response_acceptInvite.code());
                             break;
                     }
-                }else{
-                    //PER DEBUG
-                    Toast.makeText(getApplicationContext(), "DEBUG CALL REQUEST ACTIVATION", Toast.LENGTH_SHORT).show();
+                } else{
+                    Log.d("task_acceptInvite", "No response by acceptInvite");
+
                 }
+
+                return response_refreshjwtToken;
+            }
+
+        }).onSuccess(new Continuation<Response, Object>() {
+            @Override
+            public String then(Task<Response> task) throws Exception {
+
+                Response response_refreshjwtToken = task.getResult();                              //get response of refreshJwtToken
+                if (response_refreshjwtToken != null) {
+                    switch (response_refreshjwtToken.code()){                                       //check response status(code)
+                        case 200:  //if response is 'ok' -> save JwtToken in shared preferences and change activity
+                            try{
+                                Log.d("task_acceptInvite", "Jwt Token obtained");
+                                PreferenceManager pm = new PreferenceManager(getApplicationContext());
+                                String strResponse_body = response_refreshjwtToken.body().string();     //get body of Response
+                                JSONObject response_body = new JSONObject(strResponse_body);
+
+                                pm.setJwtToken(response_body.getString("token"));                 //save Jwt Token in SharedPreferences
+
+                                Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);  //change activity
+                                startActivity(intent);
+                                finish();
+
+                            }catch (Exception e){
+                                Log.d("task_acceptInvite", "Error to read jwt token received");
+                            }
+
+                            break;
+                        default:
+                            Log.d("task_acceptInvite","Code not recognized:"+response_refreshjwtToken.code());
+                            break;
+                    }
+                } else{
+                    Log.d("task_acceptInvite","No response by refreshJwtToken");
+                }
+
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);
     }
-
 
 
 }
