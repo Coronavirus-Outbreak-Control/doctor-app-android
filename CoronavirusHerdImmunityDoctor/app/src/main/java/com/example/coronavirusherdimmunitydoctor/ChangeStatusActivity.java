@@ -130,12 +130,13 @@ public class ChangeStatusActivity extends Activity {
      */
     private void task_updateUserStatus(final Long user_id, final Integer new_status){
 
-        Task.callInBackground(new Callable<Response>() {
+        Task.callInBackground(new Callable<String>() {
             @Override
-            public Response call() throws Exception {
+            public String call() throws Exception {
 
                 PreferenceManager pm = new PreferenceManager(getApplicationContext());
                 Boolean updated =  false;
+                String ret_value = "";
 
                 while ( updated == false){
 
@@ -145,6 +146,7 @@ public class ChangeStatusActivity extends Activity {
                         switch (response_updateUS.code()) {//check response status(code)
                             case 200:     // if response is 'ok' -> status has been changed
                                 Log.d("task_updateUserStatus","status has been changed");
+                                ret_value = "chg_st";
                                 updated = true;
                                 break;
                             case 403:     // if jwt token is not sent -> call refreshJwtToken and recall task_updateUserStatus
@@ -175,11 +177,19 @@ public class ChangeStatusActivity extends Activity {
                     }
                 }
 
-                return null;
+                return ret_value;
             }
-        }).onSuccess(new Continuation<Response, Object>() {
+        }).onSuccess(new Continuation<String, Object>() {
             @Override
-            public String then(Task<Response> task) throws Exception {
+            public String then(Task<String> task) throws Exception {
+
+                switch (task.getResult()) {
+                    case "chg_st":
+                        Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);

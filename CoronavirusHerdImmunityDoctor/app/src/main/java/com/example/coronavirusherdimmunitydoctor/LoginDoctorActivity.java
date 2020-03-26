@@ -308,12 +308,14 @@ public class LoginDoctorActivity extends Activity {
                             }catch (Exception e){
                                 Log.d("task_acceptInvite", "Error to read response body");
                             }
-
                             break;
                         case 401:      //verification code is expired
                             Log.d("task_acceptInvite", "Verification code expired");
                             break;
                         case 404:     //Authorization token has already been requested
+                            //pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
+                            //pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
+                            //response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
                             Log.d("task_acceptInvite", "Authorization token has already been requested");
                             break;
                         default:
@@ -322,10 +324,9 @@ public class LoginDoctorActivity extends Activity {
                     }
                 } else{
                     Log.d("task_acceptInvite", "No response by acceptInvite");
-
                 }
-
                 return response_refreshjwtToken;
+
             }
 
         }).onSuccess(new Continuation<Response, Object>() {

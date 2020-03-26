@@ -184,12 +184,13 @@ public class InviteContactsActivity extends Activity {
      */
     private void task_inviteDoctor(final String phone_number){
 
-        Task.callInBackground(new Callable<Response>() {
+        Task.callInBackground(new Callable<String>() {
             @Override
-            public Response call() throws Exception {
+            public String call() throws Exception {
 
                 PreferenceManager pm = new PreferenceManager(getApplicationContext());
                 Boolean updated =  false;
+                String ret_value = "";
 
                 while ( updated == false){
 
@@ -199,6 +200,7 @@ public class InviteContactsActivity extends Activity {
                         switch (response_inviteDoctor.code()) { //check response status(code)
                             case 200:     // if response is 'ok' -> new contact(doctor) has been sent
                                 Log.d("task_inviteDoctor","new contact has been sent");
+                                ret_value = "newdoc";
                                 updated = true;
                                 break;
 
@@ -232,11 +234,19 @@ public class InviteContactsActivity extends Activity {
                     }
                 }
 
-                return null;
+                return ret_value;
             }
-        }).onSuccess(new Continuation<Response, Object>() {
+        }).onSuccess(new Continuation<String, Object>() {
             @Override
-            public String then(Task<Response> task) throws Exception {
+            public String then(Task<String> task) throws Exception {
+
+                switch (task.getResult()) {
+                    case "newdoc":
+                        Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        break;
+                }
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);

@@ -3,7 +3,7 @@
     <string name="app_title">Doctor Covid Community Alert</string>
     <!-- ******* Splash Screen Activity ******* -->
     <string name="splash_title_first">Covi</string>
-    <string name="splash_title_next">Doc&#129658;</string>
+    <string name="splash_title_next">Doc&#127976;</string>
     <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
     <!-- ***** Introduction Slider ****** -->
@@ -50,7 +50,7 @@
     <string name="tv_accepted">Accesso confermato</string>
     <!-- ******************************* -->
     <!-- ******* Doctor View Activity ******* -->
-    <string name="main_title">Welcome to CoviDoc&#129658;</string>
+    <string name="main_title">Welcome to CoviDoc&#127976;</string>
     <string name="tv_change_patient_status">Scansiona il Codice QR per registrare
         lo stato di salute del paziente.</string>
     <string name="bt_scan_qrcode">Clicca qui per scansionare\nil Codice QR</string>
@@ -75,10 +75,10 @@
     <string name="toast_num_doc_invited">Dottore invitato</string>
     <!-- ******************************* -->
     <!-- ***** Change Patient Status Activity ****-->
-    <string name="diagnosis_title">Diagnosi&#129658;</string>
-    <string name="bt_confirm_covid">&#129440;\ \ \ \ Positivo al COVID-19</string>
-    <string name="bt_suspect_covid">&#10068;\ \ \ \ Sospetto di COVID-19</string>
-    <string name="bt_recover_covid">&#129293;\ \ \ \ Guarito</string>
+    <string name="diagnosis_title">Diagnosi&#128300;</string>
+    <string name="bt_confirm_covid">&#129298;\ \ \ \ Positivo al COVID-19</string>
+    <string name="bt_suspect_covid">&#128567;\ \ \ \ Sospetto di COVID-19</string>
+    <string name="bt_recover_covid">&#128522;\ \ \ \ Guarito</string>
     <string name="bt_other_status_covid">Altro</string>
     <string name="toast_status_changed">Stato di salute registrato</string>
     <!-- ******************************* -->

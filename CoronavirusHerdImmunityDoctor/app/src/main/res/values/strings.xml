@@ -3,7 +3,7 @@
     <string name="app_title">Doctor Covid Community Alert</string>
     <!-- ******* Splash Screen Activity ******* -->
     <string name="splash_title_first">Covi</string>
-    <string name="splash_title_next">Doc&#129658;</string>
+    <string name="splash_title_next">Doc&#127976;</string>
     <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
 
@@ -53,7 +53,7 @@
     <!-- ******************************* -->
 
     <!-- ******* Doctor View Activity ******* -->
-    <string name="main_title">Welcome to CoviDoc&#129658;</string>
+    <string name="main_title">Welcome to CoviDoc&#127976;</string>
     <string name="bt_scan_qrcode">Click here to\nscan QR code</string>
     <string name="tv_change_patient_status">Scan the patient account QR code to change their health status,
         or invite more doctors to this app.</string>
@@ -77,16 +77,16 @@
     <string name="alertdial_invite_msg">Do you confirm the invite?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
-    <string name="toast_num_doc_invited">Another doctor invited</string>
+    <string name="toast_num_doc_invited">Doctor invited</string>
     <!-- ******************************* -->
 
     <!-- ***** Change Patient Status Activity ****-->
-    <string name="diagnosis_title">Diagnosis&#129658;</string>
-    <string name="bt_confirm_covid">&#129440;\ \ \ \ Positive to COVID-19</string>
-    <string name="bt_suspect_covid">&#10068;\ \ \ \ Suspected of COVID-19</string>
-    <string name="bt_recover_covid">&#129293;\ \ \ \ Healed</string>
+    <string name="diagnosis_title">Diagnosis&#128300;</string>
+    <string name="bt_confirm_covid">&#129298;\ \ \ \ Positive to COVID-19</string>
+    <string name="bt_suspect_covid">&#128567;\ \ \ \ Suspected of COVID-19</string>
+    <string name="bt_recover_covid">&#128522;\ \ \ \ Healed</string>
     <string name="bt_other_status_covid">Other</string>
-    <string name="toast_status_changed">Health status logged</string>
+    <string name="toast_status_changed">Health status changed</string>
     <!-- ******************************* -->
 
     <!-- ****** How it works Screen *****-->

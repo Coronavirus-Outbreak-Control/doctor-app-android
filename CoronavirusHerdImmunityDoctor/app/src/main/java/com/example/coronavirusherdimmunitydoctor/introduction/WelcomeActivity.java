@@ -58,8 +58,8 @@ public class WelcomeActivity extends AppCompatActivity {
         String last = getResources().getString(R.string.welcome_last);
         TextView t = (TextView) findViewById(R.id.welcome_to);
 
-        t.setText(Html.fromHtml(first +
-                "<font color='#16ACEA'>"+blue+"</font>"
+        t.setText(Html.fromHtml(first
+                +"<font color='#16ACEA'>"+blue+"</font>"
                 + last));
     }
 }
