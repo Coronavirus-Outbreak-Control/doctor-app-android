@@ -39,7 +39,7 @@ public class ApiManager {
      */
     public static Response refreshJwtToken(String authorization_token){
         /****** Endpoint *****/
-        String endpoint = baseEndoint + "/authenticate";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/authenticate
+        String endpoint = baseEndoint + "/authenticate";   //Endpoint: https://doctors.coronaviruscheck.org/v1/authenticate
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
@@ -84,7 +84,7 @@ public class ApiManager {
     public static Response inviteDoctor(String phone_number, String jwt_token){
 
         /****** Endpoint *****/
-        String endpoint = baseEndoint + "/activation/invite";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/invite
+        String endpoint = baseEndoint + "/activation/invite";   //Endpoint: https://doctors.coronaviruscheck.org/v1/activation/invite
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
@@ -132,7 +132,7 @@ public class ApiManager {
     public static Response requestActivation(String phone_number){
 
         /****** Endpoint *****/
-        String endpoint = baseEndoint + "/activation/request";   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/request
+        String endpoint = baseEndoint + "/activation/request";   //Endpoint: https://doctors.coronaviruscheck.org/v1/activation/request
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
@@ -180,7 +180,7 @@ public class ApiManager {
         /****** Endpoint *****/
         String endpoint =   baseEndoint+
                             "/activation/confirm/"+
-                            verification_code;   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/activation/confirm/<string:received-sms-code>
+                            verification_code;   //Endpoint: https://doctors.coronaviruscheck.org/v1/activation/confirm/<string:received-sms-code>
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’
@@ -224,7 +224,7 @@ public class ApiManager {
         String endpoint = baseEndoint +
                           "/mark/" +
                           user_id.toString() + "/" +
-                          new_status.toString();   //Endpoint: https://doctors.api.coronaviruscheck.org/v1/mark/<long:user-id>/<int:new-status>
+                          new_status.toString();   //Endpoint: https://doctors.coronaviruscheck.org/v1/mark/<long:user-id>/<int:new-status>
 
         /****** Header *******/
         //String h_contenttype = JSONContentType.toString();       //Headers: ‘Content-Type: application/json’

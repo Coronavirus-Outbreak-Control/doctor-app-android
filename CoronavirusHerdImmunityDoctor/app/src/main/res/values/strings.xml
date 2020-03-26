@@ -42,7 +42,7 @@
     <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
-    <string name="tv_code">Enter the 4 digits code you received by SMS</string>
+    <string name="tv_code">Enter the 6 digits code you received by SMS</string>
     <string name="bt_send_number">Send</string>
     <string name="toast_insert_num">Insert number</string>
     <!-- ******************************* -->
