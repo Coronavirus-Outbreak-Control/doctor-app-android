@@ -8,7 +8,7 @@
     <!-- ******************************* -->
 
     <!-- ***** Introduction Slider ****** -->
-    <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
+    <string name="welcome_first">Hey Doctor, \nWelcome to \nanonymous</string>
     <string name="welcome_next">\nCovidCommunity</string>
     <string name="welcome_last">\nAlert &#128075;</string>
     <string name="together_we">Together we can save lives!</string>
