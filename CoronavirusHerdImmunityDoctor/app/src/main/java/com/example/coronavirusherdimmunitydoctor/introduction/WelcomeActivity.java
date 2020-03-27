@@ -53,13 +53,22 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     private void writeTitle() {
-        String first = getResources().getString(R.string.welcome_first);
+
+
+        String first_line = "Hey Doctor,";
+        String second_line = "Welcome";
+        String third_line = "to anonymous";
+        String blue = "CovidCommunity";
+        String last = "Alert &#128075;";
+        /*String first = getResources().getString(R.string.welcome_first);
         String blue = getResources().getString(R.string.welcome_next);
-        String last = getResources().getString(R.string.welcome_last);
+        String last = getResources().getString(R.string.welcome_last);*/
         TextView t = (TextView) findViewById(R.id.welcome_to);
 
-        t.setText(Html.fromHtml(first
-                +"<font color='#16ACEA'>"+blue+"</font>"
-                + last));
+        t.setText(Html.fromHtml(first_line +
+                "<br/><br/>" + second_line +
+                "<br/>" + third_line +
+                "<br/><font color='#16ACEA'>" +
+                blue + "</font><br/>" + last));
     }
 }

@@ -41,7 +41,7 @@
     <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Numero di cellulare</string>
-    <string name="tv_code">Inserisci il codice di 4 cifre ricevuto per SMS</string>
+    <string name="tv_code">Inserisci il codice di 6 cifre ricevuto per SMS</string>
     <string name="bt_send_number">Invia</string>
     <string name="toast_insert_num">Inserisci numero</string>
     <!-- ******************************* -->

@@ -8,7 +8,7 @@
     <!-- ******************************* -->
 
     <!-- ***** Introduction Slider ****** -->
-    <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
+    <string name="welcome_first">Hey Doctor, \nWelcome to \nanonymous</string>
     <string name="welcome_next">\nCovidCommunity</string>
     <string name="welcome_last">\nAlert &#128075;</string>
     <string name="together_we">Together we can save lives!</string>
@@ -42,7 +42,7 @@
     <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Mobile Phone</string>
-    <string name="tv_code">Enter the 4 digits code you received by SMS</string>
+    <string name="tv_code">Enter the 6 digits code you received by SMS</string>
     <string name="bt_send_number">Send</string>
     <string name="toast_insert_num">Insert number</string>
     <!-- ******************************* -->

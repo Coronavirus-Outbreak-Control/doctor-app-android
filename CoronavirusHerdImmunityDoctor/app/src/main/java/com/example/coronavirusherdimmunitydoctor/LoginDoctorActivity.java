@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
+import com.example.coronavirusherdimmunitydoctor.utils.CountryCodeSpinner;
 import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
 
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class LoginDoctorActivity extends Activity {
     private Button bt_send_num;                                     //When is clicked, sends phone number to Server
 
     private EditText et_phone_number;                               //Edit Text where phone number is inserted
-    private Spinner spinner_prefix;                                 //Spinner where there is a list of number prefix
+    private CountryCodeSpinner ccs;                                 //Spinner where there is a list of number prefix
 
     private TextView tv_write_code;                                 //TextView
     private TableRow tr_code;                                       //View where the code is inserted
@@ -56,7 +57,7 @@ public class LoginDoctorActivity extends Activity {
     /**
      * This TextWatcher manages text changed on EditText:
      * - when a digit is inserted then change to next EditText
-     * - when the 4th digit is inserted then change activity
+     * - when the 6th digit is inserted then change activity
      */
     public class GenericTextWatcher implements TextWatcher
     {
@@ -132,7 +133,7 @@ public class LoginDoctorActivity extends Activity {
     }
 
     /**
-     * Write 4 digits of verification code on 4 EditText, when a digit is inserted then change to next EditText.
+     * Write 6 digits of verification code on 4 EditText, when a digit is inserted then change to next EditText.
      * When all digits are inserted, then check verification code and go to next Activity
      */
     private void write_verification_code(){
@@ -178,21 +179,18 @@ public class LoginDoctorActivity extends Activity {
         et_code5 = (EditText) findViewById(R.id.et_code5);
         et_code6 = (EditText) findViewById(R.id.et_code6);
 
-        spinner_prefix = (Spinner) findViewById(R.id.spinner_prefix);
-        spinner_prefix.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+        ccs = findViewById(R.id.ccs);
+        ccs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> spinner, View v,
-                                       int arg2, long arg3) {
-
-                //get number prefix from spinner
-                prefix_num = getResources().getStringArray(R.array.country_prefix)[spinner.getSelectedItemPosition()].split("-")[0];
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                CountryCodeSpinner.CountryModel model = (CountryCodeSpinner.CountryModel) parent.getAdapter().getItem(position);
+                prefix_num = model.getPhoneCode();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) {
 
+            }
         });
 
         bt_send_num = findViewById(R.id.bt_send_num);
@@ -313,9 +311,9 @@ public class LoginDoctorActivity extends Activity {
                             Log.d("task_acceptInvite", "Verification code expired");
                             break;
                         case 404:     //Authorization token has already been requested
-                            //pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
-                            //pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
-                            //response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
+                            pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
+                            pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
+                            response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
                             Log.d("task_acceptInvite", "Authorization token has already been requested");
                             break;
                         default:

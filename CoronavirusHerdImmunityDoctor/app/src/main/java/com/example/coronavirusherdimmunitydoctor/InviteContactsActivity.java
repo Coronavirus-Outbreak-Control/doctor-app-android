@@ -195,7 +195,7 @@ public class InviteContactsActivity extends Activity {
                 while ( updated == false){
 
                     Response response_inviteDoctor = ApiManager.inviteDoctor(phone_number, pm.getJwtToken());  //call inviteDoctor
-
+                    pm.getDoctorId();
                     if (response_inviteDoctor != null) {
                         switch (response_inviteDoctor.code()) { //check response status(code)
                             case 200:     // if response is 'ok' -> new contact(doctor) has been sent
