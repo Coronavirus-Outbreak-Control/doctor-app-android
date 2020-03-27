@@ -113,6 +113,7 @@ public class CameraPermissionActivity extends AppCompatActivity {
                    go_nextActivity();
 
                 }
+                break;
             }
         }
     }

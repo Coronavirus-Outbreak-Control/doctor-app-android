@@ -33,28 +33,30 @@
 
     <EditText
         android:id="@+id/et_phone_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="171dp"
+        android:layout_height="39dp"
         android:layout_marginTop="48dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="36dp"
         android:ems="10"
         android:inputType="number"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_mobilephone" />
 
-    <Spinner
-        android:id="@+id/spinner_prefix"
-        android:layout_width="134dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="228dp"
-        android:entries="@array/country_prefix"
-        android:prompt="@string/country_prompt"
-        android:layout_marginStart="32dp"
+    <com.example.coronavirusherdimmunitydoctor.utils.CountryCodeSpinner
+        android:id="@+id/ccs"
+        android:layout_width="122dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="69dp"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toTopOf="@+id/bt_send_num"
         app:layout_constraintEnd_toStartOf="@+id/et_phone_number"
-        app:layout_constraintHorizontal_bias="0.818"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_mobilephone"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bt_send_num"
@@ -86,8 +88,8 @@
 
     <TableRow
         android:id="@+id/tr_code"
-        android:layout_width="243dp"
-        android:layout_height="61dp"
+        android:layout_width="303dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_write_code"
         app:layout_constraintStart_toStartOf="@+id/tv_write_code"
@@ -96,39 +98,57 @@
 
         <EditText
             android:id="@+id/et_code1"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code2"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code3"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
 
         <EditText
             android:id="@+id/et_code4"
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:gravity="center"
             android:inputType="numberPassword"
-            android:maxLength="1"/>
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/et_code5"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="1" />
+
+        <EditText
+            android:id="@+id/et_code6"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberPassword"
+            android:maxLength="1" />
 
     </TableRow>
 
