@@ -56,15 +56,20 @@
 
     <!-- Splash Screen -->
     <style name="splashscreen_title">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
         <item name="android:layout_marginTop">100dp</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:gravity">center_horizontal</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">55sp</item>
         <item name="android:textColor">@color/colorTextDark</item>
+        <item name="android:drawableStart">@drawable/ic_icon</item>
+        <item name="android:drawablePadding">-44dp</item>
+        <item name="android:paddingEnd">25dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
     </style>
 
     <style name="splashscreen_subtitle">
@@ -78,8 +83,9 @@
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">27sp</item>
-        <item name="android:textColor">#555</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
+
     <!-- ///////////////////////////////////////////////////////// -->
 
     <!-- Intro Screens -->
@@ -92,7 +98,7 @@
         <item name="android:layout_marginEnd">@dimen/side_margin</item>
         <item name="android:layout_marginTop">64dp</item>
         <item name="android:gravity">top</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/colorTextLight</item>
     </style>
 
@@ -118,6 +124,8 @@
         <item name="android:gravity">top</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:textSize"> 20sp </item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textColor"> @color/colorText </item>
     </style>
 
