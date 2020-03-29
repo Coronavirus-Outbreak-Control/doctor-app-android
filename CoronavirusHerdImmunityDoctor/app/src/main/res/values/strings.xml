@@ -2,8 +2,8 @@
     <string name="app_name">CoviDoc</string>
     <string name="app_title">Doctor Covid Community Alert</string>
     <!-- ******* Splash Screen Activity ******* -->
-    <string name="splash_title_first">Covi</string>
-    <string name="splash_title_next">Doc&#127976;</string>
+    <string name="splash_title_first">ovi</string>
+    <string name="splash_title_next">Doc</string>
     <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
 

@@ -2,8 +2,8 @@
     <string name="app_name">CoviDoc</string>
     <string name="app_title">Doctor Covid Community Alert</string>
     <!-- ******* Splash Screen Activity ******* -->
-    <string name="splash_title_first">Covi</string>
-    <string name="splash_title_next">Doc&#127976;</string>
+    <string name="splash_title_first">ovi</string>
+    <string name="splash_title_next">Doc</string>
     <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
     <!-- ***** Introduction Slider ****** -->
@@ -15,16 +15,16 @@
     <string name="how_it_works">Come funziona &#129300;</string>
     <string name="step_1_of_2">Passaggio 1 di 2 </string>
     <string name="step_2_of_2">Passaggio 2 di 2 </string>
-    <string name="skip_step">SALTA QUESTO PASSAGGIO </string>
+    <string name="skip_step">SALTA</string>
     <string name="camera">Fotocamera</string>
     <string name="we_need_camera">Ci serve poter accedere alla fotocamera
         per permetterti di scansionare il Codice QR del paziente e
         registrare il loro stato di salute.</string>
-    <string name="give_cam">PERMETTI ACCESSO ALLA FOTOCAMERA </string>
+    <string name="give_cam">CONSENTI ACCESSO</string>
     <string name="contact">Contatti</string>
     <string name="we_need_contact">Ci serve poter accedere ai contatti
         per permetterti di invitare altri dottori.</string>
-    <string name="give_contact">PERMETTI ACCESSO AI CONTATTI</string>
+    <string name="give_contact">CONSENTI ACCESSO</string>
     <string name="all_set">Fatto!</string>
     <string name="what_to_do">Ora potrai scansionare il Codice QR dei
         pazienti, registrare il loro stato di salute e invitare altri
