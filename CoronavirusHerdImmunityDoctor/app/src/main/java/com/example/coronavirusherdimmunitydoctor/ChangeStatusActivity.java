@@ -130,6 +130,8 @@ public class ChangeStatusActivity extends Activity {
      */
     private void task_updateUserStatus(final Long user_id, final Integer new_status){
 
+        Toast.makeText(getApplicationContext(), R.string.toast_click_status_changed, Toast.LENGTH_SHORT).show();
+
         Task.callInBackground(new Callable<String>() {
             @Override
             public String call() throws Exception {

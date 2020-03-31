@@ -86,6 +86,36 @@
         app:layout_constraintTop_toBottomOf="@+id/bt_send_num"
         android:visibility = "gone"/>
 
+    <RelativeLayout
+        android:id="@+id/rel_progbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/tr_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_write_code">
+
+        <TextView
+            android:id="@+id/tv_progbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_progbar"
+            android:textColor="@color/colorText"
+            android:textSize="20sp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_progbar"
+            android:layout_centerInParent="true"
+            android:indeterminate="true" />
+
+    </RelativeLayout>
+
     <TableRow
         android:id="@+id/tr_code"
         android:layout_width="303dp"

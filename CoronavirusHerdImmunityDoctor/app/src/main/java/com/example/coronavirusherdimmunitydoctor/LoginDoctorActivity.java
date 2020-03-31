@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -40,6 +41,7 @@ public class LoginDoctorActivity extends Activity {
     private EditText et_phone_number;                               //Edit Text where phone number is inserted
     private CountryCodeSpinner ccs;                                 //Spinner where there is a list of number prefix
 
+    private RelativeLayout progBar;                                 //Relative Layout (ProgressBar + TextView)
     private TextView tv_write_code;                                 //TextView
     private TableRow tr_code;                                       //View where the code is inserted
     private EditText et_code1;                                      //EditText where inserting 1 digit of verification code
@@ -112,8 +114,6 @@ public class LoginDoctorActivity extends Activity {
 
                         PreferenceManager pm = new PreferenceManager(getApplicationContext());
                         task_acceptInvite(verification_code, prefix_phone_num);  //call acceptInvite
-
-                        //task_refreshJwtToken();
                     }
                     else if(text.length()==0)
                         et_code5.requestFocus();
@@ -178,6 +178,9 @@ public class LoginDoctorActivity extends Activity {
         et_code4 = (EditText) findViewById(R.id.et_code4);
         et_code5 = (EditText) findViewById(R.id.et_code5);
         et_code6 = (EditText) findViewById(R.id.et_code6);
+
+        progBar = (RelativeLayout) findViewById(R.id.rel_progbar);
+        progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
 
         ccs = findViewById(R.id.ccs);
         ccs.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -278,6 +281,8 @@ public class LoginDoctorActivity extends Activity {
      */
     private void task_acceptInvite(final String verification_code, final String doc_phone_num){
 
+        progBar.setVisibility(View.VISIBLE);  //set visible the relative layout (progress bar + text view)
+
         Task.callInBackground(new Callable<Response>() {
             @Override
             public Response call() throws Exception {
@@ -311,6 +316,7 @@ public class LoginDoctorActivity extends Activity {
                             Log.d("task_acceptInvite", "Verification code expired");
                             break;
                         case 404:     //Authorization token has already been requested
+                            /*PER DEBUG: following 3 rows are used to try login many times with the same phone number*/
                             pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
                             pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
                             response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
@@ -342,6 +348,8 @@ public class LoginDoctorActivity extends Activity {
                                 JSONObject response_body = new JSONObject(strResponse_body);
 
                                 pm.setJwtToken(response_body.getString("token"));                 //save Jwt Token in SharedPreferences
+
+                                progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
 
                                 Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);  //change activity
                                 startActivity(intent);

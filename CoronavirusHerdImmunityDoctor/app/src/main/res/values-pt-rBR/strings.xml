@@ -45,6 +45,7 @@
     <string name="tv_code">Digite os 6 dígitos recebidos por SMS</string>
     <string name="bt_send_number">Enviar</string>
     <string name="toast_insert_num">Digite o número</string>
+    <string name="text_progbar">Acesso...</string>
     <!-- ******************************* -->
 
     <!-- ******* Login Accepted Activity *******-->
@@ -77,6 +78,7 @@
     <string name="alertdial_invite_msg">Você confirma o convite?</string>
     <string name="alertdial_yes">Sim</string>
     <string name="alertdial_no">Não</string>
+    <string name="toast_click_invite_doc">Enviando novo médico...</string>
     <string name="toast_num_doc_invited">Médico convidado</string>
     <!-- ******************************* -->
 
@@ -86,6 +88,7 @@
     <string name="bt_suspect_covid">&#10068;\ \ \ \ Suspeito para COVID-19</string>
     <string name="bt_recover_covid">&#129293;\ \ \ \ Curado ou Negativo</string>
     <string name="bt_other_status_covid">Outro</string>
+    <string name="toast_click_status_changed">Alterando status paciente...</string>
     <string name="toast_status_changed">Diagnóstico registrado</string>
     <!-- ******************************* -->
 

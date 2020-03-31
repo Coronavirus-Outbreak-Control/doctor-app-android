@@ -184,6 +184,8 @@ public class InviteContactsActivity extends Activity {
      */
     private void task_inviteDoctor(final String phone_number){
 
+        Toast.makeText(getApplicationContext(), R.string.toast_click_invite_doc, Toast.LENGTH_SHORT).show();
+
         Task.callInBackground(new Callable<String>() {
             @Override
             public String call() throws Exception {
