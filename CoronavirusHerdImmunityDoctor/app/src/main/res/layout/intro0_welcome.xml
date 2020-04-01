@@ -9,7 +9,7 @@
     <!-- Welcome to anonymous Coronavirus check 👋 -->
     <TextView style="@style/intro_title"
         android:layout_marginTop="60dp"
-        android:textSize="40sp"
+        android:textSize="35sp"
         android:fontFamily="sans-serif-medium"
         android:id="@+id/welcome_to"/>
 

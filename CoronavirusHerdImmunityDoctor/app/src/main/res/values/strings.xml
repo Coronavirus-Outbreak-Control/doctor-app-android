@@ -45,6 +45,7 @@
     <string name="tv_code">Enter the 6 digits code you received by SMS</string>
     <string name="bt_send_number">Send</string>
     <string name="toast_insert_num">Insert number</string>
+    <string name="text_progbar">Login...</string>
     <!-- ******************************* -->
 
     <!-- ******* Login Accepted Activity *******-->
@@ -77,7 +78,9 @@
     <string name="alertdial_invite_msg">Do you confirm the invite?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
+    <string name="toast_click_invite_doc">Sending new Doctor...</string>
     <string name="toast_num_doc_invited">Doctor invited</string>
+    <string name="toast_err_doc_inv">Error, select the doctor again</string>
     <!-- ******************************* -->
 
     <!-- ***** Change Patient Status Activity ****-->
@@ -86,7 +89,10 @@
     <string name="bt_suspect_covid">&#128567;\ \ \ \ Suspected of COVID-19</string>
     <string name="bt_recover_covid">&#128522;\ \ \ \ Healed</string>
     <string name="bt_other_status_covid">Other</string>
+    <string name="toast_click_status_changed">Changing patient status...</string>
     <string name="toast_status_changed">Health status changed</string>
+    <string name="toast_code_not_recognized">Patient ID is wrong, please scan QR code again</string>
+    <string name="toast_err_status_change">Error, please change status again</string>
     <!-- ******************************* -->
 
     <!-- ****** How it works Screen *****-->

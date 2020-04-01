@@ -44,6 +44,7 @@
     <string name="tv_code">Inserisci il codice di 6 cifre ricevuto per SMS</string>
     <string name="bt_send_number">Invia</string>
     <string name="toast_insert_num">Inserisci numero</string>
+    <string name="text_progbar">Accesso...</string>
     <!-- ******************************* -->
     <!-- ******* Login Accepted Activity *******-->
     <string name="tv_title_login_accepted">Attivato</string>
@@ -72,7 +73,9 @@
     <string name="alertdial_invite_msg">Confermi l\’invito?</string>
     <string name="alertdial_yes">Si</string>
     <string name="alertdial_no">No</string>
+    <string name="toast_click_invite_doc">Invio nuovo Dottore...</string>
     <string name="toast_num_doc_invited">Dottore invitato</string>
+    <string name="toast_err_doc_inv">Errore, perfavore selezionare il dottore di nuovo</string>
     <!-- ******************************* -->
     <!-- ***** Change Patient Status Activity ****-->
     <string name="diagnosis_title">Diagnosi&#128300;</string>
@@ -80,7 +83,10 @@
     <string name="bt_suspect_covid">&#128567;\ \ \ \ Sospetto di COVID-19</string>
     <string name="bt_recover_covid">&#128522;\ \ \ \ Guarito</string>
     <string name="bt_other_status_covid">Altro</string>
+    <string name="toast_click_status_changed">Cambio stato paziente...</string>
     <string name="toast_status_changed">Stato di salute registrato</string>
+    <string name="toast_code_not_recognized">ID paziente sbagliato, perfavore scannerizzare QR code di nuovo</string>
+    <string name="toast_err_status_change">Errore, perfavore cambiare stato di nuovo</string>
     <!-- ******************************* -->
     <!-- ****** How it works Screen *****-->
     <string name="how_it_works_p0">Useremo la fotocamera del tuo cellulare

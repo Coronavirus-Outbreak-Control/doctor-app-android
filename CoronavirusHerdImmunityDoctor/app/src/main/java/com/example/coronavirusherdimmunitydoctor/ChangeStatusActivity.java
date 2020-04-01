@@ -130,6 +130,8 @@ public class ChangeStatusActivity extends Activity {
      */
     private void task_updateUserStatus(final Long user_id, final Integer new_status){
 
+        Toast.makeText(getApplicationContext(), R.string.toast_click_status_changed, Toast.LENGTH_SHORT).show();
+
         Task.callInBackground(new Callable<String>() {
             @Override
             public String call() throws Exception {
@@ -170,10 +172,12 @@ public class ChangeStatusActivity extends Activity {
                             default:
                                 updated = true;
                                 Log.d("task_updateUserStatus", "Code not recognized:"+response_updateUS.code());
+                                ret_value = "not_rec";
                                 break;
                         }
                     } else{
                         Log.d("task_updateUserStatus","No response by updateUserStatus");
+
                     }
                 }
 
@@ -184,10 +188,13 @@ public class ChangeStatusActivity extends Activity {
             public String then(Task<String> task) throws Exception {
 
                 switch (task.getResult()) {
-                    case "chg_st":
+                    case "chg_st":  //healths status changed
                         Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
                         break;
-                    default:
+                    case "not_rec": //patient id (QR code) not recognized
+                        Toast.makeText(getApplicationContext(), R.string.toast_code_not_recognized, Toast.LENGTH_SHORT).show();
+                    default: //some errors
+                        Toast.makeText(getApplicationContext(), R.string.toast_err_status_change, Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return null;
