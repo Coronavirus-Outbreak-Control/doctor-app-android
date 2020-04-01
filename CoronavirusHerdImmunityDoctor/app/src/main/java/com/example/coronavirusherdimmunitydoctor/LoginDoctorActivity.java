@@ -317,9 +317,9 @@ public class LoginDoctorActivity extends Activity {
                             break;
                         case 404:     //Authorization token has already been requested
                             /*PER DEBUG: following 3 rows are used to try login many times with the same phone number*/
-                            pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
-                            pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
-                            response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
+                            //pm.setDoctorId(Long.valueOf(2));                                               // PER DEBUG: save user(doctor) id in SharedPreferences
+                            //pm.setAuthorizationToken("d4967209a8faf0ad1805ab5e32ef73e2efc6567aa295c7bc66245027ccf59ad3");  // PER DEBUG: save authorization token in SharedPreferences
+                            //response_refreshjwtToken = ApiManager.refreshJwtToken(pm.getAuthorizationToken());    // PER DEBUG: call refreshJwtToken in order to return a Jwt Token from authorization token
                             Log.d("task_acceptInvite", "Authorization token has already been requested");
                             break;
                         default:
