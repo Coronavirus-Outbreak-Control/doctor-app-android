@@ -80,6 +80,7 @@
     <string name="alertdial_no">Não</string>
     <string name="toast_click_invite_doc">Enviando novo médico...</string>
     <string name="toast_num_doc_invited">Médico convidado</string>
+    <string name="toast_err_doc_inv">Erro, selecione médico novamente</string>
     <!-- ******************************* -->
 
     <!-- ***** Change Patient Status Activity ****-->
@@ -90,6 +91,8 @@
     <string name="bt_other_status_covid">Outro</string>
     <string name="toast_click_status_changed">Alterando status paciente...</string>
     <string name="toast_status_changed">Diagnóstico registrado</string>
+    <string name="toast_code_not_recognized">ID do paciente está errado, leia novamente o código QR</string>
+    <string name="toast_err_status_change">Erro, altere o status novamente</string>
     <!-- ******************************* -->
 
     <!-- ****** How it works Screen *****-->

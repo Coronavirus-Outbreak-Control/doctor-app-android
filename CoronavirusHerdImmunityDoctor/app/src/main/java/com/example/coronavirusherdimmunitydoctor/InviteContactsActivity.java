@@ -235,18 +235,19 @@ public class InviteContactsActivity extends Activity {
                         Log.d("task_inviteDoctor","No response by task_inviteDoctor");
                     }
                 }
-
                 return ret_value;
+
             }
         }).onSuccess(new Continuation<String, Object>() {
             @Override
             public String then(Task<String> task) throws Exception {
 
                 switch (task.getResult()) {
-                    case "newdoc":
+                    case "newdoc": //if new doctor has been invited
                         Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
                         break;
-                    default:
+                    default: //some errors
+                        Toast.makeText(getApplicationContext(), R.string.toast_err_doc_inv, Toast.LENGTH_SHORT).show();
                         break;
                 }
                 return null;
