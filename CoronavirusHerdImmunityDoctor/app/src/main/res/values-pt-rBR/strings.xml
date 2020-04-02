@@ -46,6 +46,8 @@
     <string name="bt_send_number">Enviar</string>
     <string name="toast_insert_num">Digite o número</string>
     <string name="text_progbar">Acesso...</string>
+    <string name="toast_number_not_accepted">Número de telefone não aceito</string>
+    <string name="toast_login_not_accepted">Conexão não aceita</string>
     <!-- ******************************* -->
 
     <!-- ******* Login Accepted Activity *******-->

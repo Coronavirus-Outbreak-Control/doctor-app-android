@@ -7,7 +7,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.coronavirusherdimmunitydoctor"
+        applicationId "org.coronavirus_outbreak_control_doctor.android"
         minSdkVersion 20
         targetSdkVersion 29
         versionCode 1
