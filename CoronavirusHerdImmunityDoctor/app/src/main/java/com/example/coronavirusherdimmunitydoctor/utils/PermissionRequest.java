@@ -1,12 +1,14 @@
 package com.example.coronavirusherdimmunitydoctor.utils;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.view.KeyEvent;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
@@ -48,6 +50,19 @@ public class PermissionRequest {
                 public void onDismiss(DialogInterface dialog) {
                     //when you click "ok" then go to next activity in order to enable camera
                     context.startActivity(intent_cam);
+                    ((Activity) context).finish();
+                }
+            });
+            builder.setCancelable(false);
+            builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+
+                    if(keyCode == KeyEvent.KEYCODE_BACK){ // if you click back button then close dialog
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
                 }
             });
             builder.show();
@@ -70,6 +85,19 @@ public class PermissionRequest {
                 public void onDismiss(DialogInterface dialog) {
                     //when you click "ok" then go to ContactPermissionActivity in order to enable read_contact permission
                     context.startActivity(intent_cont);
+                    ((Activity) context).finish();
+                }
+            });
+            builder.setCancelable(false);
+            builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+
+                    if(keyCode == KeyEvent.KEYCODE_BACK){ // if you click back button then close dialog
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
                 }
             });
             builder.show();

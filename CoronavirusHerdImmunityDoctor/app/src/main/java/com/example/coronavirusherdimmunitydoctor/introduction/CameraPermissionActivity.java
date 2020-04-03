@@ -118,5 +118,8 @@ public class CameraPermissionActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() { } // disable back button
+
 }
 

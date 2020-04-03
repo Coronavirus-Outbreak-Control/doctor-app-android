@@ -33,4 +33,12 @@ public class HowItWorksActivity extends Activity {
             }
         });
     }
+
+    /* Manage back button when is pressed in order to go to WelcomeActivity */
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(getApplicationContext(), WelcomeActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

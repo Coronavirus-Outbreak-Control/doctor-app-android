@@ -61,6 +61,12 @@
     <string name="tv_change_patient_status">Scan the patient account QR code to change their health status,
         or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite other doctors</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Exit</string>
+    <string name="alert_exit_msg">Do you want to exit?</string>
+    <string name="alert_exit_pos_bt">Yes</string>
+    <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
 
     <!-- ******* Scanner Screen Activity ******* -->

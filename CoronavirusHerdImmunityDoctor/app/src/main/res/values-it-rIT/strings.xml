@@ -58,6 +58,12 @@
         lo stato di salute del paziente.</string>
     <string name="bt_scan_qrcode">Clicca qui per scansionare\nil Codice QR</string>
     <string name="bt_invite_doc">Invita altri dottori</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Esci</string>
+    <string name="alert_exit_msg">Sei sicuro di voler uscire?</string>
+    <string name="alert_exit_pos_bt">Sì</string>
+    <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
     <!-- ******* Scanner Screen Activity ******* -->
     <string name="toast_scanner_start">Scansione iniziata</string>

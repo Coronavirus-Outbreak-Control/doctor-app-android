@@ -61,6 +61,12 @@
     <string name="tv_change_patient_status">Escaneie o QR code de um paciente para mudar registrar o diagnóstico,
         ou convide mais médicos a usar este aplicativo.</string>
     <string name="bt_invite_doc">Convite outros médicos</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Saída</string>
+    <string name="alert_exit_msg">Você quer sair?</string>
+    <string name="alert_exit_pos_bt">Sim</string>
+    <string name="alert_exit_neg_bt">Não</string>
     <!-- ******************************* -->
 
     <!-- ******* Scanner Screen Activity ******* -->

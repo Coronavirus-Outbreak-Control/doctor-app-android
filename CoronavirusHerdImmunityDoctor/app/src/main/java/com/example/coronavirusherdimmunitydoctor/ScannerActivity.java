@@ -131,4 +131,13 @@ public class ScannerActivity extends AppCompatActivity {
         super.onResume();
         startScanner();
     }
+
+
+    /* Manage back button when is pressed in order to go to DoctorViewActivity */
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(getApplicationContext(), DoctorViewActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

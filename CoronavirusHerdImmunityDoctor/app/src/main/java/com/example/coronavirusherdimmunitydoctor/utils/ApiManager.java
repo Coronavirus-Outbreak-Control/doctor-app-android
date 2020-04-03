@@ -1,15 +1,10 @@
 package com.example.coronavirusherdimmunitydoctor.utils;
 
-import android.content.Context;
-import android.os.Build;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.json.simple.JSONValue;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.MediaType;
