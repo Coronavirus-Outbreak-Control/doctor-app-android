@@ -82,8 +82,7 @@
     <string name="toast_select_doc">Select at least one contact</string>
     <string name="progrdial_loading_con">Loading Contacts&#8230;</string>
     <string name="progrdial_waiting">Please wait</string>
-    <string name="alertdial_invite_title">Invite other doctors</string>
-    <string name="alertdial_invite_msg">Do you confirm the invite?</string>
+    <string name="alertdial_invite_title">Are you sure to invite this number?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
     <string name="toast_click_invite_doc">Sending new Doctor...</string>
