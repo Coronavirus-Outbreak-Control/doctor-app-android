@@ -12,6 +12,6 @@
         android:layout_height="30dp"
         android:layout_weight="0.04"
         android:elevation="20dp"
-        android:gravity="center"
-        tools:textColor="?android:attr/textColorHint" />
+        tools:textColor="?android:attr/textColorHint"
+        android:textSize="20dp"/>
 </LinearLayout>

@@ -45,6 +45,8 @@
     <string name="bt_send_number">Invia</string>
     <string name="toast_insert_num">Inserisci numero</string>
     <string name="text_progbar">Accesso...</string>
+    <string name="toast_number_not_accepted">Il numero di telefono non è accettato</string>
+    <string name="toast_login_not_accepted">Connessione non accettata</string>
     <!-- ******************************* -->
     <!-- ******* Login Accepted Activity *******-->
     <string name="tv_title_login_accepted">Attivato</string>
@@ -56,6 +58,12 @@
         lo stato di salute del paziente.</string>
     <string name="bt_scan_qrcode">Clicca qui per scansionare\nil Codice QR</string>
     <string name="bt_invite_doc">Invita altri dottori</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Esci</string>
+    <string name="alert_exit_msg">Sei sicuro di voler uscire?</string>
+    <string name="alert_exit_pos_bt">Sì</string>
+    <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
     <!-- ******* Scanner Screen Activity ******* -->
     <string name="toast_scanner_start">Scansione iniziata</string>
@@ -69,8 +77,7 @@
     <string name="toast_select_doc">Seleziona almeno un contatto</string>
     <string name="progrdial_loading_con">Caricamento contatti&#8230;</string>
     <string name="progrdial_waiting">Attendi</string>
-    <string name="alertdial_invite_title">Invita altri dottori</string>
-    <string name="alertdial_invite_msg">Confermi l\’invito?</string>
+    <string name="alertdial_invite_title">Sei sicuro di invitare questo numero?</string>
     <string name="alertdial_yes">Si</string>
     <string name="alertdial_no">No</string>
     <string name="toast_click_invite_doc">Invio nuovo Dottore...</string>

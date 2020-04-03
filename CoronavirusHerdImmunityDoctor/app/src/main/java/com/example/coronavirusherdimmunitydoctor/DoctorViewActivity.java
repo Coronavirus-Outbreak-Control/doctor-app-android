@@ -1,8 +1,10 @@
 package com.example.coronavirusherdimmunitydoctor;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -74,5 +76,31 @@ public class DoctorViewActivity extends Activity {
         PermissionRequest permissions = new PermissionRequest(DoctorViewActivity.this);
         permissions.checkPermissions(); //check if camera and read_contacts are enabled else go to activity in order to enable them
 
+    }
+
+
+
+    /* Manage back button when is pressed in order to exit from application*/
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // builder.setCancelable(false);
+        builder.setTitle(R.string.alert_exit_title);
+        builder.setMessage(R.string.alert_exit_msg);
+        builder.setPositiveButton(R.string.alert_exit_pos_bt, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.alert_exit_neg_bt, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert=builder.create();
+        alert.show();
     }
 }

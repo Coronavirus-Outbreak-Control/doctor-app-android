@@ -46,6 +46,8 @@
     <string name="bt_send_number">Send</string>
     <string name="toast_insert_num">Insert number</string>
     <string name="text_progbar">Login...</string>
+    <string name="toast_number_not_accepted">Phone Number is not accepted</string>
+    <string name="toast_login_not_accepted">Login is not accepted</string>
     <!-- ******************************* -->
 
     <!-- ******* Login Accepted Activity *******-->
@@ -59,6 +61,12 @@
     <string name="tv_change_patient_status">Scan the patient account QR code to change their health status,
         or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite other doctors</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Exit</string>
+    <string name="alert_exit_msg">Do you want to exit?</string>
+    <string name="alert_exit_pos_bt">Yes</string>
+    <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
 
     <!-- ******* Scanner Screen Activity ******* -->
@@ -74,8 +82,7 @@
     <string name="toast_select_doc">Select at least one contact</string>
     <string name="progrdial_loading_con">Loading Contacts&#8230;</string>
     <string name="progrdial_waiting">Please wait</string>
-    <string name="alertdial_invite_title">Invite other doctors</string>
-    <string name="alertdial_invite_msg">Do you confirm the invite?</string>
+    <string name="alertdial_invite_title">Are you sure to invite this number?</string>
     <string name="alertdial_yes">Yes</string>
     <string name="alertdial_no">No</string>
     <string name="toast_click_invite_doc">Sending new Doctor...</string>

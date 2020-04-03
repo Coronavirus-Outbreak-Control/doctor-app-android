@@ -46,6 +46,8 @@
     <string name="bt_send_number">Enviar</string>
     <string name="toast_insert_num">Digite o número</string>
     <string name="text_progbar">Acesso...</string>
+    <string name="toast_number_not_accepted">Número de telefone não aceito</string>
+    <string name="toast_login_not_accepted">Conexão não aceita</string>
     <!-- ******************************* -->
 
     <!-- ******* Login Accepted Activity *******-->
@@ -59,6 +61,12 @@
     <string name="tv_change_patient_status">Escaneie o QR code de um paciente para mudar registrar o diagnóstico,
         ou convide mais médicos a usar este aplicativo.</string>
     <string name="bt_invite_doc">Convite outros médicos</string>
+
+    <!--- ***** exit alert dialog ****** -->
+    <string name="alert_exit_title">Saída</string>
+    <string name="alert_exit_msg">Você quer sair?</string>
+    <string name="alert_exit_pos_bt">Sim</string>
+    <string name="alert_exit_neg_bt">Não</string>
     <!-- ******************************* -->
 
     <!-- ******* Scanner Screen Activity ******* -->
@@ -74,8 +82,7 @@
     <string name="toast_select_doc">Selecionar ao menos um contato</string>
     <string name="progrdial_loading_con">Carregando Contatos&#8230;</string>
     <string name="progrdial_waiting">Por favor aguarde</string>
-    <string name="alertdial_invite_title">Convide outros médicos</string>
-    <string name="alertdial_invite_msg">Você confirma o convite?</string>
+    <string name="alertdial_invite_title">Você tem certeza de convidar esse número?</string>
     <string name="alertdial_yes">Sim</string>
     <string name="alertdial_no">Não</string>
     <string name="toast_click_invite_doc">Enviando novo médico...</string>

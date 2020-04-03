@@ -1,6 +1,8 @@
 package com.example.coronavirusherdimmunitydoctor;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,6 +57,7 @@ public class LoginDoctorActivity extends Activity {
     private String prefix_num;                                      //number prefix
     private String prefix_phone_num;                                //phone number with number prefix
 
+    private String TAG = "task_requestActivation";
 
     /**
      * This TextWatcher manages text changed on EditText:
@@ -214,11 +217,6 @@ public class LoginDoctorActivity extends Activity {
                     phone_num = et_phone_number.getText().toString();  //get phone number
                     prefix_phone_num = prefix_num+phone_num;
                     task_requestActivation(prefix_phone_num); //call requestActivation
-
-                    tv_write_code.setVisibility(View.VISIBLE);
-                    tr_code.setVisibility(View.VISIBLE);
-                    et_code1.requestFocus();
-                    write_verification_code();
                 }
 
             }
@@ -236,37 +234,58 @@ public class LoginDoctorActivity extends Activity {
      */
     private void task_requestActivation(final String phone_number){
 
-        Task.callInBackground(new Callable<Response>() {
+        Task.callInBackground(new Callable<String>() {
             @Override
-            public Response call() throws Exception {
+            public String call() throws Exception {
 
                 Response response = ApiManager.requestActivation(phone_number);  //call requestActivation
+                String ret_val = "";
 
                 if (response != null) {
                     switch (response.code()) {         //check response status(code)
                         case 202: //if response is 'ok' -> Number Accepted
-                            Log.d("task_requestActivation", "Phone Number accepted, please insert verification code");
+                            Log.d(TAG, "Phone Number accepted, please insert verification code");
+                            ret_val = "num_acc";
                             break;
                         case 502: //Error Phone Number -> Not trusted
-                            Log.d("task_requestActivation", "Phone Number not accepted, please insert a number again");
+                            Log.d(TAG, "Phone Number not accepted, please insert a number again");
+                            ret_val = "num_not_acc";
                             break;
                         case 404: //Not Found
-                            Log.d("task_requestActivation", "Phone Number not found, please insert a number again");
+                            Log.d(TAG, "Phone Number not found, please insert a number again");
+                            ret_val = "num_not_acc";
                             break;
                         default:
-                            Log.d("task_requestActivation", "Code not recognized:"+response.code());
+                            Log.d(TAG, "Code not recognized:"+response.code());
                             break;
                     }
                 }else{
-                    Log.d("task_requestActivation", "No response by requestActivation");
+                    Log.d(TAG, "No response by requestActivation");
 
                 }
 
-                return null;
+                return ret_val;
             }
-        }).onSuccess(new Continuation<Response, Object>() {
+        }).onSuccess(new Continuation<String, Object>() {
             @Override
-            public String then(Task<Response> task) throws Exception {
+            public String then(Task<String> task) throws Exception {
+                switch (task.getResult()){
+                    case "num_acc":       // phone number is accepted -> can write verification code
+
+                        tv_write_code.setVisibility(View.VISIBLE);
+                        tr_code.setVisibility(View.VISIBLE);
+                        et_code1.requestFocus();
+                        write_verification_code();
+                        break;
+
+                    case "num_not_acc":    // phone number is not accepted
+
+                        Toast.makeText(getApplicationContext(), R.string.toast_number_not_accepted, Toast.LENGTH_SHORT).show();
+                        break;
+
+                    default:
+                        break;
+                }
                 return null;
             }
         },  Task.UI_THREAD_EXECUTOR);
@@ -282,6 +301,8 @@ public class LoginDoctorActivity extends Activity {
     private void task_acceptInvite(final String verification_code, final String doc_phone_num){
 
         progBar.setVisibility(View.VISIBLE);  //set visible the relative layout (progress bar + text view)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);  //disable interaction with UI when progress bar is loading
 
         Task.callInBackground(new Callable<Response>() {
             @Override
@@ -349,8 +370,6 @@ public class LoginDoctorActivity extends Activity {
 
                                 pm.setJwtToken(response_body.getString("token"));                 //save Jwt Token in SharedPreferences
 
-                                progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
-
                                 Intent intent = new Intent(LoginDoctorActivity.this, LoginAcceptedActivity.class);  //change activity
                                 startActivity(intent);
                                 finish();
@@ -364,8 +383,18 @@ public class LoginDoctorActivity extends Activity {
                             Log.d("task_acceptInvite","Code not recognized:"+response_refreshjwtToken.code());
                             break;
                     }
+
+                    progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE); //reenable interaction with UI
+
                 } else{
                     Log.d("task_acceptInvite","No response by refreshJwtToken");
+
+                    progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE); //reenable interaction with UI
+
+                    Toast.makeText(getApplicationContext(), R.string.toast_login_not_accepted, Toast.LENGTH_SHORT).show();
+
                 }
 
                 return null;
@@ -374,4 +403,27 @@ public class LoginDoctorActivity extends Activity {
     }
 
 
+    /* Manage back button when is pressed in order to exit from application*/
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // builder.setCancelable(false);
+        builder.setTitle(R.string.alert_exit_title);
+        builder.setMessage(R.string.alert_exit_msg);
+        builder.setPositiveButton(R.string.alert_exit_pos_bt, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(R.string.alert_exit_neg_bt, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert=builder.create();
+        alert.show();
+    }
 }
