@@ -170,13 +170,15 @@ public class ChangeStatusActivity extends Activity {
                                 }
                                 break;
                             default:
-                                updated = true;
                                 Log.d("task_updateUserStatus", "Code not recognized:"+response_updateUS.code());
                                 ret_value = "not_rec";
+                                updated = true;
                                 break;
                         }
-                    } else{
+                    } else{  // no response from Backend (like: internet disabled)
                         Log.d("task_updateUserStatus","No response by updateUserStatus");
+                        ret_value = "no_resp";
+                        updated = true;
 
                     }
                 }
@@ -193,6 +195,9 @@ public class ChangeStatusActivity extends Activity {
                         break;
                     case "not_rec": //patient id (QR code) not recognized
                         Toast.makeText(getApplicationContext(), R.string.toast_code_not_recognized, Toast.LENGTH_SHORT).show();
+                    case "no_resp": // no response from Backend (like: internet disabled)
+                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_change_status, Toast.LENGTH_SHORT).show();
+                        break;
                     default: //some errors
                         Toast.makeText(getApplicationContext(), R.string.toast_err_status_change, Toast.LENGTH_SHORT).show();
                         break;

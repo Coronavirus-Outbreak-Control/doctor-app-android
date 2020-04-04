@@ -87,6 +87,7 @@
     <string name="alertdial_no">No</string>
     <string name="toast_click_invite_doc">Sending new Doctor...</string>
     <string name="toast_num_doc_invited">Doctor invited</string>
+    <string name="toast_no_resp_inv_doc">Error, please check and enable Internet</string>
     <string name="toast_err_doc_inv">Error, select the doctor again</string>
     <!-- ******************************* -->
 
@@ -99,6 +100,7 @@
     <string name="toast_click_status_changed">Changing patient status...</string>
     <string name="toast_status_changed">Health status changed</string>
     <string name="toast_code_not_recognized">Patient ID is wrong, please scan QR code again</string>
+    <string name="toast_no_resp_change_status">Error, please check and enable Internet</string>
     <string name="toast_err_status_change">Error, please change status again</string>
     <!-- ******************************* -->
 

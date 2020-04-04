@@ -82,6 +82,7 @@
     <string name="alertdial_no">No</string>
     <string name="toast_click_invite_doc">Invio nuovo Dottore...</string>
     <string name="toast_num_doc_invited">Dottore invitato</string>
+    <string name="toast_no_resp_inv_doc">Errore, perfavore verificare e attivare Internet</string>
     <string name="toast_err_doc_inv">Errore, perfavore selezionare il dottore di nuovo</string>
     <!-- ******************************* -->
     <!-- ***** Change Patient Status Activity ****-->
@@ -93,6 +94,7 @@
     <string name="toast_click_status_changed">Cambio stato paziente...</string>
     <string name="toast_status_changed">Stato di salute registrato</string>
     <string name="toast_code_not_recognized">ID paziente sbagliato, perfavore scannerizzare QR code di nuovo</string>
+    <string name="toast_no_resp_change_status">Errore, perfavore verificare e attivare Internet</string>
     <string name="toast_err_status_change">Errore, perfavore cambiare stato di nuovo</string>
     <!-- ******************************* -->
     <!-- ****** How it works Screen *****-->
