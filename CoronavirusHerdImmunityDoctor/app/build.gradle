@@ -55,5 +55,6 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:17.3.0'     // (Recommended) Add the Google Analytics dependency.
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'    // Add the Firebase Crashlytics dependency.
+    implementation 'androidx.security:security-crypto:1.0.0-alpha02'    //added for EncryptedSharedPreferences
 
 }
