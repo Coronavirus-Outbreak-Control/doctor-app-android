@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.coronavirusherdimmunitydoctor">
 
-    <!--<uses-sdk tools:overrideLibrary="androidx.security" />-->  <!-- added androidx.security for SDK versions: >=23 -->
+    <uses-sdk tools:overrideLibrary="androidx.security" /> <!-- added androidx.security for SDK versions: >=23 -->
 
     <uses-feature
         android:name="android.hardware.camera"
