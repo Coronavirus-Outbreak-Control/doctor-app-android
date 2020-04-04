@@ -2,6 +2,8 @@ package com.example.coronavirusherdimmunitydoctor.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+import android.util.Log;
 
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
@@ -11,6 +13,8 @@ public class PreferenceManager {
 
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    SharedPreferences pref_sdkvers;
+    SharedPreferences.Editor editor_sdkvers;
 
     Context _context;
 
@@ -19,6 +23,7 @@ public class PreferenceManager {
 
     // Shared preferences file names
     private static final String PREF_NAME = "SharedData";
+    private static final String PREF_NAME_SDK_VERS = "SdkVersion";  //used to save sdk versions
 
 
     /***** Key shared preferences "SharedData" *******/
@@ -28,6 +33,8 @@ public class PreferenceManager {
     private static final String PHONE_NUMBER = "phone_number";      // phone number of Doctor
     private static final String DOCTOR_ID = "doctor_id";            // doctor id received after activation
 
+    /***** Key shared preferences "SdkVersion" *******/
+    private static final String SDK_VERS = "sdk_vers"; //sdk android version
 
     private String TAG = "PreferenceManager";
 
