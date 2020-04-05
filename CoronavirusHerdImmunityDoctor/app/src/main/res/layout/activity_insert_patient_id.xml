@@ -25,6 +25,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="100dp"
         android:hint="@string/et_patient_id"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_patid" />

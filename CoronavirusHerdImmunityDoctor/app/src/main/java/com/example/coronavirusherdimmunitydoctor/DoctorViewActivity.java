@@ -26,6 +26,7 @@ public class DoctorViewActivity extends Activity {
 
     private Button bt_scan_qrcode;
     private Button bt_invite_doc;
+    private Button bt_change_status;
 
     private ArrayList<String> contacts_list = new ArrayList<>();
 
@@ -52,6 +53,15 @@ public class DoctorViewActivity extends Activity {
                 Intent intent=new Intent(DoctorViewActivity.this, ScannerActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        bt_change_status = findViewById(R.id.bt_change_status);
+        bt_change_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(DoctorViewActivity.this, InsertPatientIdActivity.class);
+                startActivity(intent);
             }
         });
 
