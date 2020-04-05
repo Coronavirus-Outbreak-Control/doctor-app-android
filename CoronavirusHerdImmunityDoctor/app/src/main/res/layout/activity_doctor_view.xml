@@ -1,62 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <TextView
-        style="@style/intro_title"
-        android:id="@+id/tv_changestatus"
-        android:layout_marginTop="60dp"
-        android:text="@string/main_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <TextView
-        style="@style/intro_subtitle"
-        android:id="@+id/subtitle"
-        android:text="@string/tv_change_patient_status"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/tv_changestatus"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="@+id/tv_changestatus"
-        app:layout_constraintTop_toBottomOf="@+id/tv_changestatus" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <TextView
+                style="@style/intro_title"
+                android:id="@+id/tv_changestatus"
+                android:layout_marginTop="60dp"
+                android:text="@string/main_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.492"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                style="@style/intro_subtitle"
+                android:id="@+id/subtitle"
+                android:text="@string/tv_change_patient_status"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/tv_changestatus"
+                app:layout_constraintHorizontal_bias="0.458"
+                app:layout_constraintStart_toStartOf="@+id/tv_changestatus"
+                app:layout_constraintTop_toBottomOf="@+id/tv_changestatus" />
 
 
-    <Button
-        android:id="@+id/bt_scan_qrcode"
-        style="@style/button_primary"
-        android:layout_width="248dp"
-        android:layout_height="288dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_asset_1"
-        android:fontFamily="sans-serif-light"
-        android:gravity="center|top"
-        android:paddingTop="15dp"
-        android:text="@string/bt_scan_qrcode"
-        android:textColor="@color/colorTextDark"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/subtitle"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/subtitle"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/bt_scan_qrcode"
+            style="@style/button_primary"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_asset_1"
+            android:fontFamily="sans-serif-light"
+            android:gravity="center|top"
+            android:paddingTop="15dp"
+            android:text="@string/bt_scan_qrcode"
+            android:textColor="@color/colorTextDark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/subtitle"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="@+id/subtitle"
+            app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
-    <Button
-        android:id="@+id/bt_invite_doc"
-        style="@style/button_primary"
-        android:layout_marginTop="39dp"
-        android:layout_marginBottom="50dp"
-        android:text="@string/bt_invite_doc"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/bt_scan_qrcode"
-        app:layout_constraintStart_toStartOf="@+id/bt_scan_qrcode"
-        app:layout_constraintTop_toBottomOf="@+id/bt_scan_qrcode" />
+        <Button
+            android:id="@+id/bt_change_status"
+            style="@style/button_primary"
+            android:layout_marginTop="50dp"
+            android:text="@string/bt_change_status"
+            app:layout_constraintEnd_toEndOf="@+id/bt_scan_qrcode"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/bt_scan_qrcode"
+            app:layout_constraintTop_toBottomOf="@+id/bt_scan_qrcode" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/bt_invite_doc"
+            style="@style/button_primary"
+            android:text="@string/bt_invite_doc"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/bt_change_status"
+            app:layout_constraintStart_toStartOf="@+id/bt_change_status"
+            app:layout_constraintTop_toBottomOf="@+id/bt_change_status"
+            android:layout_marginTop="30dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

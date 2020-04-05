@@ -105,12 +105,12 @@ public class ScannerActivity extends AppCompatActivity {
                     patient_id = code.valueAt(0).displayValue;  //get qrcode recognized
 
                     try {
-                        Long pat_id = Long.parseLong(patient_id.replaceAll("\\D+","")); //convert QR code in Long number by removing chars
+                        long pat_id = Long.parseLong(patient_id.replaceAll("\\D+","")); //convert QR code in Long number by removing chars
                         Intent intent=new Intent(ScannerActivity.this, ChangeStatusActivity.class);
                         intent.putExtra("patient id", pat_id);
                         startActivity(intent);
                         finish();
-                    } catch (NumberFormatException e) { //when patient id is not convertable in a Long
+                    } catch (NumberFormatException e) { //when patient id is not convertable in a long
                         Toast.makeText(getApplicationContext(), R.string.toast_wrong_scan, Toast.LENGTH_SHORT).show();
                     }
 

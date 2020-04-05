@@ -43,7 +43,7 @@ public class ChangeStatusActivity extends Activity {
         setContentView(R.layout.activity_change_patient_status);
 
         Intent intent = getIntent();
-        final Long patient_id = intent.getLongExtra("patient id", -1); //get patient id recognized by QR code scanner
+        final long patient_id = intent.getLongExtra("patient id", -1); //get patient id recognized by QR code scanner
 
         /****************** Confirm Button *******************/
 
@@ -128,7 +128,7 @@ public class ChangeStatusActivity extends Activity {
      * @param user_id: patient id
      * @param new_status: health patient status
      */
-    private void task_updateUserStatus(final Long user_id, final Integer new_status){
+    private void task_updateUserStatus(final long user_id, final Integer new_status){
 
         Toast.makeText(getApplicationContext(), R.string.toast_click_status_changed, Toast.LENGTH_SHORT).show();
 

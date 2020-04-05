@@ -213,12 +213,12 @@ public class ApiManager {
      * @return JSONObject is the response to the request:
      *              - 200: ok
      */
-    public static Response updateUserStatus(Long user_id, Integer new_status, String jwt_token){
+    public static Response updateUserStatus(long user_id, Integer new_status, String jwt_token){
 
         /****** Endpoint *****/
         String endpoint = baseEndoint +
                           "/mark/" +
-                          user_id.toString() + "/" +
+                          user_id + "/" +
                           new_status.toString();   //Endpoint: https://doctors.coronaviruscheck.org/v1/mark/<long:user-id>/<int:new-status>
 
         /****** Header *******/

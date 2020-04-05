@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">CoviDoc</string>
     <string name="app_title">Doctor Covid Community Alert</string>
+
     <!-- ******* Splash Screen Activity ******* -->
     <string name="splash_title_first">ovi</string>
     <string name="splash_title_next">Doc</string>
     <string name="splash_subtitle">Doctor\nCovid Community Alert</string>
     <!-- ******************************* -->
+
     <!-- ***** Introduction Slider ****** -->
     <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
     <string name="welcome_next">\nCovidCommunity</string>
@@ -31,6 +33,7 @@
         dottori ad usare app.</string>
     <string name="go">VAI ALL\’APPLICAZIONE</string>
     <!-- ******************************* -->
+
     <!-- ******* Utils **************** -->
     <!-- Permission Request -->
     <string name="cam_disabled">"Fotocamera" Disattivata</string>
@@ -38,6 +41,7 @@
     <string name="cont_disabled">Accesso ai "Contatti" Disattivato</string>
     <string name="cont_please_en">Attiva accesso ai "Contatti"</string>
     <!-- ******************************* -->
+
     <!-- ******* Login Doctor Activity ******* -->
     <string name="login_doctor_title">Login Doctor App</string>
     <string name="tv_mobile_phone">Numero di cellulare</string>
@@ -48,16 +52,19 @@
     <string name="toast_number_not_accepted">Il numero di telefono non è accettato</string>
     <string name="toast_login_not_accepted">Connessione non accettata</string>
     <!-- ******************************* -->
+
     <!-- ******* Login Accepted Activity *******-->
     <string name="tv_title_login_accepted">Attivato</string>
     <string name="tv_accepted">Accesso confermato</string>
     <!-- ******************************* -->
+
     <!-- ******* Doctor View Activity ******* -->
     <string name="main_title">Welcome to CoviDoc&#127976;</string>
     <string name="tv_change_patient_status">Scansiona il Codice QR per registrare
         lo stato di salute del paziente.</string>
     <string name="bt_scan_qrcode">Clicca qui per scansionare\nil Codice QR</string>
     <string name="bt_invite_doc">Invita altri dottori</string>
+    <string name="bt_change_status">Cambia Stato Paziente</string>
 
     <!--- ***** exit alert dialog ****** -->
     <string name="alert_exit_title">Esci</string>
@@ -65,12 +72,21 @@
     <string name="alert_exit_pos_bt">Sì</string>
     <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
-    <!-- ******* Scanner Screen Activity ******* -->
+
+    <!-- ******* Scanner Activity ******* -->
     <string name="toast_scanner_start">Scansione iniziata</string>
     <string name="toast_scanner_stop">Scansione interrotta</string>
     <string name="toast_scanner_recognized">Codice riconosciuto</string>
     <string name="toast_wrong_scan">Codice scansionato incorretto</string>
     <!-- ******************************* -->
+
+    <!-- ***** Scanner Success Activity ****-->
+    <string name="tv_scanner_success">ID del Paziente scannerizzato con successo</string>
+    <string name="tv_show_patientid">ID del Paziente è %s, perfavore copiarlo nella cartella clinica.
+        Lo stato del Paziente è cambiato a "Sospetto" in attesa dei risultati del tampone.</string>
+    <string name="bt_next">Passo Successivo</string>
+    <!-- ******************************* -->
+
     <!-- ******* Invite Contacts Activity ******* -->
     <string name="tv_invite_contacts">Seleziona un altro dottore</string>
     <string name="bt_invite">Invita</string>
@@ -85,6 +101,7 @@
     <string name="toast_no_resp_inv_doc">Errore, perfavore verificare e attivare Internet</string>
     <string name="toast_err_doc_inv">Errore, perfavore selezionare il dottore di nuovo</string>
     <!-- ******************************* -->
+
     <!-- ***** Change Patient Status Activity ****-->
     <string name="diagnosis_title">Diagnosi&#128300;</string>
     <string name="bt_confirm_covid">&#129298;\ \ \ \ Positivo al COVID-19</string>
@@ -97,7 +114,14 @@
     <string name="toast_no_resp_change_status">Errore, perfavore verificare e attivare Internet</string>
     <string name="toast_err_status_change">Errore, perfavore cambiare stato di nuovo</string>
     <!-- ******************************* -->
-    <!-- ****** How it works Screen *****-->
+
+    <!-- ***** Insert Patient Id Activity ****-->
+    <string name="tv_patient_id">Scrivi ID del Paziente</string>
+    <string name="et_patient_id">(ID Paziente)</string>
+    <string name="bt_check_id">Cambia lo Stato</string>
+    <!-- ******************************* -->
+
+    <!-- ****** How it works Activity *****-->
     <string name="how_it_works_p0">Useremo la fotocamera del tuo cellulare
         e i contatti, per permetterti di scansionare i codici QR dei pazienti
         e invitare altri dottori.</string>

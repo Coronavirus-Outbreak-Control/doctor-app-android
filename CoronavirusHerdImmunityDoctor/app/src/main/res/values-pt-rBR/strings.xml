@@ -61,6 +61,7 @@
     <string name="tv_change_patient_status">Escaneie o QR code de um paciente para mudar registrar o diagnóstico,
         ou convide mais médicos a usar este aplicativo.</string>
     <string name="bt_invite_doc">Convite outros médicos</string>
+    <string name="bt_change_status">Alterar Status Paciente</string>
 
     <!--- ***** exit alert dialog ****** -->
     <string name="alert_exit_title">Saída</string>
@@ -69,11 +70,18 @@
     <string name="alert_exit_neg_bt">Não</string>
     <!-- ******************************* -->
 
-    <!-- ******* Scanner Screen Activity ******* -->
+    <!-- ******* Scanner Activity ******* -->
     <string name="toast_scanner_start">Escaneamento iniciado started</string>
     <string name="toast_scanner_stop">Escaneamento interrompido</string>
     <string name="toast_scanner_recognized">Código reconhecido</string>
     <string name="toast_wrong_scan">QR code escaneado incorreto</string>
+    <!-- ******************************* -->
+
+    <!-- ***** Scanner Success Activity ****-->
+    <string name="tv_scanner_success">ID do paciente digitalizada com sucesso</string>
+    <string name="tv_show_patientid">ID do paciente é %s, copie-a em registros médicos.
+        O status do paciente foi alterado para "Suspeito" esperando os resultados do swab.</string>
+    <string name="bt_next">Próximo Passo</string>
     <!-- ******************************* -->
 
     <!-- ******* Invite Contacts Activity ******* -->
@@ -104,7 +112,13 @@
     <string name="toast_err_status_change">Erro, altere o status novamente</string>
     <!-- ******************************* -->
 
-    <!-- ****** How it works Screen *****-->
+    <!-- ***** Insert Patient Id Activity ****-->
+    <string name="tv_patient_id">Escreva ID do paciente</string>
+    <string name="et_patient_id">(ID do paciente)</string>
+    <string name="bt_check_id">Altere o Status</string>
+    <!-- ******************************* -->
+
+    <!-- ****** How it works Activity *****-->
     <string name="how_it_works_p0">Nós vamos usar a camera para escanear o QR code dos pacientes, e os seus contatos
     	para convidar outros médicos.</string>
     <string name="how_it_works_q1">Como eu posso ajudar?</string>

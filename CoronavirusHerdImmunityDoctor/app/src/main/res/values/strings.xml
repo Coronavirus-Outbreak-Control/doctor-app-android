@@ -61,6 +61,7 @@
     <string name="tv_change_patient_status">Scan the patient account QR code to change their health status,
         or invite more doctors to this app.</string>
     <string name="bt_invite_doc">Invite other doctors</string>
+    <string name="bt_change_status">Change Status Patient</string>
 
     <!--- ***** exit alert dialog ****** -->
     <string name="alert_exit_title">Exit</string>
@@ -69,11 +70,18 @@
     <string name="alert_exit_neg_bt">No</string>
     <!-- ******************************* -->
 
-    <!-- ******* Scanner Screen Activity ******* -->
+    <!-- ******* Scanner Activity ******* -->
     <string name="toast_scanner_start">Scan started</string>
     <string name="toast_scanner_stop">Scan interrupted</string>
     <string name="toast_scanner_recognized">Code recognized</string>
     <string name="toast_wrong_scan">Scanned QR code is incorrect</string>
+    <!-- ******************************* -->
+
+    <!-- ***** Scanner Success Activity ****-->
+    <string name="tv_scanner_success">Patient ID successfully scanned</string>
+    <string name="tv_show_patientid">Patient ID is %s, please copy it on medical records.
+        The status of the Patient has been changed to "Suspected" waiting swab results.</string>
+    <string name="bt_next">Next Step</string>
     <!-- ******************************* -->
 
     <!-- ******* Invite Contacts Activity ******* -->
@@ -104,7 +112,14 @@
     <string name="toast_err_status_change">Error, please change status again</string>
     <!-- ******************************* -->
 
-    <!-- ****** How it works Screen *****-->
+    <!-- ***** Insert Patient Id Activity ****-->
+    <string name="tv_patient_id">Text Patient ID</string>
+    <string name="et_patient_id">(Patient ID)</string>
+    <string name="bt_check_id">Change Status</string>
+    <!-- ******************************* -->
+
+
+    <!-- ****** How it works Activity *****-->
     <string name="how_it_works_p0">We will use the camera and contacts in
     	order to scan the patient\’s QR code and invite other doctors.</string>
     <string name="how_it_works_q1">How can I help?</string>
