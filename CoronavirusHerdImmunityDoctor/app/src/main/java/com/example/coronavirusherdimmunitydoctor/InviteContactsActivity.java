@@ -487,12 +487,14 @@ public class InviteContactsActivity extends Activity {
                                 }
                                 break;
                             default:
-                                updated = true;
                                 Log.d("task_inviteDoctor","Code not recognized:"+response_inviteDoctor.code());
+                                updated = true;
                                 break;
                         }
-                    } else{
+                    } else{ // no response from Backend (like: internet disabled)
                         Log.d("task_inviteDoctor","No response by task_inviteDoctor");
+                        ret_value = "no_resp";
+                        updated = true;
                     }
                 }
                 return ret_value;
@@ -506,8 +508,11 @@ public class InviteContactsActivity extends Activity {
                     case "newdoc": //if new doctor has been invited
                         Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
                         break;
+                    case "no_resp": // no response from Backend (like: internet disabled)
+                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_inv_doc, Toast.LENGTH_LONG).show();
+                        break;
                     default: //some errors
-                        Toast.makeText(getApplicationContext(), R.string.toast_err_doc_inv, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_err_doc_inv, Toast.LENGTH_LONG).show();
                         break;
                 }
                 return null;

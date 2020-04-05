@@ -61,6 +61,7 @@
     <string name="tv_change_patient_status">Escaneie o QR code de um paciente para mudar registrar o diagnóstico,
         ou convide mais médicos a usar este aplicativo.</string>
     <string name="bt_invite_doc">Convite outros médicos</string>
+    <string name="bt_change_status">Alterar Status Paciente</string>
 
     <!--- ***** exit alert dialog ****** -->
     <string name="alert_exit_title">Saída</string>
@@ -69,11 +70,27 @@
     <string name="alert_exit_neg_bt">Não</string>
     <!-- ******************************* -->
 
-    <!-- ******* Scanner Screen Activity ******* -->
+    <!-- ******* Scanner Activity ******* -->
     <string name="toast_scanner_start">Escaneamento iniciado started</string>
     <string name="toast_scanner_stop">Escaneamento interrompido</string>
     <string name="toast_scanner_recognized">Código reconhecido</string>
     <string name="toast_wrong_scan">QR code escaneado incorreto</string>
+    <string name="toast_scanner_code_not_recognized">ID do paciente está errado, leia novamente o código QR</string>
+    <string name="toast_scanner_no_resp_change_status">Erro, ative a Internet leia novamente o código QR</string>
+    <string name="toast_scanner_err_status_change">Erro, leia novamente o código QR</string>
+    <!-- ******************************* -->
+
+    <!-- ***** Scanner Success Activity ****-->
+    <string name="tv_scanner_success">ID do paciente digitalizada com sucesso</string>
+    <string name="tv_show_patientid"><![CDATA[ID do paciente é <b>%d</b>, copie-a em registros médicos.\n
+        O status do paciente foi alterado para \'Suspeito\' esperando os resultados do swab.\n
+        Se você clicar no botão "Próximo passo", poderá alterar o status, se já conhece os resultados do buffer,
+        ou voltar à página principal e alterar o status posteriormente.]]></string>
+    <string name="bt_next">Próximo Passo</string>
+    <string name="alert_results_title">Você conhece os resultados do swab desse Paciente?</string>
+    <string name="alert_results_msg"><![CDATA[ID Paciente: <b>%d</b>]]></string>
+    <string name="alert_results_pos_bt">Sim</string>
+    <string name="alert_results_neg_bt">Não</string>
     <!-- ******************************* -->
 
     <!-- ******* Invite Contacts Activity ******* -->
@@ -87,22 +104,31 @@
     <string name="alertdial_no">Não</string>
     <string name="toast_click_invite_doc">Enviando novo médico...</string>
     <string name="toast_num_doc_invited">Médico convidado</string>
+    <string name="toast_no_resp_inv_doc">Erro, verifique e ative a Internet</string>
     <string name="toast_err_doc_inv">Erro, selecione médico novamente</string>
     <!-- ******************************* -->
 
     <!-- ***** Change Patient Status Activity ****-->
     <string name="diagnosis_title">Diagnóstico&#129658;</string>
     <string name="bt_confirm_covid">&#129440;\ \ \ \ Positivo para COVID-19</string>
-    <string name="bt_suspect_covid">&#10068;\ \ \ \ Suspeito para COVID-19</string>
+    <string name="bt_negative_covid">&#10068;\ \ \ \ Negativo para COVID-19</string>
     <string name="bt_recover_covid">&#129293;\ \ \ \ Curado ou Negativo</string>
     <string name="bt_other_status_covid">Outro</string>
     <string name="toast_click_status_changed">Alterando status paciente...</string>
     <string name="toast_status_changed">Diagnóstico registrado</string>
-    <string name="toast_code_not_recognized">ID do paciente está errado, leia novamente o código QR</string>
+    <string name="toast_code_not_recognized">ID do paciente está errado, por favor, peça ao paciente</string>
+    <string name="toast_no_resp_change_status">Erro, verifique e ative a Internet</string>
     <string name="toast_err_status_change">Erro, altere o status novamente</string>
     <!-- ******************************* -->
 
-    <!-- ****** How it works Screen *****-->
+    <!-- ***** Insert Patient Id Activity ****-->
+    <string name="tv_patient_id">Escreva ID do paciente</string>
+    <string name="et_patient_id">(ID do paciente)</string>
+    <string name="bt_check_id">Altere o Status</string>
+    <string name="toast_err_empty_id">Inserir um ID do paciente</string>
+    <!-- ******************************* -->
+
+    <!-- ****** How it works Activity *****-->
     <string name="how_it_works_p0">Nós vamos usar a camera para escanear o QR code dos pacientes, e os seus contatos
     	para convidar outros médicos.</string>
     <string name="how_it_works_q1">Como eu posso ajudar?</string>

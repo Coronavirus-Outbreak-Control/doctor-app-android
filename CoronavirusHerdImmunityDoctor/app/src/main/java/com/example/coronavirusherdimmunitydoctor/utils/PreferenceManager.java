@@ -104,7 +104,7 @@ public class PreferenceManager {
         String auth_token              = getAuthorizationToken();
         String jwt_token               = getJwtToken();
         String phone_numb              = getPhoneNumber();
-        Long doctor_id                 = getDoctorId();
+        long doctor_id                 = getDoctorId();
 
         try {
 
@@ -162,7 +162,7 @@ public class PreferenceManager {
         editor.commit();
     }
 
-    public void setDoctorId(Long doctorId){
+    public void setDoctorId(long doctorId){
         editor.putLong(DOCTOR_ID, doctorId);
         editor.commit();
     }
@@ -183,7 +183,7 @@ public class PreferenceManager {
         return pref.getString(PHONE_NUMBER, null);
     }
 
-    public Long getDoctorId() {
+    public long getDoctorId() {
         return pref.getLong(DOCTOR_ID, -1);
     }
     /********************************************/

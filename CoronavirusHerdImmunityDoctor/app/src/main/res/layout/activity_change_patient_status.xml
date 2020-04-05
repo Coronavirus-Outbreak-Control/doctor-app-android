@@ -28,16 +28,16 @@
 
 
     <Button
-        android:id="@+id/bt_suspect_covid"
+        android:id="@+id/bt_negative_covid"
         style="@style/button_primary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginBottom="0dp"
-        android:background="@drawable/ic_rectangle_orange"
+        android:background="@drawable/ic_rectangle_greenblue"
         android:paddingBottom="7dp"
         android:textSize="15sp"
-        android:text="@string/bt_suspect_covid" />
+        android:text="@string/bt_negative_covid" />
 
     <Button
         style="@style/button_primary"
