@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.coronavirusherdimmunitydoctor.enums.PatientStatus;
 import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
 import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
 
@@ -24,18 +25,8 @@ import okhttp3.Response;
 
 public class ChangeStatusActivity extends Activity {
 
-    private Button bt_confirm_covid, bt_suspect_covid, bt_recover_covid, bt_other;
+    private Button bt_confirm_covid, bt_negative_covid, bt_recover_covid;
     private Button bt_back;
-
-    final Integer[] states = {0, 1, 2, 3, 4, 5, 6};     // {0: normal,
-                                                        //  1: infected,
-                                                        //  2: suspect,
-                                                        //  3: healed,
-                                                        //  4: quarantine_light,
-                                                        //  5: quarantine_warning,
-                                                        //  6: quarantine_alert}
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,30 +43,30 @@ public class ChangeStatusActivity extends Activity {
 
             @Override
             /**
-             * Click on "Confirm Covid 19" button, change patient's status to 'positive'
+             * Click on "Positive to Covid 19" button, change patient's status to 'infected'
              */
             public void onClick(View view)
             {
 
-                Integer new_status = states[1];                        //"infected"
+                Integer new_status = PatientStatus.valueOf("INFECTED").ordinal();       //"infected"
 
                 task_updateUserStatus(patient_id, new_status);
 
             }
         });
 
-        /****************** Suspect Button *******************/
+        /****************** Negative Button *******************/
 
-        bt_suspect_covid = findViewById(R.id.bt_suspect_covid);
-        bt_suspect_covid.setOnClickListener(new View.OnClickListener() {
+        bt_negative_covid = findViewById(R.id.bt_negative_covid);
+        bt_negative_covid.setOnClickListener(new View.OnClickListener() {
 
             @Override
             /**
-             * Click on "Suspect Covid-19" button, change patient's status to 'negative'
+             * Click on "Negative to Covid-19" button, change patient's status to 'negative'
              */
             public void onClick(View view)
             {
-                Integer new_status = states[2];                        //"suspect"
+                Integer new_status = PatientStatus.valueOf("NEGATIVE").ordinal();      //"negative"
 
                 task_updateUserStatus(patient_id, new_status);
             }
@@ -89,11 +80,11 @@ public class ChangeStatusActivity extends Activity {
 
             @Override
             /**
-             * Click on "Recover" button, change patient's status to 'negative'
+             * Click on "Healed" button, change patient's status to 'healed'
              */
             public void onClick(View view)
             {
-                Integer new_status = states[3];                        //"recover"
+                Integer new_status = PatientStatus.valueOf("HEALED").ordinal();        //"healed"
 
                 task_updateUserStatus(patient_id, new_status);
             }
@@ -194,12 +185,12 @@ public class ChangeStatusActivity extends Activity {
                         Toast.makeText(getApplicationContext(), R.string.toast_status_changed, Toast.LENGTH_SHORT).show();
                         break;
                     case "not_rec": //patient id (QR code) not recognized
-                        Toast.makeText(getApplicationContext(), R.string.toast_code_not_recognized, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_code_not_recognized, Toast.LENGTH_LONG).show();
                     case "no_resp": // no response from Backend (like: internet disabled)
-                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_change_status, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_change_status, Toast.LENGTH_LONG).show();
                         break;
                     default: //some errors
-                        Toast.makeText(getApplicationContext(), R.string.toast_err_status_change, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_err_status_change, Toast.LENGTH_LONG).show();
                         break;
                 }
                 return null;

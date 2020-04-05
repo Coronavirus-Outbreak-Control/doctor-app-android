@@ -280,7 +280,7 @@ public class LoginDoctorActivity extends Activity {
 
                     case "num_not_acc":    // phone number is not accepted
 
-                        Toast.makeText(getApplicationContext(), R.string.toast_number_not_accepted, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_number_not_accepted, Toast.LENGTH_LONG).show();
                         break;
 
                     default:
@@ -393,7 +393,7 @@ public class LoginDoctorActivity extends Activity {
                     progBar.setVisibility(View.GONE);  //set invisible the relative layout (progress bar + text view)
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE); //reenable interaction with UI
 
-                    Toast.makeText(getApplicationContext(), R.string.toast_login_not_accepted, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), R.string.toast_login_not_accepted, Toast.LENGTH_LONG).show();
 
                 }
 

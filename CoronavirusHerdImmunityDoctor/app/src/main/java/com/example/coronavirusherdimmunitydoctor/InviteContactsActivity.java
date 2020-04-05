@@ -509,10 +509,10 @@ public class InviteContactsActivity extends Activity {
                         Toast.makeText(getApplicationContext(), R.string.toast_num_doc_invited, Toast.LENGTH_SHORT).show();
                         break;
                     case "no_resp": // no response from Backend (like: internet disabled)
-                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_inv_doc, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_no_resp_inv_doc, Toast.LENGTH_LONG).show();
                         break;
                     default: //some errors
-                        Toast.makeText(getApplicationContext(), R.string.toast_err_doc_inv, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), R.string.toast_err_doc_inv, Toast.LENGTH_LONG).show();
                         break;
                 }
                 return null;

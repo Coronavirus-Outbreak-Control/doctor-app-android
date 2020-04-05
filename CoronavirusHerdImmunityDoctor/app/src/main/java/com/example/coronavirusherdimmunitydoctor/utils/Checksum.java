@@ -7,7 +7,7 @@ public class Checksum {
      * @param patientId scanned by QR code
      * @return checksum computed
      */
-    public long computeChecksum(long patientId){
+    public static long computeChecksum(long patientId){
 
         long checksum = 0;
         long sum = 0;

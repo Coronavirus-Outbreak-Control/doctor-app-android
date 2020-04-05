@@ -78,13 +78,20 @@
     <string name="toast_scanner_stop">Scansione interrotta</string>
     <string name="toast_scanner_recognized">Codice riconosciuto</string>
     <string name="toast_wrong_scan">Codice scansionato incorretto</string>
+    <string name="toast_scanner_code_not_recognized">ID paziente è sbagliato, perfavore scannerizzare QR code di nuovo</string>
+    <string name="toast_scanner_no_resp_change_status">Errore, perfavore attivare Internet e scannerizzare QR code di nuovo</string>
+    <string name="toast_scanner_err_status_change">Errore, perfavore scannerizzare QR code di nuovo</string>
     <!-- ******************************* -->
 
     <!-- ***** Scanner Success Activity ****-->
     <string name="tv_scanner_success">ID del Paziente scannerizzato con successo</string>
-    <string name="tv_show_patientid">ID del Paziente è %s, perfavore copiarlo nella cartella clinica.
-        Lo stato del Paziente è cambiato a "Sospetto" in attesa dei risultati del tampone.</string>
+    <string name="tv_show_patientid"><![CDATA[ID del Paziente è <b>%d</b>, perfavore copiarlo nella cartella clinica.
+        Lo stato del Paziente è cambiato a \'Sospetto\' in attesa dei risultati del tampone.]]></string>
     <string name="bt_next">Passo Successivo</string>
+    <string name="alert_results_title">Conosci i risultati del tampone di questo Paziente?</string>
+    <string name="alert_results_msg"><![CDATA[ID Paziente: <b>%d</b>]]></string>
+    <string name="alert_results_pos_bt">Si</string>
+    <string name="alert_results_neg_bt">No</string>
     <!-- ******************************* -->
 
     <!-- ******* Invite Contacts Activity ******* -->
@@ -105,12 +112,12 @@
     <!-- ***** Change Patient Status Activity ****-->
     <string name="diagnosis_title">Diagnosi&#128300;</string>
     <string name="bt_confirm_covid">&#129298;\ \ \ \ Positivo al COVID-19</string>
-    <string name="bt_suspect_covid">&#128567;\ \ \ \ Sospetto di COVID-19</string>
+    <string name="bt_negative_covid">&#128567;\ \ \ \ Negativo al COVID-19</string>
     <string name="bt_recover_covid">&#128522;\ \ \ \ Guarito</string>
     <string name="bt_other_status_covid">Altro</string>
     <string name="toast_click_status_changed">Cambio stato paziente...</string>
     <string name="toast_status_changed">Stato di salute registrato</string>
-    <string name="toast_code_not_recognized">ID paziente sbagliato, perfavore scannerizzare QR code di nuovo</string>
+    <string name="toast_code_not_recognized">ID paziente sbagliato, perfavore richiederlo al paziente</string>
     <string name="toast_no_resp_change_status">Errore, perfavore verificare e attivare Internet</string>
     <string name="toast_err_status_change">Errore, perfavore cambiare stato di nuovo</string>
     <!-- ******************************* -->
