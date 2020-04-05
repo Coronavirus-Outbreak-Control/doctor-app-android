@@ -126,6 +126,7 @@
     <string name="et_patient_id">(Patient ID)</string>
     <string name="bt_check_id">Change Status</string>
     <string name="toast_err_empty_id">Insert a patient ID</string>
+    <string name="alert_err_check_patid">Patient ID is wrong, please check it and call Patient to ask it again.</string>
     <!-- ******************************* -->
 
 
