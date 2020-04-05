@@ -160,7 +160,7 @@ public class ChangeStatusActivity extends Activity {
                                     }
                                 }
                                 break;
-                            default:
+                            default:       // for example, if patient id is not recognized
                                 Log.d("task_updateUserStatus", "Code not recognized:"+response_updateUS.code());
                                 ret_value = "not_rec";
                                 updated = true;
@@ -186,6 +186,7 @@ public class ChangeStatusActivity extends Activity {
                         break;
                     case "not_rec": //patient id (QR code) not recognized
                         Toast.makeText(getApplicationContext(), R.string.toast_code_not_recognized, Toast.LENGTH_LONG).show();
+                        break;
                     case "no_resp": // no response from Backend (like: internet disabled)
                         Toast.makeText(getApplicationContext(), R.string.toast_no_resp_change_status, Toast.LENGTH_LONG).show();
                         break;

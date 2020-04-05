@@ -30,13 +30,16 @@ public class InsertPatientIdActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(ACTV_patientID.getText().length() == 0){
                     Toast.makeText(InsertPatientIdActivity.this, R.string.toast_err_empty_id, Toast.LENGTH_SHORT).show();
-                } else if (Checksum.verifyChecksum(Long.parseLong(ACTV_patientID.getText().toString()))){
+
+                } else if (Checksum.verifyChecksum(Long.parseLong(ACTV_patientID.getText().toString()))){ //if checksum is verified then go to change status
                     try {
-                            long pat_id = Long.parseLong(ACTV_patientID.getText().toString());
+                            long pat_id_cs = Long.parseLong(ACTV_patientID.getText().toString()); //patient id + checksum
+                            long pat_id = pat_id_cs / 10;             //patient id without checksum (removing last digit)
                             Intent intent=new Intent(InsertPatientIdActivity.this, ChangeStatusActivity.class);
                             intent.putExtra("patient id", pat_id);
                             startActivity(intent);
                             finish();
+
                     } catch (NumberFormatException e) { //when patient id is not convertable in a long
                         Toast.makeText(getApplicationContext(), R.string.toast_wrong_scan, Toast.LENGTH_SHORT).show();
                     }
@@ -51,5 +54,13 @@ public class InsertPatientIdActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /* Manage back button when is pressed in order to go to DoctorViewActivity */
+    @Override
+    public void onBackPressed() {
+        Intent intent=new Intent(getApplicationContext(), DoctorViewActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
