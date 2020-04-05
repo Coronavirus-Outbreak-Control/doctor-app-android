@@ -7,7 +7,7 @@ public class Checksum {
      * @param patientId scanned by QR code
      * @return checksum computed
      */
-    public long computeChecksum(long patientId){
+    private static long computeChecksum(long patientId){
 
         long checksum = 0;
         long sum = 0;
@@ -28,7 +28,7 @@ public class Checksum {
      * @param patId_with_checksum: patientId+checksum
      * @return "true" if checksum is right, "false" otherwise
      */
-    public boolean verifyChecksum (long patId_with_checksum){
+    public static boolean verifyChecksum (long patId_with_checksum){
         long checksum = patId_with_checksum % 10;   //get checksum by patId_with_checksum (last digit of patId_with_checksum)
         long patient_id = patId_with_checksum / 10; // get patient id (patId_with_checksum without last digit)
 

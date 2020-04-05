@@ -119,6 +119,8 @@
     <string name="tv_patient_id">Scrivi ID del Paziente</string>
     <string name="et_patient_id">(ID Paziente)</string>
     <string name="bt_check_id">Cambia lo Stato</string>
+    <string name="toast_err_empty_id">Inserire un ID paziente</string>
+
     <!-- ******************************* -->
 
     <!-- ****** How it works Activity *****-->
