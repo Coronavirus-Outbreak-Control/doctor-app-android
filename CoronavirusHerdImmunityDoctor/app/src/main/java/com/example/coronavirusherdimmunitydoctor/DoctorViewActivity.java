@@ -2,22 +2,16 @@ package com.example.coronavirusherdimmunitydoctor;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 
+import com.example.coronavirusherdimmunitydoctor.invitecontacts.InviteContactsActivity;
 import com.example.coronavirusherdimmunitydoctor.utils.PermissionRequest;
-import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
 
 import java.util.ArrayList;
 
