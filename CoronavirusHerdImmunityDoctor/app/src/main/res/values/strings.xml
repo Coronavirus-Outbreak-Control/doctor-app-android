@@ -94,7 +94,8 @@
     <!-- ****************************** -->
 
     <!-- ******* Invite Contacts Activity ******* -->
-    <string name="tv_invite_contacts">Select another doctor</string>
+    <string name="tv_invite_contacts">Invite doctors</string>
+    <string name="invites_count">%1d of %2d</string>
     <string name="bt_invite">Invite</string>
     <string name="toast_select_doc">Select at least one contact</string>
     <string name="progrdial_loading_con">Loading Contacts&#8230;</string>
