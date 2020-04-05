@@ -46,7 +46,7 @@ public class InsertPatientIdActivity extends AppCompatActivity {
                 } else {
                     new AlertDialog.Builder(InsertPatientIdActivity.this)
                             .setTitle("ERROR")
-                            .setMessage("Il codice inserito non è valido. Ripetere l'inserimento")
+                            .setMessage(R.string.alert_err_check_patid)
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton("OK", null)
                             .show();

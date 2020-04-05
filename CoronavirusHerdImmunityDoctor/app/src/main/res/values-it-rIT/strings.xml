@@ -129,6 +129,7 @@
     <string name="et_patient_id">(ID Paziente)</string>
     <string name="bt_check_id">Cambia lo Stato</string>
     <string name="toast_err_empty_id">Inserire un ID paziente</string>
+    <string name="alert_err_check_patid">ID del Paziente è sbagliato, perfavore controllarlo e chiamare il Paziente per richiederlo di nuovo.</string>
     <!-- ******************************* -->
 
     <!-- ****** How it works Activity *****-->
