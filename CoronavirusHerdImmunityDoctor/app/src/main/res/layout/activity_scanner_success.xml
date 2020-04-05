@@ -19,10 +19,9 @@
         android:id="@+id/tv_show_patient_id"
         style="@style/intro_subtitle"
         android:layout_width="305dp"
-        android:layout_height="201dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_scanner_success" />
 
@@ -32,6 +31,7 @@
         android:text="@string/bt_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_show_patient_id"
         app:layout_constraintVertical_bias="1.0" />

@@ -82,8 +82,10 @@
 
     <!-- ***** Scanner Success Activity ****-->
     <string name="tv_scanner_success">ID do paciente digitalizada com sucesso</string>
-    <string name="tv_show_patientid"><![CDATA[ID do paciente é <b>%d</b>, copie-a em registros médicos.
-        O status do paciente foi alterado para \'Suspeito\' esperando os resultados do swab.]]></string>
+    <string name="tv_show_patientid"><![CDATA[ID do paciente é <b>%d</b>, copie-a em registros médicos.\n
+        O status do paciente foi alterado para \'Suspeito\' esperando os resultados do swab.\n
+        Se você clicar no botão "Próximo passo", poderá alterar o status, se já conhece os resultados do buffer,
+        ou voltar à página principal e alterar o status posteriormente.]]></string>
     <string name="bt_next">Próximo Passo</string>
     <string name="alert_results_title">Você conhece os resultados do swab desse Paciente?</string>
     <string name="alert_results_msg"><![CDATA[ID Paciente: <b>%d</b>]]></string>

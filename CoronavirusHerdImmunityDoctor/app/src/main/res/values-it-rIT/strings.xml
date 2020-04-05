@@ -85,8 +85,10 @@
 
     <!-- ***** Scanner Success Activity ****-->
     <string name="tv_scanner_success">ID del Paziente scannerizzato con successo</string>
-    <string name="tv_show_patientid"><![CDATA[ID del Paziente è <b>%d</b>, perfavore copiarlo nella cartella clinica.
-        Lo stato del Paziente è cambiato a \'Sospetto\' in attesa dei risultati del tampone.]]></string>
+    <string name="tv_show_patientid"><![CDATA[ID del Paziente è <b>%d</b>, perfavore copiarlo nella cartella clinica. \n
+        Lo stato del Paziente è cambiato a \'Sospetto\' in attesa dei risultati del tampone. \n
+        Se clicchi sul bottone "Passo Successivo" puoi scegliere di cambiare lo stato, se conosci già i risultati del tampone,
+        oppure tornare alla pagina principale e modificarli successivamente.]]></string>
     <string name="bt_next">Passo Successivo</string>
     <string name="alert_results_title">Conosci i risultati del tampone di questo Paziente?</string>
     <string name="alert_results_msg"><![CDATA[ID Paziente: <b>%d</b>]]></string>
