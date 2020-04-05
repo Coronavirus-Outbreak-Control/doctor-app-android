@@ -3,9 +3,11 @@ package com.example.coronavirusherdimmunitydoctor.invitecontacts;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -337,40 +339,7 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
         btInvite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO(AL): need to change the API to accept multiple phone numbers instead of just one
-                //click on contacts of ListView so as to select and invite them
-//        lv_contacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-//                final String contact = lv_contacts.getItemAtPosition(position).toString();  //phone number
-//
-//                final String phone_number_with_prefix = addPrefix(contact.split(":")[1]); // add prefix if missing
-//
-//                /**
-//                 *  open an Alert dialog which asks if user has selected  right number
-//                 *  if click on "yes" then send selected contacts to Server
-//                 *  else if click on "no" then the user can change contacts
-//                 */
-//                new AlertDialog.Builder(InviteContactsActivity.this)
-//                        .setTitle(R.string.alertdial_invite_title)
-//                        .setMessage(contact.split(":")[0] + ":" + phone_number_with_prefix)
-//                        .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctor
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                                //send contact to Server
-//                                task_inviteDoctor(phone_number_with_prefix);                     //call inviteDoctor Api
-//                            }
-//                        })
-//                        .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
-//                            public void onClick(DialogInterface dialog, int which) {
-//
-//                            }
-//                        })
-//                        .show();
-//
-//            }
-//        });
+
             }
         });
     }
@@ -409,11 +378,40 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
         }.execute((Void[]) null);
     }
 
+    /**
+     * when a contact is clicked then is invited
+     * @param contact
+     */
     @Override
     public void onContactClicked(Contact contact) {
         contact.toggleSelected();
-        updateSelectedContacts();
+
+        final String phone_number= contact.getPhone(); //get phone number from contact selected
+        final String phone_number_with_prefix = addPrefix(phone_number); // add prefix if missing
+
+        /**
+         *  open an Alert dialog which asks if user has selected  right number
+         *  if click on "yes" then send selected contacts to Server
+         *  else if click on "no" then the user can change contacts
+         */
+        new AlertDialog.Builder(InviteContactsActivity.this)
+                .setTitle(R.string.alertdial_invite_title)
+                .setMessage(contact.getName() + ":" + phone_number_with_prefix)
+                .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctor
+                    public void onClick(DialogInterface dialog, int which) {
+                        //send contact to Server
+                        task_inviteDoctor(phone_number_with_prefix);                     //call inviteDoctor Api
+                    }
+                })
+                .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .show();
+
     }
+
+    /* DA RIMUOVERE*/
 
     @Override
     public void onRemoveContact(Contact contact) {
@@ -430,6 +428,7 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
         selectedContactsAdapter.setContacts(selectedContacts);
         selectedCount.setText(getString(R.string.invites_count, selectedContacts.size(), contactsList.size()));
     }
+
 
     /**
      * Read list of Contacts on  smartphone
