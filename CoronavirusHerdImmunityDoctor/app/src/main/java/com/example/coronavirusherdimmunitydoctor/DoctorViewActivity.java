@@ -62,6 +62,7 @@ public class DoctorViewActivity extends Activity {
             public void onClick(View v) {
                 Intent intent=new Intent(DoctorViewActivity.this, InsertPatientIdActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
