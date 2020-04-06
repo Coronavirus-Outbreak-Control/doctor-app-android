@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/side_margin"
             android:id="@+id/button_back"/>
+
     </LinearLayout>
 
 </ScrollView>

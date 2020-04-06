@@ -16,6 +16,7 @@ import android.provider.ContactsContract;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,17 +40,13 @@ import bolts.Continuation;
 import bolts.Task;
 import okhttp3.Response;
 
-public class InviteContactsActivity extends Activity implements ContactsAdapter.OnContactClick, SelectedContactsAdapter.RemoveContactListener {
+public class InviteContactsActivity extends Activity implements ContactsAdapter.OnContactClick {
 
     private ArrayList<Contact> contactsList;  //the list of all contacts
 
-    private View btBack;
-    private FloatingActionButton btInvite;
+    private FloatingActionButton bt_back;
     private RecyclerView contactsRecyclerView;
-    private RecyclerView selectedContactsRecyclerView;
     private ContactsAdapter contactsAdapter;
-    private SelectedContactsAdapter selectedContactsAdapter;
-    private TextView selectedCount;
 
     private Context _context;
 
@@ -310,23 +307,18 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
         _context = this;
 
         contactsRecyclerView = findViewById(R.id.contacts_list);
-        selectedContactsRecyclerView = findViewById(R.id.selected_contacts_list);
-        btBack = findViewById(R.id.bt_back);
-        btInvite = findViewById(R.id.invite);
-        selectedCount = findViewById(R.id.selected_count);
-        selectedContactsAdapter = new SelectedContactsAdapter(Glide.with(this), this);
-        selectedContactsRecyclerView.setAdapter(selectedContactsAdapter);
+        bt_back = findViewById(R.id.bt_back);
 
         contactsList = new ArrayList<>();
         //invited_contacts_list = new ArrayList<String>();
 
         loadingContacts();
 
-        btBack.setOnClickListener(new View.OnClickListener() {
+        bt_back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             /**
-             * Click on "Other" button
+             * Click on "Back" button
              */
             public void onClick(View view) {
                 Intent intent = new Intent(InviteContactsActivity.this, DoctorViewActivity.class);
@@ -335,13 +327,6 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
             }
         });
 
-
-        btInvite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
 
@@ -365,7 +350,6 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
                     dialog.dismiss();
                     contactsAdapter = new ContactsAdapter(contactsList, Glide.with(InviteContactsActivity.this), InviteContactsActivity.this);
                     contactsRecyclerView.setAdapter(contactsAdapter);
-                    updateSelectedContacts();
                 }
             }
 
@@ -384,7 +368,6 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
      */
     @Override
     public void onContactClicked(Contact contact) {
-        contact.toggleSelected();
 
         final String phone_number= contact.getPhone(); //get phone number from contact selected
         final String phone_number_with_prefix = addPrefix(phone_number); // add prefix if missing
@@ -396,11 +379,11 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
          */
         new AlertDialog.Builder(InviteContactsActivity.this)
                 .setTitle(R.string.alertdial_invite_title)
-                .setMessage(contact.getName() + ":" + phone_number_with_prefix)
+                .setMessage(contact.getName() + ": " + phone_number_with_prefix)
                 .setPositiveButton(R.string.alertdial_yes, new DialogInterface.OnClickListener() { //invite new doctor
                     public void onClick(DialogInterface dialog, int which) {
                         //send contact to Server
-                        task_inviteDoctor(phone_number_with_prefix);                     //call inviteDoctor Api
+                        task_inviteDoctor(phone_number_with_prefix.replaceAll(" ", ""));                     //call inviteDoctor Api
                     }
                 })
                 .setNegativeButton(R.string.alertdial_no, new DialogInterface.OnClickListener() { //change number selected list
@@ -409,24 +392,6 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
                 })
                 .show();
 
-    }
-
-    /* DA RIMUOVERE*/
-
-    @Override
-    public void onRemoveContact(Contact contact) {
-        contact.toggleSelected();
-        updateSelectedContacts();
-        contactsAdapter.notifyDataSetChanged();
-    }
-
-    private void updateSelectedContacts() {
-        final ArrayList<Contact> selectedContacts = new ArrayList<>();
-        for (final Contact contact : contactsList) {
-            if (contact.isSelected()) selectedContacts.add(contact);
-        }
-        selectedContactsAdapter.setContacts(selectedContacts);
-        selectedCount.setText(getString(R.string.invites_count, selectedContacts.size(), contactsList.size()));
     }
 
 
@@ -568,7 +533,7 @@ public class InviteContactsActivity extends Activity implements ContactsAdapter.
             iso_country = manager.getNetworkCountryIso();  //get country from ISO of SIM
 
             String prefix = prefix_list.get(iso_country.toUpperCase());
-            number_with_pref = prefix + number;  //add prefix to number
+            number_with_pref = prefix + " " + number;  //add prefix to number
         }
 
         return number_with_pref;

@@ -10,12 +10,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.coronavirusherdimmunitydoctor.invitecontacts.InviteContactsActivity;
 import com.example.coronavirusherdimmunitydoctor.utils.Checksum;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class InsertPatientIdActivity extends AppCompatActivity {
 
     private AutoCompleteTextView ACTV_patientID;
     private Button bt_check_id;
+    private FloatingActionButton bt_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,20 @@ public class InsertPatientIdActivity extends AppCompatActivity {
                             .setPositiveButton("OK", null)
                             .show();
                 }
+            }
+        });
+
+        bt_back = findViewById(R.id.bt_back);
+        bt_back.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            /**
+             * Click on "back" button
+             */
+            public void onClick(View view) {
+                Intent intent = new Intent(InsertPatientIdActivity.this, DoctorViewActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
