@@ -70,7 +70,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".InviteContactsActivity"
+            android:name=".invitecontacts.InviteContactsActivity"
             android:screenOrientation="portrait"/>
 
         <activity

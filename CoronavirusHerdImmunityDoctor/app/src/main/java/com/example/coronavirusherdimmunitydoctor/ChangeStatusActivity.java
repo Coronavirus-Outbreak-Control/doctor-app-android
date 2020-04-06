@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.coronavirusherdimmunitydoctor.enums.PatientStatus;
 import com.example.coronavirusherdimmunitydoctor.utils.ApiManager;
 import com.example.coronavirusherdimmunitydoctor.utils.PreferenceManager;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
 
@@ -26,7 +27,7 @@ import okhttp3.Response;
 public class ChangeStatusActivity extends Activity {
 
     private Button bt_confirm_covid, bt_negative_covid, bt_recover_covid;
-    private Button bt_back;
+    private FloatingActionButton bt_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
