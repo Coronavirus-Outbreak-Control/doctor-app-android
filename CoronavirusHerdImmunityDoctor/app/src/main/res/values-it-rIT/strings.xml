@@ -9,8 +9,10 @@
     <!-- ******************************* -->
 
     <!-- ***** Introduction Slider ****** -->
-    <string name="welcome_first">Hey Doctor,\n\nWelcome to\nanonymous</string>
-    <string name="welcome_next">\nCovidCommunity</string>
+    <string name="welcome_first">Hey Doctor, \n</string>
+    <string name="welcome_second">Welcome \n</string>
+    <string name="welcome_third">to anonymous</string>
+    <string name="welcome_blue">\nCovidCommunity</string>
     <string name="welcome_last">\nAlert &#128075;</string>
     <string name="together_we">Insieme possiamo salvare vite!</string>
     <string name="let_s_get_s">INIZIAMO</string>

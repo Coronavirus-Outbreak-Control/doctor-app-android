@@ -8,9 +8,11 @@
     <!-- ******************************* -->
 
     <!-- ***** Introduction Slider ****** -->
-    <string name="welcome_first">Olá Doutor,\n\nBem-vindo ao</string>
-    <string name="welcome_next">\nCovid Alerta</string>
-    <string name="welcome_last">\nComunitário Anônimo &#128075;</string>
+    <string name="welcome_first">Olá Doutor,\n</string>
+    <string name="welcome_second">Seja\n</string>
+    <string name="welcome_third">Bem-vindo ao\n</string>
+    <string name="welcome_blue">\nCovid Alerta</string>
+    <string name="welcome_last">\nComunitário&#128075;</string>
     <string name="together_we">Juntos podemos salvar vidas!</string>
     <string name="let_s_get_s">VAMOS COMEÇAR </string>
     <string name="how_it_works">Como funciona &#129300;</string>
